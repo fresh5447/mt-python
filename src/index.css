@@ -62,11 +62,22 @@ body {
 }
 
 .playbook-panel .panel-footer {
-  background-color: #4CB5B5;
+  background-color: #FFA400;
   width: 40%;
   margin-top: 40px;
-  border-color: #4CB5B5;
+  border-color: #FFA400;
 }
+
+.user-auth-btn {
+  background-color: #FFA400;
+  margin: 10px 20px 10px 0;
+    padding: 0 2px 0 2px;
+}
+
+.user-text {
+  padding: 0 2px 0 2px;
+}
+
 
 .playbook-flexbox {
   display: flex;

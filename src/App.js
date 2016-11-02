@@ -65,7 +65,7 @@ class App extends Component {
     return(
       <Grid>
       <img className="mt-logo" role="presentation" src={logo}/>
-      <Navbar className="main-nav" collapseOnSelect>
+      <Navbar className="main-nav" inverse collapseOnSelect>
          <Navbar.Header>
            <Navbar.Brand>
             <a href="#" className="">Montana Code Girls</a>
@@ -85,7 +85,7 @@ class App extends Component {
            </Nav>
            <Nav pullRight>
              <NavItem eventKey={1} href="#">Missoula</NavItem>
-             <NavItem eventKey={2} href="#">Doug Walter</NavItem>
+             <NavItem eventKey={2} href="#" className="btn btn-primary user-auth-btn"><span className="user-text"> Doug Walter </span></NavItem>
            </Nav>
          </Navbar.Collapse>
        </Navbar>
