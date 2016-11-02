@@ -62,14 +62,14 @@ body {
 }
 
 .playbook-panel .panel-footer {
-  background-color: #FFA400;
+  background-color: #2980b9;
   width: 40%;
   margin-top: 40px;
-  border-color: #FFA400;
+  border-color: #2980b9;
 }
 
 .user-auth-btn {
-  background-color: #FFA400;
+  background-color: #DB5C7E;
   margin: 10px 20px 10px 0;
     padding: 0 2px 0 2px;
 }
