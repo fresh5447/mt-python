@@ -20,11 +20,11 @@
   },
   "homepage": "https://github.com/fresh5447/mt-python#readme",
   "babel": {
-  "presets": [
-    "es2015",
-    "stage-0"
-  ]
-},
+    "presets": [
+      "es2015",
+      "stage-0"
+    ]
+  },
   "dependencies": {
     "babel-cli": "6.14.0",
     "babel-core": "6.14.0",
@@ -32,6 +32,10 @@
     "babel-preset-stage-0": "6.5.0",
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
-    "foreman": "^2.0.0"
+    "foreman": "^2.0.0",
+    "moment": "^2.15.2",
+    "react": "^15.3.2",
+    "react-big-calendar": "^0.11.0",
+    "react-dom": "^15.3.2"
   }
 }
