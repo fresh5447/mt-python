@@ -1,19 +1,19 @@
-import React, { PropTypes } from 'react';
-import 'react-big-calendar/lib/css/react-big-calendar.css';
+import React from 'react';
 import BigCalendar from 'react-big-calendar';
 import moment from 'moment';
+import 'react-big-calendar/lib/css/react-big-calendar.css';
+
 import events from './events-data';
 
-BigCalendar.setLocalizer(
-  BigCalendar.momentLocalizer(moment)
-);
+BigCalendar.momentLocalizer(moment);
 
-
-let Basic = React.createClass({
+let MyCalender = React.createClass({
   render(){
     return (
       <BigCalendar
         {...this.props}
+        step={30}
+        timeslots={8}
         events={events}
         defaultDate={new Date()}
       />
@@ -21,4 +21,4 @@ let Basic = React.createClass({
   }
 })
 
-export default Basic;
+export default MyCalender;
