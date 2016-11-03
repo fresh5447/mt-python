@@ -19,7 +19,7 @@ class NavNav extends Component {
                <NavDropdown  title="My Chapter" id="basic-nav-dropdown">
                  <MenuItem ><NavLink to="/attendance">Attendance</NavLink></MenuItem>
                  <MenuItem ><NavLink to="/schedule">Schedule</NavLink></MenuItem>
-                 <MenuItem>Students & Parents</MenuItem>
+                 <MenuItem ><NavLink to="/students">Roster</NavLink></MenuItem>
                  <MenuItem>Volunteers</MenuItem>
                </NavDropdown>
              </Nav>

@@ -12,7 +12,7 @@ let MyCalender = React.createClass({
     return (
       <BigCalendar
         {...this.props}
-        step={30}
+        step={15}
         timeslots={8}
         events={events}
         defaultDate={new Date()}

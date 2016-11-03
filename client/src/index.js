@@ -9,13 +9,15 @@ import LandingPage from './LandingPage/LandingPageContainer.js';
 import Playbook from './Playbook/PlaybookContainer.js';
 import Attendance from './Attendance/AttendanceContainer.js';
 import Schedule from './Schedule/ScheduleContainer.js';
+import Students from './Students/StudentsContainer.js';
 
 render((
   <Router history={browserHistory}>
     <Route path="/" component={App}>
-      <Route path="/playbook" component={Playbook}/>
+      <Route path="playbook" component={Playbook}/>
       <Route path="/attendance" component={Attendance}/>
       <Route path="/schedule" component={Schedule}/>
+      <Route path="/students" component={Students}/>
       <Route path="/landing-page" component={LandingPage}/>
     </Route>
   </Router>
