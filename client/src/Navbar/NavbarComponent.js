@@ -1,33 +1,42 @@
-import { React, Component } from 'react';
-// import '../index.css';
-import { Navbar, Nav, NavDropdown, NavItem, MenuItem } from 'react-bootstrap';
+import React, { Component } from 'react';
+import NavLink from '../Components/NavLink';
+import { Navbar, Nav, NavDropdown, NavItem, MenuItem, Button } from 'react-bootstrap';
 
-const NavbarComponent = () =>
-    <Navbar inverse collapseOnSelect>
-      <Navbar.Header>
-        <Navbar.Brand>
-          <a href="#">React-Bootstrap</a>
-        </Navbar.Brand>
-        <Navbar.Toggle />
-      </Navbar.Header>
-      <Navbar.Collapse>
-        <Nav>
-          <NavItem eventKey={1} href="#">Link</NavItem>
-          <NavItem eventKey={2} href="#">Link</NavItem>
-          <NavDropdown eventKey={3} title="Dropdown" id="basic-nav-dropdown">
-            <MenuItem eventKey={3.1}>Action</MenuItem>
-            <MenuItem eventKey={3.2}>Another action</MenuItem>
-            <MenuItem eventKey={3.3}>Something else here</MenuItem>
-            <MenuItem divider />
-            <MenuItem eventKey={3.3}>Separated link</MenuItem>
-          </NavDropdown>
-        </Nav>
-        <Nav pullRight>
-          <NavItem eventKey={1} href="#">Link Right</NavItem>
-          <NavItem eventKey={2} href="#">Link Right</NavItem>
-        </Nav>
-      </Navbar.Collapse>
-    </Navbar>
+class NavNav extends Component {
+  render() {
+    return (
+      <Navbar inverse collapseOnSelect>
+           <Navbar.Header>
+             <Navbar.Brand>
+               <a href="#">MTCG Playbook</a>
+             </Navbar.Brand>
+             <Navbar.Toggle />
+           </Navbar.Header>
+           <Navbar.Collapse>
+             <Nav>
+               <NavItem><NavLink to="/landing-page">Home</NavLink></NavItem>
+               <NavItem><NavLink to="/playbook">Playbook</NavLink></NavItem>
+               <NavDropdown  title="My Chapter" id="basic-nav-dropdown">
+                 <MenuItem ><NavLink to="/attendance">Attendance</NavLink></MenuItem>
+                 <MenuItem ><NavLink to="/schedule">Schedule</NavLink></MenuItem>
+                 <MenuItem>Students & Parents</MenuItem>
+                 <MenuItem>Volunteers</MenuItem>
+               </NavDropdown>
+             </Nav>
+             <Nav pullRight>
+             <NavDropdown  title="Quick Links" id="basic-nav-dropdown">
+               <MenuItem>Code.org Intro To CS</MenuItem>
+               <MenuItem>Montana Code Girls Website</MenuItem>
+               <MenuItem>Big Sky Code Academy</MenuItem>
+               <MenuItem>Register Student</MenuItem>
+               <MenuItem>Register Volunteer</MenuItem>
+             </NavDropdown>
+               <NavItem eventKey={1} href="#"><Button>Login</Button></NavItem>
+             </Nav>
+           </Navbar.Collapse>
+         </Navbar>
+    );
+  }
+}
 
-
-export default NavbarComponent;
+export default NavNav;

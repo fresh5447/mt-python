@@ -85,15 +85,23 @@ body {
   justify-content: center;
 }
 
+@media (max-width: 728px ) {
+  .playbook-panel {
+      width: 100%;
+  }
+}
+
+
+
 .main-nav {
   background-color: #4CB5B5;
   border: none;
 }
 
 .navbar-brand {
-  color: white !important;
+
 }
 
 .navbar-brand, a {
-  color: white !important;
+
 }

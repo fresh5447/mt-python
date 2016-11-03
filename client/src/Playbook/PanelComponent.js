@@ -1,21 +1,21 @@
 import React from 'react';
+import '../index.css';
 import { Panel } from 'react-bootstrap';
 
-const panelStyle = {
-  width: '30%',
-  minHeight: '255',
-  fontSize: '16',
-  color: 'white',
-  padding: '20',
-  borderRadius: '5',
-  margin: '5 1% 1% 5',
-  backgroundColor: '#DB5C7E',
-  height: '270',
-  padding: '15',
-};
+// const panelStyle = {
+//   width: '30%',
+//   minHeight: '255px',
+//   fontSize: '16px',
+//   color: 'white',
+//   padding: '20px',
+//   borderRadius: '5px',
+//   margin: '5 1% 1% 5',
+//   backgroundColor: '#DB5C7E',
+//   height: '270px'
+// };
 
 const PanelComponent = (props) =>
-  <Panel style={panelStyle} header={props.header} footer={props.footer}>
+  <Panel className="playbook-panel" header={props.header} footer={props.footer}>
     {props.desc}
   </Panel>
 
