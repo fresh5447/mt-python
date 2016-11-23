@@ -16,6 +16,7 @@ app.get('/home', function(req, res) {
   res.json({ message: "hi there!" })
 })
 
+// BUG: API is served over port 3100;
 const port = process.env.PORT || 3001;
 
 app.listen(port, function(){
