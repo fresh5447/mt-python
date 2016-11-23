@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Calendar from '../Components/Calendar';
-import '../App.css';
+import Calendar from '../../Components/Calendar';
+import '../../App.css';
 
 const divStyle = {
   height: "1000px",

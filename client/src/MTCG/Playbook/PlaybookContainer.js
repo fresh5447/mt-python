@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PanelComponent from './PanelComponent';
 import { Grid, Row, Col } from 'react-bootstrap';
-import '../App.css';
+import '../../App.css';
 
 const DATA = [
   { myKey: 0, header: "Community Branding", footer: "Learn More" , desc: "Archives of Code.org email communications, templates for your use, and branding guidelines" },

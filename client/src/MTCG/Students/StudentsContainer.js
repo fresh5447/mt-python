@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import StudentsPageView from './StudentsPageView';
-import '../App.css';
+import '../../App.css';
 
 class StudentsPageContainer extends Component {
   render() {
