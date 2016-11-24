@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Jumbotron, Button, Grid, Col, Row, Nav, NavItem } from 'react-bootstrap';
+import { Jumbotron, Button, Grid, Col, Row, ButtonGroup, DropdownButton, MenuItem, Nav, NavItem } from 'react-bootstrap';
 
 const rezs = [
   { title: "JS",
@@ -31,22 +31,37 @@ const rezs = [
 
 
 class ResourcesContainer extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      key: 1
+    };
+
+    this.handleSelect = this.handleSelect.bind(this);
+  }
   handleSelect(selectedKey) {
-    console.log('selected ' + selectedKey);
+    return this.setState({ key: selectedKey })
   }
   render() {
     return (
       <Grid>
         <Row>
           <Col xs={2}>
-            <Nav bsStyle="pills" activeKey={"one"}>
-              <NavItem eventKey={"one"} title="one">NavItem 1 content</NavItem>
-              <NavItem eventKey={"two"} title="two">NavItem 2 content</NavItem>
-              <NavItem eventKey={"three"} title="three">NavItem 3 content</NavItem>
-            </Nav>
+            <p><strong>categories</strong></p>
+            <ButtonGroup vertical>
+              <Button>JavaScript</Button>
+              <Button>CSS</Button>
+              <Button>HTML</Button>
+              <Button>Node</Button>
+              <Button>React</Button>
+            </ButtonGroup>
           </Col>
           <Col xs={10}>
-              Layout Jumblies
+            <Nav bsStyle="pills" activeKey={this.state.key} onSelect={this.handleSelect}>
+              <NavItem active={  this.state.key === 1 ?  true : false }  eventKey={1} title="ALL">ALL</NavItem>
+              <NavItem active={  this.state.key === 2 ?  true : false }  eventKey={2} title="FAVS">FAVORITE</NavItem>
+              <NavItem active={  this.state.key === 3 ?  true : false }   eventKey={3} title="NEW">NEW</NavItem>
+            </Nav>
           </Col>
         </Row>
       </Grid>
