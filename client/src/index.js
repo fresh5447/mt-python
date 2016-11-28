@@ -20,6 +20,9 @@ import Students from './MTCG/Students/StudentsContainer';
 
 import ADMIN from './ADMIN/ADMIN';
 import BSCAContainer from './ADMIN/BSCA/BSCAContainer';
+import BSCAViewContainer from './ADMIN/BSCA/View/BSCAViewContainer';
+import BSCAEditContainer from './ADMIN/BSCA/Edit/BSCAEditContainer';
+import BSCAPostContainer from './ADMIN/BSCA/Post/BSCAPostContainer';
 import MTCGContainer from './ADMIN/MTCG/MTCGContainer';
 import UsersContainer from './ADMIN/Users/UsersContainer';
 import PublisherContainer from './ADMIN/Publisher/PublisherContainer';
@@ -35,7 +38,12 @@ render((
       </Route>
 
       <Route path="/admin-console" component={ADMIN}>
-        <Route path="bsca" component={BSCAContainer}/>
+        <Route path="bsca" component={BSCAContainer}>
+          <Route path="view-course/:course_id" component={BSCAViewContainer}/>
+          <Route path="edit-course/:course_id" component={BSCAEditContainer}/>
+          <Route path="post-course" component={BSCAPostContainer}/>
+        </Route>
+
         <Route path="mtcg" component={MTCGContainer}/>
         <Route path="users" component={UsersContainer}/>
         <Route path="publisher" component={PublisherContainer}/>

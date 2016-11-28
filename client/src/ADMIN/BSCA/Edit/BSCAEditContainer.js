@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import NavLink from '../../Components/NavLink';
-import { Jumbotron, Button, Panel } from 'react-bootstrap';
+import NavLink from '../../../Components/NavLink';
+import { Jumbotron, Button } from 'react-bootstrap';
 
 const courses = [
   {
@@ -33,25 +33,18 @@ const unavailableItems = courses.filter((item) => {
 })
 
 
-class BSCAContainer extends Component {
+class BSCAEditContainer extends Component {
   render() {
     return (
     <div>
       <Jumbotron>
-        <h3>Big Sky Code Academy</h3>
+        <h3>Edit Course {this.props.params.course_id}</h3>
         <ul>
-          <li><NavLink to="/admin-console/bsca/view-course/123">Course One </NavLink></li>
-          <li><NavLink to="/admin-console/bsca/view-course/456">Course Two </NavLink></li>
-          <li><NavLink to="/admin-console/bsca/view-course/789">Course Three </NavLink></li>
-          <li><NavLink to="/admin-console/bsca/view-course/980">Course Four </NavLink></li>
-          <li><NavLink to="/admin-console/bsca/view-course/5454">Course Five </NavLink></li>
-          <li><NavLink to="/admin-console/bsca/post-course"> Create Course </NavLink></li>
         </ul>
       </Jumbotron>
-      { this.props.children }
     </div>
     )
   }
 }
 
-export default BSCAContainer;
+export default BSCAEditContainer;
