@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { browserHistory } from 'react-router';
-import NavLink from '../../../Components/NavLink';
 import PostCourseForm from './PostCourseForm';
-import { Jumbotron, Button } from 'react-bootstrap';
+import $ from 'jquery';
 
-class BSCAPostContainer extends React.Component {
+class BSCAPostContainer extends Component {
   constructor(props) {
     super(props);
 
@@ -26,12 +25,21 @@ class BSCAPostContainer extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
+    const published = this.state.publish == null ? false : true;
     const data = {
       title: this.state.title,
       desc: this.state.desc,
-      publish: this.state.publish
+      publish: published
     };
     console.log(data)
+    $.ajax({
+      url: `/api/v2/courses`,
+      method: 'POST',
+      data
+    }).done((d) => {
+      const path = `/admin-console/bsca`
+      browserHistory.push(path);
+    });
   }
 
   render() {

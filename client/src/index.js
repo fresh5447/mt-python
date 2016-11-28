@@ -2,6 +2,7 @@ import React from 'react';
 import { render } from 'react-dom';
 import App from './App';
 import { Router, Route, browserHistory } from 'react-router';
+import $ from 'jquery';
 import 'bootstrap/dist/css/bootstrap.css';
 import './index.css';
 

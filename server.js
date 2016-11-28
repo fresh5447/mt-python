@@ -6,6 +6,7 @@ const path           = require('path'),
   session             = require('express-session'),
   nodemailer          = require('nodemailer'),
   uriUtil             = require('mongodb-uri'),
+  CourseRouter        = require('./routes/courses'),
 
  mongoose            = require('mongoose');
 
@@ -13,7 +14,7 @@ const path           = require('path'),
 server:  { socketOptions: { keepAlive: 1, connectTimeoutMS: 30000 } },
 replset: { socketOptions: { keepAlive: 1, connectTimeoutMS: 30000 } }
 };
-var mongodbUri = process.env.MONGODB_URI || "mongodb://localhost/lms";
+var mongodbUri = process.env.MONGODB_URI || "mongodb://localhost/lms-v2";
 var mongooseUri = uriUtil.formatMongoose(mongodbUri);
 
 mongoose.connect(mongooseUri, options);
@@ -47,6 +48,8 @@ require('./routes/user.js')(app, passport);
 app.get('/home', function(req, res) {
   res.json({ message: "hi there!" })
 })
+
+app.use('/api/v2/courses', CourseRouter);
 
 // BUG: API is served over port 3100;
 const port = process.env.PORT || 3001;
