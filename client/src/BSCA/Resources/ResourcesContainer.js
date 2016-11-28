@@ -1,33 +1,54 @@
 import React, { Component } from 'react';
-import { Jumbotron, Button, Grid, Col, Row, ButtonGroup, DropdownButton, MenuItem, Nav, NavItem } from 'react-bootstrap';
+import { Jumbotron, Button, Grid, Col, Row, ButtonGroup, DropdownButton, MenuItem, Nav, NavItem, Panel } from 'react-bootstrap';
 
 const rezs = [
-  { title: "JS",
-    content: "hebalsdjfsafasdf",
+  { title: "Intro to JS",
+    content: "this is a bunch of lorem ipsum yada yada yada yada yada yada yada",
     link: "www.google.com",
-    categories: ["one", "two", "three", "four"]
+    categories: ["javascript"],
+    favorite: true,
+    link: "www.google.com"
   },
-  { title: "CSS",
-    content: "hebalsdjfsafasdf",
+  { title: "intro to CSS",
+  content: "this is a bunch of lorem ipsum yada yada yada yada yada yada yada",
     link: "www.google.com",
-    categories: ["one", "two", "three", "four"]
+    categories: ["css"],
+    favorite: false,
+    link: "www.google.com"
   },
-  { title: "HTML",
-    content: "hebalsdjfsafasdf",
+  { title: "intro to HTML",
+  content: "this is a bunch of lorem ipsum yada yada yada yada yada yada yada",
     link: "www.google.com",
-    categories: ["one", "two", "three", "four"]
+    categories: ["html"],
+    favorite: true,
+    link: "www.google.com"
   },
-  { title: "jQuery",
-    content: "hebalsdjfsafasdf",
+  { title: "intro to jQuery",
+  content: "this is a bunch of lorem ipsum yada yada yada yada yada yada yada",
     link: "www.google.com",
-    categories: ["one", "two", "three", "four"]
+    categories: ["javascript", "jquery"],
+    favorite: false,
+    link: "www.google.com"
   },
-  { title: "One",
-    content: "hebalsdjfsafasdf",
+  { title: "Frontend Stuff",
+  content: "this is a bunch of lorem ipsum yada yada yada yada yada yada yada",
     link: "www.google.com",
-    categories: ["one", "two", "three", "four"]
+    categories: ["CSS", "HTML"],
+    favorite: true,
+    link: "www.google.com"
   }
 ]
+
+const resourcePanels = rezs.map((item) => {
+  return (
+    <Panel className="" header={item.title} footer={item.link}>
+      {item.content}
+      <p>{ item.favorite.toString() }</p>
+    </Panel>
+  )
+})
+
+
 
 
 class ResourcesContainer extends Component {
@@ -45,7 +66,6 @@ class ResourcesContainer extends Component {
   render() {
     return (
       <Grid>
-        <Row>
           <Col xs={2}>
             <p><strong>categories</strong></p>
             <ButtonGroup vertical>
@@ -63,10 +83,13 @@ class ResourcesContainer extends Component {
               <NavItem active={  this.state.key === 3 ?  true : false }   eventKey={3} title="NEW">NEW</NavItem>
             </Nav>
           </Col>
-        </Row>
+          <Col xs={10} className="show-grid playbook-flexbox">
+            { resourcePanels }
+          </Col>
       </Grid>
     )
   }
 }
+
 
 export default ResourcesContainer;

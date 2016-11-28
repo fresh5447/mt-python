@@ -14,6 +14,7 @@ class RootNavbar extends Component {
            </Navbar.Header>
            <Navbar.Collapse>
              <Nav pullRight>
+             <NavLink to="/admin-console">Admin Console</NavLink>
              <NavDropdown  title="Quick Links" id="basic-nav-dropdown">
                <MenuItem>Code.org Intro To CS</MenuItem>
                <MenuItem>Montana Code Girls Website</MenuItem>

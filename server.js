@@ -1,7 +1,24 @@
 const path           = require('path'),
   express             = require('express'),
   bodyParser          = require('body-parser'),
-  app                 = express();
+  app                 = express(),
+  passport            = require('passport'),
+  session             = require('express-session'),
+  nodemailer          = require('nodemailer'),
+  uriUtil             = require('mongodb-uri'),
+
+ mongoose            = require('mongoose');
+
+ var options = {
+server:  { socketOptions: { keepAlive: 1, connectTimeoutMS: 30000 } },
+replset: { socketOptions: { keepAlive: 1, connectTimeoutMS: 30000 } }
+};
+var mongodbUri = process.env.MONGODB_URI || "mongodb://localhost/lms";
+var mongooseUri = uriUtil.formatMongoose(mongodbUri);
+
+mongoose.connect(mongooseUri, options);
+
+
 
   // Express only serves static assets in production
   if (process.env.NODE_ENV === 'production') {
@@ -11,6 +28,21 @@ const path           = require('path'),
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(session({
+ secret: 'ilovescotchscotchyscotchscotch'
+})); // session secret
+app.use(passport.initialize());
+app.use(passport.session()); // persistent login sessions
+app.use(session({
+ cookie: {
+   maxAge: 60000
+ }
+}));
+
+require('./config/passport')(passport);
+require('./routes/user.js')(app, passport);
+
 
 app.get('/home', function(req, res) {
   res.json({ message: "hi there!" })
