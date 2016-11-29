@@ -21,7 +21,6 @@ class BSCAContainer extends Component {
     this.loadCourses();
   }
 
-
   loadCourses() {
     $.ajax({
       url: '/api/v2/courses',
@@ -37,9 +36,10 @@ class BSCAContainer extends Component {
     return (
     <div>
       <Jumbotron>
-        <h3>Big Sky Code Academy</h3>
+        <h3>Big Sky Code Academy courses</h3>
         <ul>
           { courseItems }
+          <li><NavLink to="/admin-console/bsca/post-course/">Create New Course</NavLink></li>
         </ul>
       </Jumbotron>
       { this.props.children }
