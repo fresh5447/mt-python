@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
 import NavLink from '../../../Components/NavLink';
-import { Jumbotron, Button, Panel } from 'react-bootstrap';
+import { Jumbotron, Button, Panel, Table } from 'react-bootstrap';
 
 class BSCAContainer extends Component {
   constructor(props, context) {
@@ -31,14 +31,31 @@ class BSCAContainer extends Component {
   }
   render() {
     const courseItems = this.state.courses ? this.state.courses.map((item) => {
-      return <li><NavLink to={"/admin-console/bsca/courses/view/" + item._id }>{ item.title } </NavLink></li>
+      return (
+        <tr>
+          <td><NavLink to={"/admin-console/bsca/courses/view/" + item._id }> { item.title } </NavLink></td>
+          <td><NavLink to={"/admin-console/bsca/courses/edit/" + item._id }> Edit </NavLink></td>
+          <td><NavLink to={"/admin-console/bsca/course/" + item._id + "/modules"}> Go </NavLink></td>
+        </tr>
+      )
     }) : null;
     return (
     <div>
       <Jumbotron>
         <h3>Big Sky Code Academy ( courses )</h3>
         <ul>
-          { courseItems }
+          <Table responsive>
+            <thead>
+              <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              { courseItems }
+            </tbody>
+          </Table>
           <li><NavLink to="/admin-console/bsca/courses/post/">Create New Course</NavLink></li>
         </ul>
       </Jumbotron>
