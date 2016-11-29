@@ -43,6 +43,7 @@ Router.route('/')
 Router.route('/:id')
   .get((req, res) => {
     Course.findById(req.params.id)
+    .populate('modules')
     .exec((err, course) => {
       if (err) {
         res.json({ message: 'there was an error finding this course' });

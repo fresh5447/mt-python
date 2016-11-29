@@ -24,6 +24,9 @@ import BSCAViewCourseContainer from './ADMIN/BSCA/Courses/View/BSCAViewContainer
 import BSCAEditCourseContainer from './ADMIN/BSCA/Courses/Edit/BSCAEditContainer';
 import BSCAPostCourseContainer from './ADMIN/BSCA/Courses/Post/BSCAPostContainer';
 
+import BSCAModulesContainer from './ADMIN/BSCA/Modules/ModulesContainer';
+import BSCAPostModulesContainer from './ADMIN/BSCA/Modules/Post/BSCAPostContainer';
+
 
 import MTCGContainer from './ADMIN/MTCG/MTCGContainer';
 import UsersContainer from './ADMIN/Users/UsersContainer';
@@ -46,11 +49,11 @@ render((
           <Route path="post" component={BSCAPostCourseContainer}/>
         </Route>
 
-        {/* <Route path="bsca/course/:course_id/modules" component={BSCAModulesContainer}>
-          <Route path="view/:module_id" component={BSCAViewModulesContainer}/>
-          <Route path="edit/:module_id" component={BSCAEditModulesContainer}/>
+        <Route path="bsca/course/:course_id/modules" component={BSCAModulesContainer}>
+          {/* <Route path="view/:module_id" component={BSCAViewModulesContainer}/>
+          <Route path="edit/:module_id" component={BSCAEditModulesContainer}/> */}
           <Route path="post" component={BSCAPostModulesContainer}/>
-        </Route> */}
+        </Route>
 
         <Route path="mtcg" component={MTCGContainer}/>
         <Route path="users" component={UsersContainer}/>

@@ -7,6 +7,7 @@ const path           = require('path'),
   nodemailer          = require('nodemailer'),
   uriUtil             = require('mongodb-uri'),
   CourseRouter        = require('./routes/courses'),
+  ModuleRouter        = require('./routes/modules'),
 
  mongoose            = require('mongoose');
 
@@ -50,6 +51,7 @@ app.get('/home', function(req, res) {
 })
 
 app.use('/api/v2/courses', CourseRouter);
+app.use('/api/v2/modules', ModuleRouter);
 
 // BUG: API is served over port 3100;
 const port = process.env.PORT || 3001;
