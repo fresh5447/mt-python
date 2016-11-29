@@ -1,8 +1,8 @@
 import React from 'react';
 
 const EditCourseForm = (props) =>
-  <div className="cp-form-container">
-    <div className="page-header">
+  <div className="">
+    <div className="">
       <h5>edit course: {props.title}</h5>
     </div>
     <div className="container cp-form">

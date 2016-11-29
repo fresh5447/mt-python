@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
-import NavLink from '../../../Components/NavLink';
-import EditCourseForm from './EditCourseForm';
+import NavLink from '../../../../Components/NavLink';
+import EditModuleForm from './EditModuleForm';
 import { Jumbotron, Button } from 'react-bootstrap';
 
 class BSCAEditContainer extends Component {
@@ -19,11 +19,11 @@ class BSCAEditContainer extends Component {
   }
 
   componentWillMount() {
-    this.loadCourse(this.props.params.course_id);
+    this.loadModule(this.props.params.module_id);
   }
 
   componentWillReceiveProps() {
-    this.loadCourse(this.props.params.course_id);
+    this.loadModule(this.props.params.module_id);
   }
 
   handleSubmit(e) {
@@ -34,11 +34,11 @@ class BSCAEditContainer extends Component {
       publish: this.state.publish,
     };
     $.ajax({
-      url: `/api/v2/courses/${this.props.params.course_id}`,
+      url: `/api/v2/modules/${this.props.params.module_id}`,
       method: 'PUT',
       data
     }).done((d) => {
-      console.log('successfully edited course', d)
+      console.log('successfully edited module', d)
     });
   }
 
@@ -49,9 +49,9 @@ class BSCAEditContainer extends Component {
   }
 
 
-  loadCourse(id) {
+  loadModule(id) {
     $.ajax({
-      url: '/api/v2/courses/' + this.props.params.course_id,
+      url: '/api/v2/modules/' + this.props.params.module_id,
       method: 'GET',
     }).done((data) => {
       console.log(data);
@@ -59,12 +59,13 @@ class BSCAEditContainer extends Component {
         title: data.title,
         desc: data.desc,
         publish: data.publish,
+        course: data.course
       });
       console.log(this.state)
     });
   }
   render() {
-    return (this.state.title ? <EditCourseForm
+    return (this.state.title ? <EditModuleForm
       title={this.state.title}
       desc={this.state.desc}
       publish={this.state.publish}

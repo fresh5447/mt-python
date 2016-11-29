@@ -1,11 +1,11 @@
 import React from 'react';
 
-const EditCourseForm = (props) =>
-  <div className="cp-form-container">
-    <div className="page-header">
-      <h5>edit course: {props.title}</h5>
+const EditModuleForm = (props) =>
+  <div className="container">
+    <div className="">
+      <h5>edit module: {props.title}</h5>
     </div>
-    <div className="container cp-form">
+    <div className="">
       <form onSubmit={props.handleSubmit}>
         <fieldset className="form-group">
           <input required="true" onChange={ (event) => props.onFieldChange('title', event.target.value)}
@@ -30,4 +30,4 @@ const EditCourseForm = (props) =>
   </div>;
 
 
-export default EditCourseForm;
+export default EditModuleForm;
