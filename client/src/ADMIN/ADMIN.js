@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Grid, Row, Col, Tabs, Tab } from 'react-bootstrap';
-import BSCA from './BSCA/BSCAContainer';
+import BSCA from './BSCA/Courses/CoursesContainer';
 import { browserHistory } from 'react-router'
 
 
