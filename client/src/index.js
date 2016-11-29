@@ -2,7 +2,6 @@ import React from 'react';
 import { render } from 'react-dom';
 import App from './App';
 import { Router, Route, browserHistory } from 'react-router';
-import $ from 'jquery';
 import 'bootstrap/dist/css/bootstrap.css';
 import './index.css';
 
@@ -21,9 +20,11 @@ import Students from './MTCG/Students/StudentsContainer';
 
 import ADMIN from './ADMIN/ADMIN';
 import BSCACourseContainer from './ADMIN/BSCA/Courses/CoursesContainer';
-import BSCAViewContainer from './ADMIN/BSCA/Courses/View/BSCAViewContainer';
-import BSCAEditContainer from './ADMIN/BSCA/Courses/Edit/BSCAEditContainer';
-import BSCAPostContainer from './ADMIN/BSCA/Courses/Post/BSCAPostContainer';
+import BSCAViewCourseContainer from './ADMIN/BSCA/Courses/View/BSCAViewContainer';
+import BSCAEditCourseContainer from './ADMIN/BSCA/Courses/Edit/BSCAEditContainer';
+import BSCAPostCourseContainer from './ADMIN/BSCA/Courses/Post/BSCAPostContainer';
+
+
 import MTCGContainer from './ADMIN/MTCG/MTCGContainer';
 import UsersContainer from './ADMIN/Users/UsersContainer';
 import PublisherContainer from './ADMIN/Publisher/PublisherContainer';
@@ -40,10 +41,16 @@ render((
 
       <Route path="/admin-console" component={ADMIN}>
         <Route path="bsca/courses" component={BSCACourseContainer}>
-          <Route path="view/:course_id" component={BSCAViewContainer}/>
-          <Route path="edit/:course_id" component={BSCAEditContainer}/>
-          <Route path="post" component={BSCAPostContainer}/>
+          <Route path="view/:course_id" component={BSCAViewCourseContainer}/>
+          <Route path="edit/:course_id" component={BSCAEditCourseContainer}/>
+          <Route path="post" component={BSCAPostCourseContainer}/>
         </Route>
+
+        {/* <Route path="bsca/course/:course_id/modules" component={BSCAModulesContainer}>
+          <Route path="view/:module_id" component={BSCAViewModulesContainer}/>
+          <Route path="edit/:module_id" component={BSCAEditModulesContainer}/>
+          <Route path="post" component={BSCAPostModulesContainer}/>
+        </Route> */}
 
         <Route path="mtcg" component={MTCGContainer}/>
         <Route path="users" component={UsersContainer}/>
