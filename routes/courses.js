@@ -4,26 +4,16 @@ const Course = require('../models/course');
 const Router = new express.Router();
 
 Router.route('/')
-  // .get((req, res) => {
-  //   Course.find()
-  //   .populate('students')
-  //   .populate('modules')
-  //   .exec((err, r) => {
-  //     if (err) {
-  //       res.json(err, 'ERROR');
-  //     } else {
-  //       res.json(r);
-  //     }
-  //   });
-  // })
   .get((req, res) => {
-    Course.find((err, courses) => {
-      if(err){
-        res.json(err)
+    Course.find()
+    .populate('modules')
+    .exec((err, r) => {
+      if (err) {
+        res.json(err, 'ERROR');
       } else {
-        res.json(courses)
+        res.json(r);
       }
-    })
+    });
   })
   .post((req, res) => {
     const course = new Course({

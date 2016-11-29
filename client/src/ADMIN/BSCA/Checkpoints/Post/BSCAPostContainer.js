@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { browserHistory } from 'react-router';
-import PostCourseForm from './PostCourseForm';
+import PostCheckpointForm from './PostCheckpointForm';
 import $ from 'jquery';
 
 class BSCAPostContainer extends Component {
@@ -12,7 +12,10 @@ class BSCAPostContainer extends Component {
     this.state = {
       title: null,
       desc: null,
-      publish: null
+      publish: null,
+      content: null,
+      assignment: null,
+      module: null
     };
 
   }
@@ -29,21 +32,24 @@ class BSCAPostContainer extends Component {
     const data = {
       title: this.state.title,
       desc: this.state.desc,
-      publish: published
+      content: this.state.content
+      publish: published,
+      assignment: this.state.assignment,
+      module: this.props.params.module_id
     };
     console.log(data)
     $.ajax({
-      url: `/api/v2/courses`,
+      url: `/api/v2/checkpoints`,
       method: 'POST',
       data
     }).done((d) => {
-      const path = `/admin-console/bsca`
+      const path = `/admin-console`
       browserHistory.push(path);
     });
   }
 
   render() {
-    return <PostCourseForm
+    return <PostCheckpointForm
     onFieldChange={(...args) => this.onFieldChange(...args)}
     handleSubmit={this.handleSubmit}
     />;

@@ -124,6 +124,7 @@ const Router = express.Router();
 Router.route('/')
   .get(function(req, res){
     Module.find()
+    .populate('checkpoints')
     .exec(function(err, modules){
       if(err){
         res.json({ message: "there was an error finding all modules" })

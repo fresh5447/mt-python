@@ -9,6 +9,7 @@ const ModuleSchema = new Schema({
   title: String,
   desc: String,
   order: { type: Number, default: 0 },
+  checkpoints: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Checkpoint' }],
   publish: Boolean,
   course: { type: mongoose.Schema.Types.ObjectId, ref: 'Course' }
 });

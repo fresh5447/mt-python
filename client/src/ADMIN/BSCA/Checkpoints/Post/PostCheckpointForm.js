@@ -1,14 +1,14 @@
 import React from 'react';
 
-const PostCourseForm = (props) =>
+const PostCheckpointForm = (props) =>
   <div className="">
     <div className="page-header">
-      <h2>Create Course</h2>
+      <h2>Create Checkpoint</h2>
     </div>
     <div className="">
       <form onSubmit={props.handleSubmit}>
         <fieldset className="form-group">
-          <label>course title</label>
+          <label>checkpoint title</label>
           <input required="true" onChange={ (event) => props.onFieldChange('title', event.target.value)}
             type="text" className="form-control" id="" placeholder="title"
           />
@@ -17,6 +17,18 @@ const PostCourseForm = (props) =>
           <label>description</label>
           <input required="true" onChange={ (event) => props.onFieldChange('desc', event.target.value)}
           type="text" className="form-control" id="" placeholder="..."
+          />
+        </fieldset>
+        <fieldset className="form-group">
+          <label>content</label>
+          <input required="true" onChange={ (event) => props.onFieldChange('content', event.target.value)}
+          type="text-area" className="form-control" id="" placeholder="..."
+          />
+        </fieldset>
+        <fieldset className="form-group">
+          <label>assignment</label>
+          <input required="true" onChange={ (event) => props.onFieldChange('assignment', event.target.value)}
+          type="text-area" className="form-control" id="" placeholder="..."
           />
         </fieldset>
         <fieldset className="">
@@ -30,4 +42,4 @@ const PostCourseForm = (props) =>
     </div>
   </div>;
 
-export default PostCourseForm;
+export default PostCheckpointForm;

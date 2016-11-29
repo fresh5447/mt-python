@@ -29,6 +29,10 @@ import BSCAPostModulesContainer from './ADMIN/BSCA/Modules/Post/BSCAPostContaine
 import BSCAViewModulesContainer from './ADMIN/BSCA/Modules/View/BSCAViewContainer';
 import BSCAEditModulesContainer from './ADMIN/BSCA/Modules/Edit/BSCAEditContainer';
 
+import BSCACheckpointContainer from './ADMIN/BSCA/Checkpoints/BSCACheckpointContainer';
+import BSCAPostCheckpointContainer from './ADMIN/BSCA/Checkpoints/Post/BSCAPostContainer';
+
+
 
 import MTCGContainer from './ADMIN/MTCG/MTCGContainer';
 import UsersContainer from './ADMIN/Users/UsersContainer';
@@ -45,17 +49,23 @@ render((
       </Route>
 
       <Route path="/admin-console" component={ADMIN}>
-
+        {/* COURSES */}
         <Route path="bsca/courses" component={BSCACourseContainer}>
           <Route path="view/:course_id" component={BSCAViewCourseContainer}/>
           <Route path="edit/:course_id" component={BSCAEditCourseContainer}/>
           <Route path="post" component={BSCAPostCourseContainer}/>
         </Route>
-
+        {/* MODULES */}
         <Route path="bsca/course/:course_id/modules" component={BSCAModulesContainer}>
           <Route path="view/:module_id" component={BSCAViewModulesContainer}/>
           <Route path="edit/:module_id" component={BSCAEditModulesContainer}/>
           <Route path="post" component={BSCAPostModulesContainer}/>
+        </Route>
+        {/* CHECKPOINTS */}
+        <Route path="bsca/course/:course_id/module/:module_id" component={BSCACheckpointContainer}>
+          {/* <Route path="view/:checkpoint_id" component={BSCAViewModulesContainer}/>
+          <Route path="edit/:checkpoint_id" component={BSCAEditModulesContainer}/> */}
+          <Route path="post" component={BSCAPostCheckpointContainer}/>
         </Route>
 
         <Route path="mtcg" component={MTCGContainer}/>
