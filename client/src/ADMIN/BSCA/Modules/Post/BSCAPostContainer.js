@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { browserHistory } from 'react-router';
-import PostCourseForm from './PostCourseForm';
+import PostModuleForm from './PostModuleForm';
 import $ from 'jquery';
 
 class BSCAPostContainer extends Component {
@@ -29,21 +29,22 @@ class BSCAPostContainer extends Component {
     const data = {
       title: this.state.title,
       desc: this.state.desc,
-      publish: published
+      publish: published,
+      course: this.props.params.course_id
     };
     console.log(data)
     $.ajax({
-      url: `/api/v2/courses`,
+      url: `/api/v2/modules`,
       method: 'POST',
       data
     }).done((d) => {
-      const path = `/admin-console/bsca`
+      const path = `/admin-console`
       browserHistory.push(path);
     });
   }
 
   render() {
-    return <PostCourseForm
+    return <PostModuleForm
     onFieldChange={(...args) => this.onFieldChange(...args)}
     handleSubmit={this.handleSubmit}
     />;

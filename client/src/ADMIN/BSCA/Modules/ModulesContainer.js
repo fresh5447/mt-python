@@ -32,18 +32,15 @@ class ModulesContainer extends Component {
     });
   }
   render() {
-    // const courseItems = this.state.courses ? this.state.courses.map((item) => {
-    //   return <li><NavLink to={"/admin-console/bsca/view-course/" + item._id }>{ item.title } </NavLink></li>
-    // }) : null;
+    const modulesItems = this.state.course ? this.state.course.modules.map((item) => {
+      return <li><NavLink to={"/admin-console/bsca/course/" + this.props.params.course_id + "/modules/view/" + item._id}>{ item.title } </NavLink></li>
+    }) : null;
     return (
     <div>
       <Jumbotron>
         <h3>{this.state.course ? this.state.course.title : null}</h3>
         <ul>
-          <li>Module Number One</li>
-          <li>Module Number Dos</li>
-          <li>Module Number Tres</li>
-          <li>Module Number Quatro</li>
+          { modulesItems }
           <li><NavLink to={"/admin-console/bsca/course/" + this.props.params.course_id + "/modules/post/"}>Create New Module</NavLink></li>
         </ul>
       </Jumbotron>

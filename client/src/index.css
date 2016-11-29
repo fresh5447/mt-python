@@ -4,6 +4,18 @@ body {
   font-family: sans-serif;
 }
 
+/*$font-content: 'Lato', sans-serif;
+*/
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Varela Round', sans-serif;
+}
+
+p, a {
+  font-family: 'Lato', sans-serif;
+}
+
+
 .playbook-panel {
   width: 30%;
   min-height: 255px;

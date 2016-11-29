@@ -1,6 +1,6 @@
 import React from 'react';
 
-const PostCourseForm = (props) =>
+const PostModuleForm = (props) =>
   <div className="">
     <div className="page-header">
       <h2>Create Course</h2>
@@ -30,4 +30,4 @@ const PostCourseForm = (props) =>
     </div>
   </div>;
 
-export default PostCourseForm;
+export default PostModuleForm;

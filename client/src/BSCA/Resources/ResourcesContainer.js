@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Jumbotron, Button, Grid, Col, Row, ButtonGroup, DropdownButton, MenuItem, Nav, NavItem, Panel } from 'react-bootstrap';
+import { Button, Grid, Col, ButtonGroup, Nav, NavItem, Panel } from 'react-bootstrap';
 
 const rezs = [
   { title: "Intro to JS",
