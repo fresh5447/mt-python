@@ -9,6 +9,7 @@ const path           = require('path'),
   CourseRouter        = require('./routes/courses'),
   ModuleRouter        = require('./routes/modules'),
   CheckpointsRouter   = require('./routes/checkpoints'),
+  ResourcesRouter   = require('./routes/resources'),
 
  mongoose            = require('mongoose');
 
@@ -54,6 +55,7 @@ app.get('/home', function(req, res) {
 app.use('/api/v2/courses', CourseRouter);
 app.use('/api/v2/modules', ModuleRouter);
 app.use('/api/v2/checkpoints', CheckpointsRouter);
+app.use('/api/v2/resources', ResourcesRouter);
 
 // BUG: API is served over port 3100;
 const port = process.env.PORT || 3001;
