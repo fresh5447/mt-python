@@ -1,37 +1,6 @@
 import React, { Component } from 'react';
 import NavLink from '../../Components/NavLink';
-import { Jumbotron, Button } from 'react-bootstrap';
-
-const courses = [
-  {
-    title: "Intro to web dev",
-    enrolled: true,
-    desc: "just a cool course about web stuff"
-  },
-  {
-    title: "Web Dev Foundations",
-    enrolled: true,
-    desc: "just some more cool course about web stuff"
-  },
-  {
-    title: "Advanced Web Developement",
-    enrolled: false,
-    desc: "just some more cool course about web stuff"
-  },
-]
-
-const availableItems = courses.filter((item) => {
-  return item.enrolled
-}).map((item) => {
-  return <li> <NavLink to={'/big-sky-code-academy/course/' + item.title}> {item.title}</NavLink> </li>
-})
-
-const unavailableItems = courses.filter((item) => {
-  return !item.enrolled
-}).map((item) => {
-  return <li> {item.title} </li>
-})
-
+import { Jumbotron, Button, Table } from 'react-bootstrap';
 
 class UsersContainer extends Component {
   render() {
@@ -39,18 +8,48 @@ class UsersContainer extends Component {
     <div>
       <Jumbotron>
         <h3>Users Tab</h3>
-        <ul>
-        </ul>
-      </Jumbotron>
-      <Jumbotron>
-        <h3>Other Courses</h3>
-        <ul>
-        </ul>
-      </Jumbotron>
-      <Jumbotron>
-        <h3>User Profile</h3>
-        <p>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-        <p><Button bsStyle="primary">Edit</Button></p>
+        <Table responsive>
+          <thead>
+            <tr>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Username</th>
+              <th>Status</th>
+              <th>Code Range</th>
+              <th>MTCG</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Doug</td>
+              <td>Walter</td>
+              <td>fresh5447</td>
+              <td>Active</td>
+              <td>Yes</td>
+              <td>Yes</td>
+              <td><button>Invite</button></td>
+            </tr>
+            <tr>
+              <td>Bob</td>
+              <td>Johnson</td>
+              <td>bj</td>
+              <td>Pending</td>
+              <td>Yes</td>
+              <td>No</td>
+              <td><button>Invite</button></td>
+            </tr>
+            <tr>
+              <td>Sue</td>
+              <td>Bob</td>
+              <td>fresh5447</td>
+              <td>Active</td>
+              <td>No</td>
+              <td>Yes</td>
+              <td><button>Invite</button></td>
+            </tr>
+          </tbody>
+        </Table>
       </Jumbotron>
     </div>
     )

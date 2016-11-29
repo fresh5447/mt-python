@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import GetUser from './Context/GetUser';
+import Feedback from './Context/Feedback';
+import Notifier from './Context/Notifier';
 import DashboardContainer from './Dashboard/DashboardContainer';
 import RootNavbar from './Navbar/RootNavbar';
 
@@ -19,8 +22,14 @@ class App extends Component {
   render() {
     return (
       <div>
-        <RootNavbar user={user}/>
-          { this.props.children ? this.props.children : <DashboardContainer user={user}/> }
+        <GetUser>
+          <Notifier>
+            {/* <Feedback> */}
+              <RootNavbar/>
+                { this.props.children ? this.props.children : <DashboardContainer/> }
+            {/* </Feedback> */}
+          </Notifier>
+        </GetUser>
       </div>
     );
   }

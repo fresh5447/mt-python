@@ -9,10 +9,16 @@ module.exports = function(app, passport) {
 
   app.post('/signup', function(req, res, next) {
     passport.authenticate('local-signup', function(err, user, info) {
-      console.log('sign up post', info);
-      if (err) { return next(err); }
-      if (!user) { return res.status(404).json(info.message);}
-      console.log(req.body.email, 'HERE IS THE EMAIL')
+      console.log('SIGNUP INFO', info);
+      if (err) {
+        console.log("ONE ERR: ", err)
+        res.json(err)
+        return next(err);
+      }
+      if (!user) {
+        console.log("NO USER:", info)
+        return res.status(404).json(info.message);
+      }
       req.logIn(user, function(err) {
         if (err) { return next(err); }
         return res.json({message: "Success! You are all signed up.", user: user});
@@ -80,7 +86,7 @@ module.exports = function(app, passport) {
         }
       })
     } else {
-      res.json({user: "no user"})
+      res.json({user: null})
     }
   });
 

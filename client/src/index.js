@@ -5,7 +5,11 @@ import { Router, Route, browserHistory } from 'react-router';
 import 'bootstrap/dist/css/bootstrap.css';
 import './index.css';
 
-
+{/* BEGIN AUTHERIZATION */}
+import Forgot from './UserAuth/Forgot';
+import Register from './UserAuth/Register';
+import Signin from './UserAuth/Signin';
+import Reset from './UserAuth/Reset';
 
 import BSCA from './BSCA/BSCA';
 import HomeContainer from './BSCA/Home/HomeContainer';
@@ -46,6 +50,7 @@ import BSCAPostResourceContainer from './ADMIN/BSCA/Resources/Post/BSCAPostConta
 import MTCGContainer from './ADMIN/MTCG/MTCGContainer';
 import UsersContainer from './ADMIN/Users/UsersContainer';
 import PublisherContainer from './ADMIN/Publisher/PublisherContainer';
+
 
 render((
   <Router history={browserHistory}>
@@ -98,6 +103,12 @@ render((
         <Route path="students" component={Students}/>
         <Route path="schedule" component={Schedule}/>
       </Route>
+
+    {/* BEGIN AUTHERIZATION */}
+    <Route path="/register" component={Register} />
+    <Route path="/signin" component={Signin} />
+    <Route path="/forgot" component={Forgot} />
+    <Route path="/user/reset/:reset_token" component={Reset} />
 
     </Route>
   </Router>
