@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
 import NavLink from '../../../Components/NavLink';
-import { Jumbotron, Button, Panel } from 'react-bootstrap';
+import { Jumbotron, Button, Panel, Table } from 'react-bootstrap';
 
 class ModulesContainer extends Component {
   constructor(props, context) {
@@ -33,16 +33,32 @@ class ModulesContainer extends Component {
   }
   render() {
     const modulesItems = this.state.course ? this.state.course.modules.map((item) => {
-      return <li><NavLink to={"/admin-console/bsca/course/" + this.props.params.course_id + "/modules/view/" + item._id}>{ item.title } </NavLink></li>
+      return (
+        <tr>
+          <td><NavLink to={"/admin-console/bsca/course/" + this.props.params.course_id + "/modules/view/" + item._id}>{ item.title } </NavLink></td>
+          <td><NavLink to={ "/admin-console/bsca/course/" + this.props.params.course_id + "/modules/edit/" + item._id}>Edit</NavLink></td>
+          <td><NavLink to={ "/admin-console/bsca/course/" + this.props.params.course_id + "/module/" + item._id}>Go</NavLink></td>
+        </tr>
+      )
     }) : null;
     return (
     <div>
       <Jumbotron>
         <h3>{this.state.course ? this.state.course.title : null}</h3>
-        <ul>
-          { modulesItems }
-          <li><NavLink to={"/admin-console/bsca/course/" + this.props.params.course_id + "/modules/post/"}>Create New Module</NavLink></li>
-        </ul>
+        <p>Modules</p>
+        <Table responsive>
+          <thead>
+            <tr>
+              <th></th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            { modulesItems }
+          </tbody>
+        </Table>
+        <NavLink to={"/admin-console/bsca/course/" + this.props.params.course_id + "/modules/post/"}>Create New Module</NavLink>
       </Jumbotron>
       { this.props.children }
     </div>

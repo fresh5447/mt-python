@@ -33,14 +33,16 @@ class BSCAEditContainer extends Component {
     const data = {
       title: this.state.title,
       desc: this.state.desc,
+      assignment: this.state.assignment,
+      content: this.state.content,
       publish: this.state.publish,
     };
     $.ajax({
-      url: `/api/v2/courses/${this.props.params.checkpoint_id}`,
+      url: `/api/v2/checkpoints/${this.props.params.checkpoint_id}`,
       method: 'PUT',
       data
     }).done((d) => {
-      console.log('successfully edited course', d)
+      console.log('successfully edited checkpoint', d)
     });
   }
 

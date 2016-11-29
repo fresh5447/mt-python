@@ -1,13 +1,14 @@
 import React from 'react';
 
 const EditCheckpointForm = (props) =>
-  <div className="cp-form-container">
-    <div className="page-header">
-      <h5>edit course: {props.title}</h5>
+  <div className="">
+    <div className="">
+      <h5>edit checkpoint: {props.title}</h5>
     </div>
     <div className="container cp-form">
       <form onSubmit={props.handleSubmit}>
         <fieldset className="form-group">
+          <label>title</label>
           <input required="true" onChange={ (event) => props.onFieldChange('title', event.target.value)}
             type="text" className="form-control" id="" placeholder="title" value={props.title}
           />
@@ -19,11 +20,13 @@ const EditCheckpointForm = (props) =>
           />
         </fieldset>
         <fieldset className="form-group">
+          <label>content</label>
           <input required="true" onChange={ (event) => props.onFieldChange('content', event.target.value)}
             type="text" className="form-control" id="" placeholder="content" value={props.content}
           />
         </fieldset>
         <fieldset className="form-group">
+          <label>assignment</label>
           <input onChange={ (event) => props.onFieldChange('assignment', event.target.value)}
             type="text" className="form-control" id="" placeholder="assignment" value={props.assignment}
           />

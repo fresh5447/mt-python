@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
 import NavLink from '../../../Components/NavLink';
-import { Jumbotron, Button, Panel } from 'react-bootstrap';
+import { Jumbotron, Button, Panel, Table } from 'react-bootstrap';
 
 class BSCAContainer extends Component {
   constructor(props, context) {
@@ -31,14 +31,30 @@ class BSCAContainer extends Component {
   }
   render() {
     const checkpointItems = this.state.module ? this.state.module.checkpoints.map((item) => {
-      return <li><NavLink to={ "/admin-console/bsca/course/" + this.props.params.course_id + "/module/" + this.props.params.module_id + "/view/" + item._id}>{item.title}</NavLink></li>
-    }) : null;
+      return (
+        <tr>
+          <td><NavLink to={ "/admin-console/bsca/course/" + this.props.params.course_id + "/module/" + this.props.params.module_id + "/view/" + item._id}>{item.title}</NavLink></td>
+          <td><NavLink to={ "/admin-console/bsca/course/" + this.props.params.course_id + "/module/" + this.props.params.module_id + "/edit/" + item._id}>Edit</NavLink></td>
+        </tr>
+      )    }) : null;
     return (
     <div>
       <Jumbotron>
         <h3>{ this.state.module ? this.state.module.title : null }</h3>
-        <ul>
+        <p>Checkpoints</p>
+        <Table responsive>
+          <thead>
+            <tr>
+              <th></th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
           { checkpointItems }
+          </tbody>
+        </Table>
+        <ul>
           <li><NavLink to={ "/admin-console/bsca/course/" + this.props.params.course_id + "/module/" + this.props.params.module_id + "/post"}>New Checkpiont</NavLink></li>
         </ul>
       </Jumbotron>

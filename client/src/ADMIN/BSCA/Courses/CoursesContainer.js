@@ -42,8 +42,8 @@ class BSCAContainer extends Component {
     return (
     <div>
       <Jumbotron>
-        <h3>Big Sky Code Academy ( courses )</h3>
-        <ul>
+        <h3>Big Sky Code Academy</h3>
+        <p>Courses</p>
           <Table responsive>
             <thead>
               <tr>
@@ -56,8 +56,7 @@ class BSCAContainer extends Component {
               { courseItems }
             </tbody>
           </Table>
-          <li><NavLink to="/admin-console/bsca/courses/post/">Create New Course</NavLink></li>
-        </ul>
+          <NavLink to="/admin-console/bsca/courses/post/">Create New Course</NavLink>
       </Jumbotron>
       { this.props.children }
     </div>
