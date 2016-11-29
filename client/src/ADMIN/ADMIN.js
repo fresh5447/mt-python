@@ -14,7 +14,7 @@ class ADMIN extends Component {
         <Row>
           <Col xs={12}>
             <Tabs defaultActiveKey={"home"} onSelect={this.handleSelect} id="uncontrolled-tab-example">
-              <Tab eventKey={"bsca/courses"} title="bsca">{this.props.children ? this.props.children : <BSCA />}</Tab>
+              <Tab eventKey={"bsca"} title="bsca">{this.props.children ? this.props.children : <BSCA />}</Tab>
               <Tab eventKey={"mtcg"} title="mtcg">{this.props.children}</Tab>
               <Tab eventKey={"users"} title="users">{this.props.children}</Tab>
               <Tab eventKey={"publisher"} title="publisher">{this.props.children}</Tab>

@@ -42,7 +42,7 @@ class BSCAContainer extends Component {
     return (
     <div>
       <Jumbotron>
-        <p>Courses</p>
+        <p>Resources</p>
           <Table responsive>
             <thead>
               <tr>
