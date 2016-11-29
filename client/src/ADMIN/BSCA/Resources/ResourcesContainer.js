@@ -8,34 +8,33 @@ class BSCAContainer extends Component {
     super(props, context);
 
     this.state = {
-      courses: null
+      resources: null
     };
-    this.loadCourses = this.loadCourses.bind(this);
+    this.loadResources = this.loadResources.bind(this);
   }
 
   componentWillMount() {
-    this.loadCourses();
+    this.loadResources();
   }
 
   componentWillReceiveProps() {
-    this.loadCourses();
+    this.loadResources();
   }
 
-  loadCourses() {
+  loadResources() {
     $.ajax({
-      url: '/api/v2/courses',
+      url: '/api/v2/resources',
       method: 'GET',
     }).done((data) => {
-      this.setState({ courses: data });
+      this.setState({ resources: data });
     });
   }
   render() {
-    const courseItems = this.state.courses ? this.state.courses.map((item) => {
+    const resourceItems = this.state.resources ? this.state.resources.map((item) => {
       return (
         <tr>
-          <td><NavLink to={"/admin-console/bsca/courses/view/" + item._id }> { item.title } </NavLink></td>
-          <td><NavLink to={"/admin-console/bsca/courses/edit/" + item._id }> Edit </NavLink></td>
-          <td><NavLink to={"/admin-console/bsca/course/" + item._id + "/modules"}> Go </NavLink></td>
+          <td><NavLink to={"/admin-console/bsca/resources/view/" + item._id }> { item.title } </NavLink></td>
+          <td><NavLink to={"/admin-console/bsca/resources/edit/" + item._id }> Edit </NavLink></td>
         </tr>
       )
     }) : null;
@@ -52,10 +51,10 @@ class BSCAContainer extends Component {
               </tr>
             </thead>
             <tbody>
-              { courseItems }
+              { resourceItems }
             </tbody>
           </Table>
-          <NavLink to="/admin-console/bsca/courses/post/">Create New Course</NavLink>
+          <NavLink to="/admin-console/bsca/resources/post/">Create New Resource</NavLink>
       </Jumbotron>
       { this.props.children }
     </div>

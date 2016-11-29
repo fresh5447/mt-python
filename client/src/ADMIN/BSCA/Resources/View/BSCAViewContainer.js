@@ -8,41 +8,41 @@ class BSCAViewContainer extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      course: null
+      resource: null
     };
   }
 
   componentWillMount(props) {
-    console.log('PROPS', props)
-    this.loadCourse(this.props.params.course_id);
+    this.loadResource(this.props.params.resource_id);
   }
 
   componentWillReceiveProps() {
-    this.loadCourse(this.props.params.course_id);
+    this.loadResource(this.props.params.resource_id);
   }
 
 
-  loadCourse(id) {
+  loadResource(id) {
     $.ajax({
-      url: '/api/v2/courses/' + id,
+      url: '/api/v2/resources/id/' + id,
       method: 'GET',
     }).done((data) => {
       console.log(data);
-      this.setState({ course: data });
+      this.setState({ resource: data });
     });
   }
   render() {
     return (
     <div>
       <Jumbotron>
-        <h3>{this.state.course ? this.state.course.title : "loading..."}</h3>
-        <NavLink to={ "/admin-console/bsca/courses/edit/" + this.props.params.course_id}>Edit Course Info</NavLink>
+        <NavLink to={ "/admin-console/bsca/resources/edit/" + this.props.params.resource_id}>Edit Course Info</NavLink>
+        <h3>{this.state.resource ? this.state.resource.title : "loading..."}</h3>
         <p></p>
-        <NavLink to={ "/admin-console/bsca/course/" + this.props.params.course_id + "/modules"}>TAKE ME THERE</NavLink>
-
         <p></p>
-        <p>{this.state.course ? "Desription: " + this.state.course.desc : "loading..."}</p>
-        <p>{this.state.course ? "Publish: " + this.state.course.publish.toString() : "loading..."}</p>
+        <p>{this.state.resource ? "Content: " + this.state.resource.content : "loading..."}</p>
+        <p>{this.state.resource ? "Link: " + this.state.resource.link : "loading..."}</p>
+        <p>{this.state.resource ? "Desription: " + this.state.resource.desc : "loading..."}</p>
+        <p>{this.state.resource ? "Publish: " + this.state.resource.publish.toString() : "loading..."}</p>
+        <p>{this.state.resource ? "Internal: " + this.state.resource.internal.toString() : "loading..."}</p>
       </Jumbotron>
     </div>
     )

@@ -11,8 +11,11 @@ class BSCAPostContainer extends Component {
 
     this.state = {
       title: null,
+      content: null,
+      link: null,
       desc: null,
-      publish: null
+      publish: null,
+      internal: null
     };
 
   }
@@ -26,14 +29,18 @@ class BSCAPostContainer extends Component {
   handleSubmit(e) {
     e.preventDefault();
     const published = this.state.publish == null ? false : true;
+    const int = this.state.internal == null ? false : true;
     const data = {
       title: this.state.title,
+      content: this.state.content,
       desc: this.state.desc,
-      publish: published
+      link: this.state.link,
+      publish: published,
+      internal: int
     };
     console.log(data)
     $.ajax({
-      url: `/api/v2/courses`,
+      url: `/api/v2/resources`,
       method: 'POST',
       data
     }).done((d) => {

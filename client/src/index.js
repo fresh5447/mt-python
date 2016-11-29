@@ -81,9 +81,9 @@ render((
 
           {/* Resources */}
           <Route path="resources" component={BSCAResourceContainer}>
-            {/* <Route path="view/:resource_id" component={BSCAViewResourceContainer}/>
+            <Route path="view/:resource_id" component={BSCAViewResourceContainer}/>
             <Route path="edit/:resource_id" component={BSCAEditResourceContainer}/>
-            <Route path="post" component={BSCAPostResourceContainer}/> */}
+            <Route path="post" component={BSCAPostResourceContainer}/>
           </Route>
         </Route>
 

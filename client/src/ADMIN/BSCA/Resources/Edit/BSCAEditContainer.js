@@ -13,32 +13,39 @@ class BSCAEditContainer extends Component {
 
     this.state = {
       title: null,
+      content: null,
+      link: null,
       desc: null,
-      publish: null
+      publish: null,
+      internal: null
     };
   }
 
   componentWillMount() {
-    // this.loadResource(this.props.params.course_id);
+    this.loadResource(this.props.params.resource_id);
   }
 
   componentWillReceiveProps() {
-    // this.loadResource(this.props.params.course_id);
+    this.loadResource(this.props.params.resource_id);
   }
 
   handleSubmit(e) {
-    e.preventDefault();
+    const published = this.state.publish == null ? false : true;
+    const int = this.state.internal == null ? false : true;
     const data = {
       title: this.state.title,
+      content: this.state.content,
       desc: this.state.desc,
-      publish: this.state.publish,
+      link: this.state.link,
+      publish: published,
+      internal: int
     };
     $.ajax({
-      url: `/api/v2/courses/${this.props.params.course_id}`,
+      url: `/api/v2/resources/id/${this.props.params.resource_id}`,
       method: 'PUT',
       data
     }).done((d) => {
-      console.log('successfully edited course', d)
+      console.log('successfully edited resource', d)
     });
   }
 
@@ -51,16 +58,18 @@ class BSCAEditContainer extends Component {
 
   loadResource(id) {
     $.ajax({
-      url: '/api/v2/courses/' + this.props.params.course_id,
+      url: '/api/v2/resources/id/' + this.props.params.resource_id,
       method: 'GET',
     }).done((data) => {
       console.log(data);
       this.setState({
         title: data.title,
+        content: data.content,
         desc: data.desc,
-        publish: data.publish,
+        link: data.link,
+        publish: data.published,
+        internal: data.internal
       });
-      console.log(this.state)
     });
   }
   render() {
@@ -68,6 +77,9 @@ class BSCAEditContainer extends Component {
       title={this.state.title}
       desc={this.state.desc}
       publish={this.state.publish}
+      content={this.state.content}
+      link={this.state.link}
+      internal={this.state.internal}
       onFieldChange={this.onFieldChange}
       handleSubmit={this.handleSubmit}
       /> : null
