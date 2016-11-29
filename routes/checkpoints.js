@@ -136,6 +136,47 @@ Router.route('/')
   })
 })
 
+Router.route('/:id')
+  .get((req, res) => {
+    Checkpoint.findById(req.params.id)
+    .exec((err, cp) => {
+      if(err){
+        res.json(err)
+      } else {
+        res.json(cp)
+      }
+    })
+  })
+  .put((req, res) => {
+    Checkpoint.findById(req.params.id, (err, cp) => {
+      if(err) {
+        res.json({ message: 'could not find cp' })
+      } else {
+        cp.title = req.body.title ? req.body.title : cp.title;
+        cp.desc = req.body.desc ? req.body.desc : cp.desc;
+        cp.assignment = req.body.assignment ? req.body.assignment : cp.assignment;
+        cp.content = req.body.content ? req.body.content : cp.content;
+        cp.publish = req.body.publish ? req.body.publish : cp.publish;
+        cp.save((er) => {
+          if (er) {
+            res.json(err)
+          } else {
+            res.json(cp)
+          }
+        })
+      }
+    })
+  })
+  .delete(function(req, res){
+    Checkpoint.remove({ _id: req.params.id }, function(err) {
+      if(err){
+        res.json({ message: "Was unable to delete Checkpoint" })
+      } else {
+        res.json("Checkpoint deleted!")
+      }
+    })
+  });
+
 // Router.route('/one/:id/checkpoints')
 //   .post(function(req, res){
 //     let cp = new Checkpoint({

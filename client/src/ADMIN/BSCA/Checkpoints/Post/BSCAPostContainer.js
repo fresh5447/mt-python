@@ -32,7 +32,7 @@ class BSCAPostContainer extends Component {
     const data = {
       title: this.state.title,
       desc: this.state.desc,
-      content: this.state.content
+      content: this.state.content,
       publish: published,
       assignment: this.state.assignment,
       module: this.props.params.module_id

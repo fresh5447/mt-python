@@ -31,6 +31,8 @@ import BSCAEditModulesContainer from './ADMIN/BSCA/Modules/Edit/BSCAEditContaine
 
 import BSCACheckpointContainer from './ADMIN/BSCA/Checkpoints/BSCACheckpointContainer';
 import BSCAPostCheckpointContainer from './ADMIN/BSCA/Checkpoints/Post/BSCAPostContainer';
+import BSCAViewCheckpointContainer from './ADMIN/BSCA/Checkpoints/View/BSCAViewContainer';
+import BSCAEditCheckpointContainer from './ADMIN/BSCA/Checkpoints/Edit/BSCAEditContainer';
 
 
 
@@ -63,8 +65,8 @@ render((
         </Route>
         {/* CHECKPOINTS */}
         <Route path="bsca/course/:course_id/module/:module_id" component={BSCACheckpointContainer}>
-          {/* <Route path="view/:checkpoint_id" component={BSCAViewModulesContainer}/>
-          <Route path="edit/:checkpoint_id" component={BSCAEditModulesContainer}/> */}
+          <Route path="view/:checkpoint_id" component={BSCAViewCheckpointContainer}/>
+          <Route path="edit/:checkpoint_id" component={BSCAEditCheckpointContainer}/>
           <Route path="post" component={BSCAPostCheckpointContainer}/>
         </Route>
 

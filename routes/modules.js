@@ -190,6 +190,7 @@ Router.route('/')
 Router.route('/:id')
   .get(function(req, res){
     Module.findById(req.params.id)
+    .populate('checkpoints')
     .exec(function(err, module) {
       if(err){
         res.json({ message: "no module found with id #{req.params.id" })

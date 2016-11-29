@@ -1,6 +1,6 @@
 import React from 'react';
 
-const EditCourseForm = (props) =>
+const EditCheckpointForm = (props) =>
   <div className="cp-form-container">
     <div className="page-header">
       <h5>edit course: {props.title}</h5>
@@ -18,6 +18,16 @@ const EditCourseForm = (props) =>
           type="text" className="form-control" id="" placeholder="..." value={props.desc}
           />
         </fieldset>
+        <fieldset className="form-group">
+          <input required="true" onChange={ (event) => props.onFieldChange('content', event.target.value)}
+            type="text" className="form-control" id="" placeholder="content" value={props.content}
+          />
+        </fieldset>
+        <fieldset className="form-group">
+          <input onChange={ (event) => props.onFieldChange('assignment', event.target.value)}
+            type="text" className="form-control" id="" placeholder="assignment" value={props.assignment}
+          />
+        </fieldset>
         <fieldset className="">
           <label>publish</label>
           <input onChange={ (event) => props.onFieldChange('publish', event.target.checked)}
@@ -30,4 +40,4 @@ const EditCourseForm = (props) =>
   </div>;
 
 
-export default EditCourseForm;
+export default EditCheckpointForm;

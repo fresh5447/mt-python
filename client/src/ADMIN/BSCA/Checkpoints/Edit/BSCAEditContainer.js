@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
-import NavLink from '../../../Components/NavLink';
-import EditCourseForm from './EditCourseForm';
+import NavLink from '../../../../Components/NavLink';
+import EditCheckpointForm from './EditCheckpointForm';
 import { Jumbotron, Button } from 'react-bootstrap';
 
 class BSCAEditContainer extends Component {
@@ -14,16 +14,18 @@ class BSCAEditContainer extends Component {
     this.state = {
       title: null,
       desc: null,
-      publish: null
+      publish: null,
+      content: null,
+      assignment: null
     };
   }
 
   componentWillMount() {
-    this.loadCourse(this.props.params.course_id);
+    this.loadCheckpoint(this.props.params.checkpoint_id);
   }
 
   componentWillReceiveProps() {
-    this.loadCourse(this.props.params.course_id);
+    this.loadCheckpoint(this.props.params.checkpoint_id);
   }
 
   handleSubmit(e) {
@@ -34,7 +36,7 @@ class BSCAEditContainer extends Component {
       publish: this.state.publish,
     };
     $.ajax({
-      url: `/api/v2/courses/${this.props.params.course_id}`,
+      url: `/api/v2/courses/${this.props.params.checkpoint_id}`,
       method: 'PUT',
       data
     }).done((d) => {
@@ -49,9 +51,9 @@ class BSCAEditContainer extends Component {
   }
 
 
-  loadCourse(id) {
+  loadCheckpoint(id) {
     $.ajax({
-      url: '/api/v2/courses/' + this.props.params.course_id,
+      url: '/api/v2/checkpoints/' + this.props.params.checkpoint_id,
       method: 'GET',
     }).done((data) => {
       console.log(data);
@@ -59,14 +61,18 @@ class BSCAEditContainer extends Component {
         title: data.title,
         desc: data.desc,
         publish: data.publish,
+        content: data.content,
+        assignment: data.assignment
       });
       console.log(this.state)
     });
   }
   render() {
-    return (this.state.title ? <EditCourseForm
+    return (this.state.title ? <EditCheckpointForm
       title={this.state.title}
       desc={this.state.desc}
+      content={this.state.content}
+      assignment={this.state.assignment}
       publish={this.state.publish}
       onFieldChange={this.onFieldChange}
       handleSubmit={this.handleSubmit}

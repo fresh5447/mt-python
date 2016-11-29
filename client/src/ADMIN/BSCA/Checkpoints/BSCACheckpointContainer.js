@@ -8,38 +8,38 @@ class BSCAContainer extends Component {
     super(props, context);
 
     this.state = {
-      courses: null
+      module: null
     };
-    this.loadCourses = this.loadCourses.bind(this);
+    this.loadModule = this.loadModule.bind(this);
   }
 
   componentWillMount() {
-    this.loadCourses();
+    this.loadModule();
   }
 
   componentWillReceiveProps() {
-    this.loadCourses();
+    this.loadModule();
   }
 
-  loadCourses() {
+  loadModule() {
     $.ajax({
-      url: '/api/v2/courses',
+      url: '/api/v2/modules/' + this.props.params.module_id,
       method: 'GET',
     }).done((data) => {
-      this.setState({ courses: data });
+      this.setState({ module: data });
     });
   }
   render() {
-    const courseItems = this.state.courses ? this.state.courses.map((item) => {
-      return <li><NavLink to={"/admin-console/bsca/view-course/" + item._id }>{ item.title } </NavLink></li>
+    const checkpointItems = this.state.module ? this.state.module.checkpoints.map((item) => {
+      return <li><NavLink to={ "/admin-console/bsca/course/" + this.props.params.course_id + "/module/" + this.props.params.module_id + "/view/" + item._id}>{item.title}</NavLink></li>
     }) : null;
     return (
     <div>
       <Jumbotron>
-        <h3>Big Sky Code Academy courses</h3>
+        <h3>{ this.state.module ? this.state.module.title : null }</h3>
         <ul>
-          { courseItems }
-          <li><NavLink to="/admin-console/bsca/post-course/">Create New Course</NavLink></li>
+          { checkpointItems }
+          <li><NavLink to={ "/admin-console/bsca/course/" + this.props.params.course_id + "/module/" + this.props.params.module_id + "/post"}>New Checkpiont</NavLink></li>
         </ul>
       </Jumbotron>
       { this.props.children }
