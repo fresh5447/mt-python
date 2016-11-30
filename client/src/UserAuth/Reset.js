@@ -12,6 +12,7 @@ class Reset extends React.Component {
     this.state = {
       password: null,
       confirm: null,
+      success: false,
     };
 
   }
@@ -28,30 +29,45 @@ class Reset extends React.Component {
     $.ajax({
       url: '/reset/' + this.props.params.reset_token,
       data: User,
-      method: 'POST'
-    }).success((d) => {
-      console.log(d)
-      // this.context.sendNotification(data.message);
+      method: 'POST',
+      success: ((data) => {
+        console.log("Sucess", data)
+        this.setState({ success: true })
+        this.context.sendNotification("Your password has been reset.");
+      }),
+      error: ((err) => {
+        console.log(err)
+        this.context.sendNotification(err);
+      })
     })
-      .error((data) => console.log(data));
   }
 
   render() {
     return (
       <div className="container">
         <div className="user-screen-container">
-          <h1>Reset Password</h1>
-            <form onSubmit={this.submitUserToServer}>
-              <fieldset className="form-group">
-                <label>new password</label>
-                <input onChange={this.handlePasswordChange} type="password" className="form-control" placeholder="password"/>
-              </fieldset>
-              <fieldset className="form-group">
-                <label>confirm</label>
-                <input onChange={this.handleConfirmChange} type="password" className="form-control" placeholder="re-enter"/>
-              </fieldset>
-              <button type="submit" className="btn btn-primary  submit-btn">Update Password</button>
-            </form>
+          {
+            this.state.success ? (
+              <h1>Your password has successfully been reset</h1>
+            ) : (
+              <div>
+              <h1>Reset Password</h1>
+                <form onSubmit={this.submitUserToServer}>
+                  <fieldset className="form-group">
+                    <label>new password</label>
+                    <input onChange={this.handlePasswordChange} type="password" className="form-control" placeholder="password"/>
+                  </fieldset>
+                  <fieldset className="form-group">
+                    <label>confirm</label>
+                    <input onChange={this.handleConfirmChange} type="password" className="form-control" placeholder="re-enter"/>
+                  </fieldset>
+                  <button type="submit" className="btn btn-primary  submit-btn">Update Password</button>
+                </form>
+              </div>
+            )
+          }
+
+
         </div>
       </div>
 

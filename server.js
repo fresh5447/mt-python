@@ -5,13 +5,14 @@ const path           = require('path'),
   passport            = require('passport'),
   session             = require('express-session'),
   nodemailer          = require('nodemailer'),
+  async               = require('async'),
   uriUtil             = require('mongodb-uri'),
   CourseRouter        = require('./routes/courses'),
   ModuleRouter        = require('./routes/modules'),
   CheckpointsRouter   = require('./routes/checkpoints'),
-  ResourcesRouter   = require('./routes/resources'),
+  ResourcesRouter     = require('./routes/resources'),
 
- mongoose            = require('mongoose');
+ mongoose             = require('mongoose');
 
  var options = {
 server:  { socketOptions: { keepAlive: 1, connectTimeoutMS: 30000 } },

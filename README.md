@@ -7,3 +7,7 @@ In this mode, does not give proper server error. Instead simply says can not pro
 Admin Course List Container is not un-mounting.
 
 Edit Course - Publish does not pre-populate value.
+
+Reset password will crash if email is not found.
+
+Reset email uses host in link. This redirects to the server host.

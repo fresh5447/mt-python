@@ -22,7 +22,7 @@ class RootNavbar extends Component {
            <Navbar.Header>
              <Navbar.Brand>
                <NavLink to="/">Code Range</NavLink><p></p>
-               { this.state.user ? this.state.user.local.email : "NO" }
+               { this.state.user && this.state.user.local ? this.state.user.local.email : "NO" }
              </Navbar.Brand>
              <Navbar.Toggle />
            </Navbar.Header>

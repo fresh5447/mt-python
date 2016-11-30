@@ -10,6 +10,7 @@ class Forgot extends React.Component {
 
     this.state = {
       email: null,
+      success: false
     };
 
   }
@@ -24,26 +25,45 @@ class Forgot extends React.Component {
     $.ajax({
       url: '/forgot',
       data: User,
-      method: 'POST'
-    }).success((d) => {
-      console.log(d)
-      // this.context.sendNotification(data.message);
+      method: 'POST',
+      success: ((data) => {
+        console.log("Sucess", data)
+        this.setState({ success: true })
+        this.context.sendNotification(data.message);
+        // browserHistory.push('/');
+      }),
+      error: ((err) => {
+        console.log(err)
+        this.context.sendNotification("Email not found, request assitance from admin");
+      })
     })
-      .error((data) => console.log(data));
   }
+
+
 
   render() {
     return (
       <div className="container">
-        <div className="user-screen-container">
-          <h3>Forgot your password?</h3>
-            <form onSubmit={this.submitUserToServer}>
-              <fieldset className="form-group">
-                <input onChange={this.handleEmailChange} type="email" className="form-control" placeholder="enter email address"/>
-              </fieldset>
-              <button type="submit" className="btn btn-primary  submit-btn">Reset Password</button>
-            </form>
-        </div>
+
+        {
+          this.state.success ? (
+            <div className="user-screen-container">
+              <h3>You are all set.</h3>
+              <p>Go check your email</p>
+            </div>
+          ) : (
+            <div className="user-screen-container">
+              <h3>Forgot your password?</h3>
+              <p>Enter your email address to receive a reset link.</p>
+                <form onSubmit={this.submitUserToServer}>
+                  <fieldset className="form-group">
+                    <input onChange={this.handleEmailChange} required="true" type="email" className="form-control" placeholder="enter email address"/>
+                  </fieldset>
+                  <button type="submit" className="btn btn-primary  submit-btn">Reset Password</button>
+                </form>
+            </div>
+          )
+        }
       </div>
 
     );

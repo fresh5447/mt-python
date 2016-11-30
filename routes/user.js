@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 var User = require('../models/user');
 var crypto = require('crypto');
+var async = require('async');
 var nodemailer = require('nodemailer');
 var sgTransport = require('nodemailer-sendgrid-transport');
 require('dotenv').config();
@@ -228,8 +229,8 @@ module.exports = function(app, passport) {
             'If you did not request this, please ignore this email and your password will remain unchanged.\n'
         };
         mailer.sendMail(mailOptions, function(err) {
-          req.flash('info', 'An e-mail has been sent to ' + user.local.email + ' with further instructions.');
-          done(err, 'done');
+          console.log('Success! An email was sent to your inbox.');
+          done(err);
         });
       }
     ], function(err) {
