@@ -10,6 +10,7 @@ import Forgot from './UserAuth/Forgot';
 import Register from './UserAuth/Register';
 import Signin from './UserAuth/Signin';
 import Reset from './UserAuth/Reset';
+import Logout from './UserAuth/Logout';
 
 import BSCA from './BSCA/BSCA';
 import HomeContainer from './BSCA/Home/HomeContainer';
@@ -108,6 +109,7 @@ render((
     <Route path="/register" component={Register} />
     <Route path="/signin" component={Signin} />
     <Route path="/forgot" component={Forgot} />
+    <Route path="/signout" component={Logout} />
     <Route path="/user/reset/:reset_token" component={Reset} />
 
     </Route>

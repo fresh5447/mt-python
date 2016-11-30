@@ -33,16 +33,16 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-// app.use(session({
-//  secret: 'ilovescotchscotchyscotchscotch'
-// })); // session secret
+app.use(session({
+ secret: 'blahblahblah'
+})); // session secret
 app.use(passport.initialize());
-// app.use(passport.session()); // persistent login sessions
-// app.use(session({
-//  cookie: {
-//    maxAge: 60000
-//  }
-// }));
+app.use(passport.session()); // persistent login sessions
+app.use(session({
+ cookie: {
+   maxAge: 60000
+ }
+}));
 
 require('./config/passport')(passport);
 require('./routes/user.js')(app, passport);

@@ -32,7 +32,7 @@ class UserSignin extends React.Component {
       success: ((data) => {
         console.log("Sucess", data)
         this.context.sendNotification(data.message);
-        browserHistory.push('/');
+        window.location = '/';
       }),
       error: ((err) => {
         console.log("ERROR", err)

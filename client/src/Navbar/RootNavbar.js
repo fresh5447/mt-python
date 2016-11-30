@@ -11,7 +11,9 @@ class RootNavbar extends Component {
   }
   componentWillMount(){
     this.context.getUser((data) => {
-      this.setState({ user: data.user })
+      if(data){
+          this.setState({ user: data })
+      }
     })
   }
   render() {
@@ -19,7 +21,8 @@ class RootNavbar extends Component {
       <Navbar collapseOnSelect>
            <Navbar.Header>
              <Navbar.Brand>
-               <NavLink to="/">Code Range</NavLink>
+               <NavLink to="/">Code Range</NavLink><p></p>
+               { this.state.user ? this.state.user.local.email : "NO" }
              </Navbar.Brand>
              <Navbar.Toggle />
            </Navbar.Header>
@@ -35,6 +38,7 @@ class RootNavbar extends Component {
              </NavDropdown>
                <NavItem><Button><NavLink to="/register">Register</NavLink></Button></NavItem>
                <NavItem><Button><NavLink to="/signin">Signin</NavLink></Button></NavItem>
+               <NavItem><Button><NavLink to="/signout">Logout</NavLink></Button></NavItem>
                <NavItem><Button><NavLink to="/admin-console">Admin Console</NavLink></Button></NavItem>
              </Nav>
            </Navbar.Collapse>
