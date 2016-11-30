@@ -1,54 +1,65 @@
 import React, { Component } from 'react';
+import $ from "jquery";
+import NavLink from '../../Components/NavLink';
 import { Jumbotron, Table } from 'react-bootstrap';
 
 class UsersContainer extends Component {
+  constructor(props, context){
+    super(props, context)
+    this.state = {
+      users: null
+    }
+  }
+  componentWillMount(){
+    this.loadUsers()
+  }
+  loadUsers(){
+    $.ajax({
+      url: '/getUsers',
+      method: 'GET',
+      success: ((data) => {
+        this.setState({ users: data })
+      }),
+      error: ((err)=> {
+        console.log("ERROR FINDING USERS", err)
+      })
+    })
+  }
   render() {
+    const u = this.state.users ? this.state.users.map((item)=>{
+      return (
+        <tr>
+          <td>{item.local.firstName}</td>
+          <td>{item.local.lastName}</td>
+          <td>{item.local.email}</td>
+          <td>{item.role ? item.local.role : "no role"}</td>
+          <td>{item.stauts ? item.local.stauts : "no stauts"}</td>
+          <td><button><NavLink to={"/admin-console/users/view/" + item._id}>View</NavLink></button></td>
+        </tr>
+      )
+    }) : null
     return (
     <div>
       <Jumbotron>
         <h3>Users Tab</h3>
+        <NavLink to={"/admin-console/users/post"}>Create User</NavLink>
         <Table responsive>
           <thead>
             <tr>
               <th>First Name</th>
               <th>Last Name</th>
-              <th>Username</th>
-              <th>Status</th>
-              <th>Code Range</th>
-              <th>MTCG</th>
-              <th></th>
+              <th>email</th>
+              <th>role</th>
+              <th>status</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Doug</td>
-              <td>Walter</td>
-              <td>fresh5447</td>
-              <td>Active</td>
-              <td>Yes</td>
-              <td>Yes</td>
-              <td><button>Invite</button></td>
-            </tr>
-            <tr>
-              <td>Bob</td>
-              <td>Johnson</td>
-              <td>bj</td>
-              <td>Pending</td>
-              <td>Yes</td>
-              <td>No</td>
-              <td><button>Invite</button></td>
-            </tr>
-            <tr>
-              <td>Sue</td>
-              <td>Bob</td>
-              <td>fresh5447</td>
-              <td>Active</td>
-              <td>No</td>
-              <td>Yes</td>
-              <td><button>Invite</button></td>
-            </tr>
+            { u }
           </tbody>
         </Table>
+      </Jumbotron>
+      <Jumbotron>
+        { this.props.children ? this.props.children : null }
       </Jumbotron>
     </div>
     )

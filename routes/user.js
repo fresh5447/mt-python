@@ -123,6 +123,16 @@ module.exports = function(app, passport) {
       })
   })
 
+  app.get('/singleUser/:student_id', function(req, res){
+      User.findById(req.params.student_id, function(err, user){
+        if(err){
+          console.log(err)
+        } else {
+          res.json(user)
+        }
+      })
+  })
+
 
 
   app.get('/getUsers', function(req, res){

@@ -24,8 +24,14 @@ import BSCAViewResourceContainer from '../../ADMIN/BSCA/Resources/View/BSCAViewC
 import BSCAEditResourceContainer from '../../ADMIN/BSCA/Resources/Edit/BSCAEditContainer';
 import BSCAPostResourceContainer from '../../ADMIN/BSCA/Resources/Post/BSCAPostContainer';
 
-import MTCGContainer from '../../ADMIN/MTCG/MTCGContainer';
 import UsersContainer from '../../ADMIN/Users/UsersContainer';
+import ViewUserContainer from '../../ADMIN/Users/View/ViewUser';
+import PostUserContainer from '../../ADMIN/Users/Post/PostContainer';
+
+
+
+import MTCGContainer from '../../ADMIN/MTCG/MTCGContainer';
+
 import PublisherContainer from '../../ADMIN/Publisher/PublisherContainer';
 
 
@@ -62,8 +68,14 @@ var routes = (
       </Route>
     </Route>
 
+        <Route path="users" component={UsersContainer}>
+            <Route path="view/:user_id" component={ViewUserContainer}/>
+            <Route path="post" component={PostUserContainer}/>
+        </Route>
+
+
+
     <Route path="mtcg" component={MTCGContainer}/>
-    <Route path="users" component={UsersContainer}/>
     <Route path="publisher" component={PublisherContainer}/>
 
   </Route>
