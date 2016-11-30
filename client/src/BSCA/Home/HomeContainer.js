@@ -1,52 +1,44 @@
 import React, { Component } from 'react';
 import NavLink from '../../Components/NavLink';
+import $ from 'jquery';
 import { Jumbotron, Button } from 'react-bootstrap';
 
-const courses = [
-  {
-    title: "Intro to web dev",
-    enrolled: true,
-    desc: "just a cool course about web stuff"
-  },
-  {
-    title: "Web Dev Foundations",
-    enrolled: true,
-    desc: "just some more cool course about web stuff"
-  },
-  {
-    title: "Advanced Web Developement",
-    enrolled: false,
-    desc: "just some more cool course about web stuff"
-  },
-]
-
-const availableItems = courses.filter((item) => {
-  return item.enrolled
-}).map((item) => {
-  return <li> <NavLink to={'/big-sky-code-academy/course/' + item.title}> {item.title}</NavLink> </li>
-})
-
-const unavailableItems = courses.filter((item) => {
-  return !item.enrolled
-}).map((item) => {
-  return <li> {item.title} </li>
-})
-
-
 class HomeContainer extends Component {
+  constructor(props, context) {
+    super(props, context);
+
+    this.state = {
+      courses: null
+    };
+    this.loadCourses = this.loadCourses.bind(this);
+  }
+
+  componentWillMount() {
+    this.loadCourses();
+  }
+
+  componentWillReceiveProps() {
+    this.loadCourses();
+  }
+
+  loadCourses() {
+    $.ajax({
+      url: '/api/v2/courses',
+      method: 'GET',
+    }).done((data) => {
+      this.setState({ courses: data });
+    });
+  }
   render() {
+    const availableCourses = this.state.courses ? this.state.courses.map((item) => {
+      return <li> <NavLink to={'/big-sky-code-academy/course/' + item._id}> {item.title}</NavLink> </li>
+    }) : null
     return (
     <div>
       <Jumbotron>
         <h3>Enrolled Courses</h3>
         <ul>
-          { availableItems }
-        </ul>
-      </Jumbotron>
-      <Jumbotron>
-        <h3>Other Courses</h3>
-        <ul>
-          { unavailableItems }
+          { availableCourses }
         </ul>
       </Jumbotron>
       <Jumbotron>

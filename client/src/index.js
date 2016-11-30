@@ -12,17 +12,15 @@ import Signin from './UserAuth/Signin';
 import Reset from './UserAuth/Reset';
 import Logout from './UserAuth/Logout';
 
-import BSCA from './BSCA/BSCA';
-import HomeContainer from './BSCA/Home/HomeContainer';
-import ResourcesContainer from './BSCA/Resources/ResourcesContainer';
-import ActiveCourseContainer from './BSCA/Courses/ActiveCourseContainer';
-
+{/* MTCG VOLS APP */}
 import MTCG from './MTCG/MTCG';
 import Playbook from './MTCG/Playbook/PlaybookContainer';
 import Attendance from './MTCG/Attendance/AttendanceContainer';
 import Schedule from './MTCG/Schedule/ScheduleContainer';
 import Students from './MTCG/Students/StudentsContainer';
 
+
+{/* AC ADMIN APP */}
 import ADMIN from './ADMIN/ADMIN';
 import BSCAAdminContainer from './ADMIN/BSCA/MainContainer';
 
@@ -46,21 +44,30 @@ import BSCAViewResourceContainer from './ADMIN/BSCA/Resources/View/BSCAViewConta
 import BSCAEditResourceContainer from './ADMIN/BSCA/Resources/Edit/BSCAEditContainer';
 import BSCAPostResourceContainer from './ADMIN/BSCA/Resources/Post/BSCAPostContainer';
 
-
-
 import MTCGContainer from './ADMIN/MTCG/MTCGContainer';
 import UsersContainer from './ADMIN/Users/UsersContainer';
 import PublisherContainer from './ADMIN/Publisher/PublisherContainer';
+
+{/* BSCA STUDENT APP */}
+import BSCAMainContainer from './BSCA/MainContainer';
+import HomeContainer from './BSCA/Home/HomeContainer';
+import ResourcesContainer from './BSCA/Resources/ResourcesContainer';
+import ActiveCourseContainer from './BSCA/Courses/ActiveCourseContainer';
+import ActiveModuleContainer from './BSCA/Module/ActiveModuleContainer';
+import ActiveCheckpointContainer from './BSCA/Checkpoint/ActiveCheckpointContainer';
 
 
 render((
   <Router history={browserHistory}>
     <Route path="/" component={App}>
 
-      <Route path="/big-sky-code-academy" component={BSCA}>
+      <Route path="big-sky-code-academy" component={BSCAMainContainer}>
         <Route path="home" component={HomeContainer}/>
         <Route path="resources" component={ResourcesContainer}/>
-        <Route path="course/:course_title" component={ActiveCourseContainer}/>
+        <Route path="course/:course_id" component={ActiveCourseContainer}/>
+        <Route path="course/:course_id/module/:module_id" component={ActiveModuleContainer}>
+          <Route path="checkpoint/:checkpoint_id" component={ActiveCheckpointContainer}/>
+        </Route>
       </Route>
 
       <Route path="/admin-console" component={ADMIN}>
@@ -105,12 +112,12 @@ render((
         <Route path="schedule" component={Schedule}/>
       </Route>
 
-    {/* BEGIN AUTHERIZATION */}
-    <Route path="/register" component={Register} />
-    <Route path="/signin" component={Signin} />
-    <Route path="/forgot" component={Forgot} />
-    <Route path="/signout" component={Logout} />
-    <Route path="/user/reset/:reset_token" component={Reset} />
+      {/* BEGIN AUTHERIZATION */}
+      <Route path="/register" component={Register} />
+      <Route path="/signin" component={Signin} />
+      <Route path="/forgot" component={Forgot} />
+      <Route path="/signout" component={Logout} />
+      <Route path="/user/reset/:reset_token" component={Reset} />
 
     </Route>
   </Router>

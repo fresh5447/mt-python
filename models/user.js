@@ -18,6 +18,7 @@ var userSchema = mongoose.Schema({
     resetPasswordExpires: Date
   },
 
+  role: String,
   authOrgs: Array,
   authCourses: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Course' }],
   status: String,

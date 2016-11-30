@@ -4,7 +4,7 @@ import Home from './Home/HomeContainer';
 import { browserHistory } from 'react-router'
 
 
-class BSCA extends Component {
+class MainContainer extends Component {
   handleSelect(key) {
     browserHistory.push('/big-sky-code-academy/' + key);
   }
@@ -25,4 +25,4 @@ class BSCA extends Component {
   }
 }
 
-export default BSCA;
+export default MainContainer;
