@@ -11,14 +11,20 @@ class ActiveModuleContainer extends Component {
     };
   }
 
-  componentWillMount(props) {
+  componentWillMount() {
+    console.log("COMP WILL MOUNT");
     this.loadModule(this.props.params.module_id);
   }
 
   componentWillReceiveProps() {
+    console.log("COMP WILL RECEIVE PROPS");
     this.loadModule(this.props.params.module_id);
   }
 
+  componentWillUnmount() {
+    console.log("COMP WILL UNMOUNT");
+    this.loadModule(this.props.params.module_id);
+  }
 
   loadModule(id) {
     $.ajax({

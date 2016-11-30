@@ -11,11 +11,15 @@ class ActiveCheckpointContainer extends Component {
     };
   }
 
-  componentWillMount(props) {
+  componentWillMount() {
     this.loadCheckpoint(this.props.params.checkpoint_id);
   }
 
   componentWillReceiveProps() {
+    this.loadCheckpoint(this.props.params.checkpoint_id);
+  }
+
+  componentWillUnmount() {
     this.loadCheckpoint(this.props.params.checkpoint_id);
   }
 
