@@ -11,3 +11,5 @@ Edit Course - Publish does not pre-populate value.
 Reset password will crash if email is not found.
 
 Reset email uses host in link. This redirects to the server host.
+
+Adds extra route when we hit refresh

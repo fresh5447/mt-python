@@ -55,13 +55,13 @@ class ResourcesContainer extends Component {
   constructor(props){
     super(props);
     this.state = {
-      key: 1
+      tabKey: 1
     };
 
     this.handleSelect = this.handleSelect.bind(this);
   }
   handleSelect(selectedKey) {
-    return this.setState({ key: selectedKey })
+    return this.setState({ tabKey: selectedKey })
   }
   render() {
     return (
@@ -77,10 +77,10 @@ class ResourcesContainer extends Component {
             </ButtonGroup>
           </Col>
           <Col xs={10}>
-            <Nav bsStyle="pills" activeKey={this.state.key} onSelect={this.handleSelect}>
-              <NavItem active={  this.state.key === 1 ?  true : false }  eventKey={1} title="ALL">ALL</NavItem>
-              <NavItem active={  this.state.key === 2 ?  true : false }  eventKey={2} title="FAVS">FAVORITE</NavItem>
-              <NavItem active={  this.state.key === 3 ?  true : false }   eventKey={3} title="NEW">NEW</NavItem>
+            <Nav bsStyle="pills" activeKey={this.state.tabKey} onSelect={this.handleSelect}>
+              <NavItem active={  this.state.tabKey === 1 ?  true : false }  eventKey={1} title="ALL">ALL</NavItem>
+              <NavItem active={  this.state.tabKey === 2 ?  true : false }  eventKey={2} title="FAVS">FAVORITE</NavItem>
+              <NavItem active={  this.state.tabKey === 3 ?  true : false }   eventKey={3} title="NEW">NEW</NavItem>
             </Nav>
           </Col>
           <Col xs={10} className="show-grid playbook-flexbox">

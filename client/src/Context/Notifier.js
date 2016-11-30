@@ -1,5 +1,4 @@
 import React from 'react';
-import $ from 'jquery';
 import Snackbar from 'material-ui/lib/snackbar';
 
 class Notifier extends React.Component {

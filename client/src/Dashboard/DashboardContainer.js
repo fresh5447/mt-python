@@ -6,7 +6,6 @@ import '../App.css';
 class DashboardContainer extends Component {
 
   render() {
-    console.log(this.props.user)
     return this.props.user ? <AuthoredDashboardView user={this.props.user} /> : <GuestDashboardView />
   }
 }

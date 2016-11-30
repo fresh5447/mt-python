@@ -13,7 +13,6 @@ class ActiveCourseContainer extends Component {
   }
 
   componentWillMount(props) {
-    console.log('PROPS', props)
     this.loadCourse(this.props.params.course_id);
   }
 
@@ -27,7 +26,6 @@ class ActiveCourseContainer extends Component {
       url: '/api/v2/courses/' + id,
       method: 'GET',
     }).done((data) => {
-      console.log(data);
       this.setState({ course: data });
     });
   }
@@ -38,6 +36,7 @@ class ActiveCourseContainer extends Component {
         <h3>{this.state.course ? this.state.course.title : "Loading Title"}</h3>
         <p>{this.state.course ? this.state.course.desc : "Loading Desc"}</p>
         <p>0/4 Modules Complete</p>
+        <NavLink to={"/big-sky-code-academy/home/"}><Button>Back</Button></NavLink>
       </Jumbotron>
       <Jumbotron>
         { this.state.course ?

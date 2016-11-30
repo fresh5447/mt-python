@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import GetUser from './Context/GetUser';
-import Feedback from './Context/Feedback';
 import Notifier from './Context/Notifier';
 import DashboardContainer from './Dashboard/DashboardContainer';
 import RootNavbar from './Navbar/RootNavbar';

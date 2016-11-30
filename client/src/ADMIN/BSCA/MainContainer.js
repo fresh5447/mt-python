@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import $ from 'jquery';
 import NavLink from '../../Components/NavLink';
-import { Jumbotron, Button, Panel, Table } from 'react-bootstrap';
+import { Jumbotron } from 'react-bootstrap';
 
 class BSCAMainContainer extends Component {
   render() {

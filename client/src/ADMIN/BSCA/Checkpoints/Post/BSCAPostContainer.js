@@ -4,8 +4,8 @@ import PostCheckpointForm from './PostCheckpointForm';
 import $ from 'jquery';
 
 class BSCAPostContainer extends Component {
-  constructor(props) {
-    super(props);
+  constructor(props, context) {
+    super(props, context);
 
     this.handleSubmit = this.handleSubmit.bind(this);
 
@@ -37,12 +37,12 @@ class BSCAPostContainer extends Component {
       assignment: this.state.assignment,
       module: this.props.params.module_id
     };
-    console.log(data)
     $.ajax({
       url: `/api/v2/checkpoints`,
       method: 'POST',
       data
     }).done((d) => {
+      this.context.sendNotification("Posted Checkpoint");
       const path = `/admin-console`
       browserHistory.push(path);
     });
@@ -56,5 +56,9 @@ class BSCAPostContainer extends Component {
   }
 
 }
+
+BSCAPostContainer.contextTypes = {
+  sendNotification: React.PropTypes.func.isRequired
+};
 
 export default BSCAPostContainer;

@@ -30,12 +30,10 @@ class UserSignin extends React.Component {
       data: User,
       method: 'POST',
       success: ((data) => {
-        console.log("Sucess", data)
         this.context.sendNotification(data.message);
         window.location = '/';
       }),
       error: ((err) => {
-        console.log("ERROR", err)
         this.context.sendNotification(err.responseText);
       })
     })

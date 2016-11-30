@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
-import { Grid, Row, Col, Jumbotron } from 'react-bootstrap';
+import { Grid, Row, Col } from 'react-bootstrap';
 
 
 class ActiveCheckpointContainer extends Component {
@@ -12,7 +12,6 @@ class ActiveCheckpointContainer extends Component {
   }
 
   componentWillMount(props) {
-    console.log('PROPS', props)
     this.loadCheckpoint(this.props.params.checkpoint_id);
   }
 
@@ -26,7 +25,6 @@ class ActiveCheckpointContainer extends Component {
       url: '/api/v2/checkpoints/' + id,
       method: 'GET',
     }).done((data) => {
-      console.log(data);
       this.setState({ checkpoint: data });
     });
   }

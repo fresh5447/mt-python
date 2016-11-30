@@ -4,8 +4,8 @@ import PostResourceForm from './PostResourceForm';
 import $ from 'jquery';
 
 class BSCAPostContainer extends Component {
-  constructor(props) {
-    super(props);
+  constructor(props, context) {
+    super(props, context);
 
     this.handleSubmit = this.handleSubmit.bind(this);
 
@@ -38,12 +38,12 @@ class BSCAPostContainer extends Component {
       publish: published,
       internal: int
     };
-    console.log(data)
     $.ajax({
       url: `/api/v2/resources`,
       method: 'POST',
       data
     }).done((d) => {
+      this.context.sendNotification("Resource Posted");
       const path = `/admin-console/bsca`
       browserHistory.push(path);
     });
@@ -58,4 +58,7 @@ class BSCAPostContainer extends Component {
 
 }
 
+BSCAPostContainer.contextTypes = {
+  sendNotification: React.PropTypes.func.isRequired
+};
 export default BSCAPostContainer;

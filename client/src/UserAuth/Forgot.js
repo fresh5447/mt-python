@@ -1,5 +1,4 @@
 import React from 'react';
-import { browserHistory } from 'react-router';
 import $ from 'jquery';
 
 class Forgot extends React.Component {
@@ -27,13 +26,11 @@ class Forgot extends React.Component {
       data: User,
       method: 'POST',
       success: ((data) => {
-        console.log("Sucess", data)
         this.setState({ success: true })
         this.context.sendNotification(data.message);
         // browserHistory.push('/');
       }),
       error: ((err) => {
-        console.log(err)
         this.context.sendNotification("Email not found, request assitance from admin");
       })
     })

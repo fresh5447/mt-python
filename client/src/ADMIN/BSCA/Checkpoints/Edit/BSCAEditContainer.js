@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
-import NavLink from '../../../../Components/NavLink';
 import EditCheckpointForm from './EditCheckpointForm';
-import { Jumbotron, Button } from 'react-bootstrap';
 
 class BSCAEditContainer extends Component {
-  constructor(props) {
-    super(props);
+  constructor(props, context) {
+    super(props, context);
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.onFieldChange = this.onFieldChange.bind(this);
@@ -42,7 +40,7 @@ class BSCAEditContainer extends Component {
       method: 'PUT',
       data
     }).done((d) => {
-      console.log('successfully edited checkpoint', d)
+      this.context.sendNotification('successfully edited checkpoint');
     });
   }
 
@@ -58,7 +56,6 @@ class BSCAEditContainer extends Component {
       url: '/api/v2/checkpoints/' + this.props.params.checkpoint_id,
       method: 'GET',
     }).done((data) => {
-      console.log(data);
       this.setState({
         title: data.title,
         desc: data.desc,
@@ -66,7 +63,6 @@ class BSCAEditContainer extends Component {
         content: data.content,
         assignment: data.assignment
       });
-      console.log(this.state)
     });
   }
   render() {
@@ -82,5 +78,9 @@ class BSCAEditContainer extends Component {
     )
   }
 }
+
+BSCAEditContainer.contextTypes = {
+  sendNotification: React.PropTypes.func.isRequired
+};
 
 export default BSCAEditContainer;

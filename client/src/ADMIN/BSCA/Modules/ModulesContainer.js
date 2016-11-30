@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
 import NavLink from '../../../Components/NavLink';
-import { Jumbotron, Button, Panel, Table } from 'react-bootstrap';
+import { Jumbotron, Table } from 'react-bootstrap';
 
 class ModulesContainer extends Component {
   constructor(props, context) {
@@ -14,7 +14,6 @@ class ModulesContainer extends Component {
   }
 
   componentWillMount(props) {
-    console.log('PROPS', props)
     this.loadCourse(this.props.params.course_id);
   }
 
@@ -27,7 +26,6 @@ class ModulesContainer extends Component {
       url: '/api/v2/courses/' + id,
       method: 'GET',
     }).done((data) => {
-      console.log(data);
       this.setState({ course: data });
     });
   }

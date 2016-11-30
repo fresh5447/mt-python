@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import NavLink from '../../Components/NavLink';
-import { Jumbotron, Button, Table } from 'react-bootstrap';
+import { Jumbotron, Table } from 'react-bootstrap';
 
 class UsersContainer extends Component {
   render() {

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
 import NavLink from '../../../../Components/NavLink';
-import { Jumbotron, Button, Panel } from 'react-bootstrap';
+import { Jumbotron } from 'react-bootstrap';
 
 
 class BSCAViewContainer extends Component {
@@ -13,7 +13,6 @@ class BSCAViewContainer extends Component {
   }
 
   componentWillMount(props) {
-    console.log('PROPS', props)
     this.loadCheckpoint(this.props.params.checkpoint_id);
   }
 
@@ -27,7 +26,6 @@ class BSCAViewContainer extends Component {
       url: '/api/v2/checkpoints/' + id,
       method: 'GET',
     }).done((data) => {
-      console.log(data);
       this.setState({ checkpoint: data });
     });
   }

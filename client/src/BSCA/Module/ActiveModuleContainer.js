@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
 import NavLink from '../../Components/NavLink';
-import { Jumbotron, Button, Panel, Grid, Col, Row, ButtonGroup } from 'react-bootstrap';
+import { Jumbotron, Button, Grid, Col, Row, ButtonGroup } from 'react-bootstrap';
 
 class ActiveModuleContainer extends Component {
   constructor(props, context) {
@@ -12,7 +12,6 @@ class ActiveModuleContainer extends Component {
   }
 
   componentWillMount(props) {
-    console.log('PROPS', props)
     this.loadModule(this.props.params.module_id);
   }
 
@@ -26,7 +25,6 @@ class ActiveModuleContainer extends Component {
       url: '/api/v2/modules/' + id,
       method: 'GET',
     }).done((data) => {
-      console.log(data);
       this.setState({ module: data });
     });
   }
@@ -35,12 +33,15 @@ class ActiveModuleContainer extends Component {
     <div>
       <Jumbotron>
         <h3>{this.state.module ? this.state.module.title : null}</h3>
+        <p>{this.state.module ? this.state.module.desc : null}</p>
+        <NavLink to={"/big-sky-code-academy/course/" + this.props.params.course_id}><Button>Back</Button></NavLink>
       </Jumbotron>
 
       <Grid>
         <Row className="show-grid">
           <Col xs={2} md={2}>
             <ButtonGroup vertical>
+              <p>Checkpoints</p>
               { this.state.module ?
                 this.state.module.checkpoints.map((item)=> {
                   return <Button><NavLink to={"/big-sky-code-academy/course/" + this.props.params.course_id + "/module/" + this.props.params.module_id + "/checkpoint/" + item._id}>{item.title}</NavLink></Button>
@@ -59,26 +60,3 @@ class ActiveModuleContainer extends Component {
 }
 
 export default ActiveModuleContainer;
-
-
-
-
-
-{/* <div>
-  <Jumbotron>
-    <h3>{this.state.module ? this.state.module.title : "Loading Title"}</h3>
-    <p>{this.state.module ? this.state.module.desc : "Loading Desc"}</p>
-    <p>0/10 Checkpoints Complete</p>
-  </Jumbotron>
-  <Jumbotron>
-    { this.state.module ?
-      this.state.module.checkpoints.map((item)=> {
-        return (
-          <Panel header={item.title} footer={"GO"}>
-            <p>{item.desc}</p>
-          </Panel>
-        )
-      })
-      : null }
-  </Jumbotron>
-</div> */}

@@ -31,12 +31,10 @@ class Reset extends React.Component {
       data: User,
       method: 'POST',
       success: ((data) => {
-        console.log("Sucess", data)
         this.setState({ success: true })
         this.context.sendNotification("Your password has been reset.");
       }),
       error: ((err) => {
-        console.log(err)
         this.context.sendNotification(err);
       })
     })

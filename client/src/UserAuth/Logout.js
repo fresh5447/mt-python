@@ -1,6 +1,5 @@
 import React from 'react';
 import { browserHistory } from 'react-router';
-import NavLink from '../Components/NavLink';
 import $ from 'jquery';
 
 class UserLogout extends React.Component {
@@ -21,12 +20,10 @@ class UserLogout extends React.Component {
       data: user,
       method: 'POST',
       success: ((data) => {
-        console.log("Sucess", data)
         this.context.sendNotification(data.message);
         browserHistory.push('/');
       }),
       error: ((err) => {
-        console.log("ERROR", err)
         this.context.sendNotification(err.responseText);
       })
     })

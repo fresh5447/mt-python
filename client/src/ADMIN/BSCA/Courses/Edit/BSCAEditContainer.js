@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
-import NavLink from '../../../../Components/NavLink';
 import EditCourseForm from './EditCourseForm';
-import { Jumbotron, Button } from 'react-bootstrap';
 
 class BSCAEditContainer extends Component {
-  constructor(props) {
-    super(props);
+  constructor(props, context) {
+    super(props, context);
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.onFieldChange = this.onFieldChange.bind(this);
@@ -38,7 +36,7 @@ class BSCAEditContainer extends Component {
       method: 'PUT',
       data
     }).done((d) => {
-      console.log('successfully edited course', d)
+      this.context.sendNotification("Course Edit Success");
     });
   }
 
@@ -54,13 +52,11 @@ class BSCAEditContainer extends Component {
       url: '/api/v2/courses/' + this.props.params.course_id,
       method: 'GET',
     }).done((data) => {
-      console.log(data);
       this.setState({
         title: data.title,
         desc: data.desc,
         publish: data.publish,
       });
-      console.log(this.state)
     });
   }
   render() {
@@ -75,4 +71,7 @@ class BSCAEditContainer extends Component {
   }
 }
 
+BSCAEditContainer.contextTypes = {
+  sendNotification: React.PropTypes.func.isRequired
+};
 export default BSCAEditContainer;
