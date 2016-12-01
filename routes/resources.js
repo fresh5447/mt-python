@@ -1,5 +1,6 @@
 const express = require('express');
 const Resource = require('../models/resource');
+const User = require('../models/user');
 const Router = new express.Router();
 
 if (!Array.prototype.includes) {
@@ -31,85 +32,78 @@ if (!Array.prototype.includes) {
   };
 }
 
-const uID = '5793f6457209639dad097947';
+
+Router.route('/student')
+  .get((req, res) => {
+    Resource.find()
+    .exec((err, resources) => {
+      if (err) {
+        res.json({ message: 'there was an error finding all resources' });
+      } else {
+        User.findById(req.user._id)
+        .populate('favorites')
+        .exec((er, user) => {
+          if (er) {
+            res.json(er);
+          } else {
+            for (var i = 0; i < resources.length; i++) {
+              const mappedFavs = user.favorites.map((item) => {
+                return item._id.toString();
+              });
+              if (mappedFavs.includes(resources[i]._id.toString())) {
+                resources[i].fav = true;
+              } else {
+                resources[i].fav = false;
+              }
+            }
+            res.json(resources);
+          }
+        });
+      }
+    });
+  });
+
+Array.prototype.remove = function() {
+    var what, a = arguments, L = a.length, ax;
+    while (L && this.length) {
+        what = a[--L];
+        while ((ax = this.indexOf(what)) !== -1) {
+            this.splice(ax, 1);
+        }
+    }
+    return this;
+};
 
 
-// Router.route('/student')
-//   .get((req, res) => {
-//     Resource.find()
-//     .populate('categories')
-//     .exec((err, resources) => {
-//       if (err) {
-//         res.json({ message: 'there was an error finding all resources' });
-//       } else {
-//         User.findById(req.user._id)
-//         .populate('favorites')
-//         .exec((er, user) => {
-//           if (er) {
-//             res.json(er);
-//           } else {
-//             for (var i = 0; i < resources.length; i++) {
-//               const mappedFavs = user.favorites.map((item) => {
-//                 return item._id
-//               });
-//               if (mappedFavs.includes(resources[i]._id.toString())) {
-//                 resources[i].fav = true;
-//               } else {
-//                 resources[i].fav = false;
-//               }
-//             }
-//             res.json(resources);
-//           }
-//         });
-//       }
-//     });
-//   });
-//
-// Array.prototype.remove = function() {
-//     var what, a = arguments, L = a.length, ax;
-//     while (L && this.length) {
-//         what = a[--L];
-//         while ((ax = this.indexOf(what)) !== -1) {
-//             this.splice(ax, 1);
-//         }
-//     }
-//     return this;
-// };
+Router.route('/student/favorite/:id/:action')
+  .put((req, res) => {
+    User.findById(req.user._id, (err, user) => {
+      if(err) {
+        res.json({ message: "couldnt find user" })
+      } else {
+        if(req.params.action === 'post'){
+          user.favorites.push(req.params.id);
+          user.save((e, u) => {
+            if(e) {
+              res.json({mesage: "error adding fav"})
+            } else {
+              res.json(u);
+            }
+          });
+        } else {
+          user.favorites.remove(req.params.id);
+          user.save((e, u) => {
+            if(e) {
+              res.json({mesage: "error adding fav"})
+            } else {
+              res.json(u);
+            }
+          });
+        }
+      }
+    })
+  })
 
-
-// Router.route('/student/favorite/:id/:action')
-//   .put((req, res) => {
-//     User.findById(req.user._id, (err, user) => {
-//       if(err) {
-//         res.json({ message: "couldnt find user" })
-//       } else {
-//         if(req.params.action === 'post'){
-//           user.favorites.push(req.params.id);
-//           user.save((e, u) => {
-//             if(e) {
-//               console.log("CANT SAVE USER", e);
-//               res.json({mesage: "error adding fav"})
-//             } else {
-//               console.log("SUCCESS", u);
-//               res.json(u);
-//             }
-//           });
-//         } else {
-//           user.favorites.remove(req.params.id);
-//           user.save((e, u) => {
-//             if(e) {
-//               console.log("CANT SAVE USER", e);
-//               res.json({mesage: "error adding fav"})
-//             } else {
-//               console.log("SUCCESS", u);
-//               res.json(u);
-//             }
-//           });
-//         }
-//       }
-//     })
-//   })
-//
 
 
 Router.route('/')

@@ -8,6 +8,7 @@ const ResourceSchema = new Schema({
   link: String,
   publish: Boolean,
   desc: String,
+  fav: Boolean,
   internal: Boolean
 });
 

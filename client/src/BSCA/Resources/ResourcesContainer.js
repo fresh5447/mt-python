@@ -1,69 +1,68 @@
 import React, { Component } from 'react';
+import $ from 'jquery';
 import { Button, Grid, Col, ButtonGroup, Nav, NavItem, Panel } from 'react-bootstrap';
-
-const rezs = [
-  { title: "Intro to JS",
-    content: "this is a bunch of lorem ipsum yada yada yada yada yada yada yada",
-    link: "www.google.com",
-    categories: ["javascript"],
-    favorite: true,
-    link: "www.google.com"
-  },
-  { title: "intro to CSS",
-  content: "this is a bunch of lorem ipsum yada yada yada yada yada yada yada",
-    link: "www.google.com",
-    categories: ["css"],
-    favorite: false,
-    link: "www.google.com"
-  },
-  { title: "intro to HTML",
-  content: "this is a bunch of lorem ipsum yada yada yada yada yada yada yada",
-    link: "www.google.com",
-    categories: ["html"],
-    favorite: true,
-    link: "www.google.com"
-  },
-  { title: "intro to jQuery",
-  content: "this is a bunch of lorem ipsum yada yada yada yada yada yada yada",
-    link: "www.google.com",
-    categories: ["javascript", "jquery"],
-    favorite: false,
-    link: "www.google.com"
-  },
-  { title: "Frontend Stuff",
-  content: "this is a bunch of lorem ipsum yada yada yada yada yada yada yada",
-    link: "www.google.com",
-    categories: ["CSS", "HTML"],
-    favorite: true,
-    link: "www.google.com"
-  }
-]
-
-const resourcePanels = rezs.map((item) => {
-  return (
-    <Panel className="" header={item.title} footer={item.link}>
-      {item.content}
-      <p>{ item.favorite.toString() }</p>
-    </Panel>
-  )
-})
-
-
-
 
 class ResourcesContainer extends Component {
   constructor(props){
     super(props);
     this.state = {
-      tabKey: 1
+      tabKey: 1,
+      resources: null
     };
 
     this.handleSelect = this.handleSelect.bind(this);
+    this.toggleFav = this.toggleFav.bind(this);
   }
+  loadResources(){
+    console.log("LOADING RES CONTAINER")
+    $.ajax({
+      url: '/api/v2/resources/student',
+      methode: 'GET'
+    }).done((data) => {
+        this.setState({ resources: data })
+        window.r = data;
+      })
+  }
+
+  componentWillMount(){
+    this.loadResources();
+  }
+
+  toggleFav = (id, action) => {
+    console.log("ID ACTION", id,action)
+  $.ajax({
+    url: `/api/v2/resources/student/favorite/${id}/${action}`,
+    method: 'PUT'
+  }).done((d) => {
+    console.log("TRYING", d)
+    this.loadResources()
+  });
+}
+
   handleSelect(selectedKey) {
     return this.setState({ tabKey: selectedKey })
   }
   render() {
+    const resourcePanels = this.state.resources ? this.state.resources.map((item) => {
+      const foot = item.internal ? "Internal" : "External";
+      const fav = item.fav ? "FAV" : "Not Fav";
+      const favBtn = (
+        <button onClick={ item.fav ? this.toggleFav.bind(this, item._id, 'remove') :
+        this.toggleFav.bind(this, item._id, 'post') }>{item.fav.toString()}</button>
+
+      )
+      const stuff = (
+        <ul>
+          <li>{foot}</li>
+          <li>{favBtn}</li>
+        </ul>
+      )
+      return (
+        <Panel className="" header={item.title} footer={stuff}>
+          {item.content}
+        </Panel>
+      )
+    }) : null
     return (
       <Grid>
           <Col xs={2}>
