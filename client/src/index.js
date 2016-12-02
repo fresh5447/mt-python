@@ -3,6 +3,7 @@ import { render } from 'react-dom';
 import App from './App';
 import { Router, Route, browserHistory } from 'react-router';
 import 'bootstrap/dist/css/bootstrap.css';
+require('./stylesheets/main.scss');
 import './index.css';
 
 import mtcgRoutes from './Config/routes/mtcg';

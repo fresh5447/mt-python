@@ -18,7 +18,7 @@ class RootNavbar extends Component {
   }
   render() {
     return (
-      <Navbar collapseOnSelect>
+      <Navbar collapseOnSelect className="customNav">
            <Navbar.Header>
              <Navbar.Brand>
                <NavLink to="/">Code Range</NavLink><p></p>
