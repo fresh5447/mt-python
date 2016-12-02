@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Jumbotron, Grid, Row, Col, Tabs, Tab, Panel } from 'react-bootstrap';
 import NavLink from '../Components/NavLink';
-import '../App.css';
 
 class AuthoredDashboardView extends Component {
   render() {

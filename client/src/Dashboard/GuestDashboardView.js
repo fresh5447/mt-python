@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Jumbotron, Button, Grid, Row, Col, Tabs, Tab, Panel } from 'react-bootstrap';
-import '../App.css';
 
 class GuestDashboardView extends Component {
   render() {

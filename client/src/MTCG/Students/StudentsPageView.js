@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Grid, Row, Col, Table } from 'react-bootstrap';
-import '../../App.css';
 
 class StudentsPageView extends Component {
   render() {
