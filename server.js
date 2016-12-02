@@ -23,6 +23,8 @@ var mongooseUri = uriUtil.formatMongoose(mongodbUri);
 
 mongoose.connect(mongooseUri, options);
 
+app.set('port', (process.env.PORT || 3001));
+
 
 
   // Express only serves static assets in production
@@ -58,8 +60,7 @@ app.use('/api/v2/modules', ModuleRouter);
 app.use('/api/v2/checkpoints', CheckpointsRouter);
 app.use('/api/v2/resources', ResourcesRouter);
 
-// BUG: API is served over port 3100;
-const port = process.env.PORT || 3001;
+
 
 app.listen(port, function(){
   console.log("🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥\n🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥 fired up 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥 \n🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥 on " + port + " 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥\n🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥")
