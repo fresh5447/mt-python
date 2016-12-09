@@ -40,7 +40,7 @@ class Register extends React.Component {
       method: 'POST',
       success: ((data) => {
         this.context.sendNotification(data.message);
-        browserHistory.push('/');
+        window.location = "/";
       }),
       error: ((err) => {
         this.context.sendNotification(err.responseText);
@@ -53,7 +53,6 @@ class Register extends React.Component {
       <div className="user-screen-container">
         <div className="container">
           <div className="row">
-            <h3>CodeRange</h3>
               <NavLink className="btn btn-primary  register-btn pull-right" to="/login">login</NavLink>
           </div>
           <div className="col-xs-6 col-xs-offset-3">

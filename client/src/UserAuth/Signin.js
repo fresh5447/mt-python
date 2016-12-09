@@ -1,5 +1,4 @@
 import React from 'react';
-import { browserHistory } from 'react-router';
 import NavLink from '../Components/NavLink';
 import $ from 'jquery';
 
@@ -44,7 +43,6 @@ class UserSignin extends React.Component {
       <div className="user-screen-container">
         <div className="container">
           <div className="row">
-            <h3>CodeRange</h3>
             <NavLink className="btn btn-primary  register-btn pull-right" to="/signup">register</NavLink>
           </div>
           <div className="col-xs-6 col-xs-offset-3">

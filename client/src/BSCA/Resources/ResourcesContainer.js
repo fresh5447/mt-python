@@ -45,7 +45,7 @@ class ResourcesContainer extends Component {
   render() {
     const resourcePanels = this.state.resources ? this.state.resources.map((item) => {
       const foot = item.internal ? "Internal" : "External";
-      const fav = item.fav ? "FAV" : "Not Fav";
+      // const fav = item.fav ? "FAV" : "Not Fav";
       const favBtn = (
         <button onClick={ item.fav ? this.toggleFav.bind(this, item._id, 'remove') :
         this.toggleFav.bind(this, item._id, 'post') }>{item.fav.toString()}</button>

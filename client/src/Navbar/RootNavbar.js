@@ -9,12 +9,36 @@ class RootNavbar extends Component {
       user: null
     }
   }
-  componentWillMount(){
-    this.context.getUser((data) => {
-      if(data){
-          this.setState({ user: data })
-      }
-    })
+  getNav() {
+    if(this.state.user && this.state.user.local && this.state.user.role === "student"){
+      return (
+        <Nav pullRight>
+           {/* <NavDropdown  title="Quick Links" id="basic-nav-dropdown">
+             <MenuItem>Code.org Intro To CS</MenuItem>
+             <MenuItem>Montana Code Girls Website</MenuItem>
+             <MenuItem>Big Sky Code Academy</MenuItem>
+             <MenuItem>Register Student</MenuItem>
+             <MenuItem>Register Volunteer</MenuItem>
+           </NavDropdown> */}
+             <NavItem><Button><NavLink to="/big-sky-code-academy">Code Range</NavLink></Button></NavItem>
+           </Nav>
+      )
+    } else if(this.state.user && this.state.user.local && this.state.user.role === "admin"){
+    return (
+      <Nav pullRight>
+           <NavItem><Button><NavLink to="/admin-console">Adminland</NavLink></Button></NavItem>
+           <NavItem><Button><NavLink to="/big-sky-code-academy">BSCA</NavLink></Button></NavItem>
+           <NavItem><Button><NavLink to="/montana-code-girls">MTCG</NavLink></Button></NavItem>
+      </Nav>
+    )
+  } else {
+    return (
+      <Nav pullRight>
+           <NavItem><Button><NavLink to="/register">Register</NavLink></Button></NavItem>
+           <NavItem><Button><NavLink to="/signin">Signin</NavLink></Button></NavItem>
+      </Nav>
+    )
+  }
   }
   render() {
     return (
@@ -22,25 +46,12 @@ class RootNavbar extends Component {
            <Navbar.Header>
              <Navbar.Brand>
                <NavLink to="/">Code Range</NavLink><p></p>
-               { this.state.user && this.state.user.local ? this.state.user.local.email : "NO" }
+               { this.props.user && this.props.user.local ? this.props.user.local.email : null }
              </Navbar.Brand>
              <Navbar.Toggle />
            </Navbar.Header>
            <Navbar.Collapse>
-             <Nav pullRight>
-
-             <NavDropdown  title="Quick Links" id="basic-nav-dropdown">
-               <MenuItem>Code.org Intro To CS</MenuItem>
-               <MenuItem>Montana Code Girls Website</MenuItem>
-               <MenuItem>Big Sky Code Academy</MenuItem>
-               <MenuItem>Register Student</MenuItem>
-               <MenuItem>Register Volunteer</MenuItem>
-             </NavDropdown>
-               <NavItem><Button><NavLink to="/register">Register</NavLink></Button></NavItem>
-               <NavItem><Button><NavLink to="/signin">Signin</NavLink></Button></NavItem>
-               <NavItem><Button><NavLink to="/signout">Logout</NavLink></Button></NavItem>
-               <NavItem><Button><NavLink to="/admin-console">Admin Console</NavLink></Button></NavItem>
-             </Nav>
+             { this.getNav() }
            </Navbar.Collapse>
          </Navbar>
     );

@@ -5,7 +5,8 @@ import GuestDashboardView from './GuestDashboardView';
 class DashboardContainer extends Component {
 
   render() {
-    return this.props.user ? <AuthoredDashboardView user={this.props.user} /> : <GuestDashboardView />
+    window.u = this.props.user;
+    return this.props.user && this.props.user.local ? <AuthoredDashboardView user={this.props.user} /> : <GuestDashboardView />
   }
 }
 

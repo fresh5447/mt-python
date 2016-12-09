@@ -17,6 +17,14 @@ p, a {
   font-family: 'Lato', sans-serif;
 }
 
+.dash-jumbo {
+  background-image: url('/hero1.jpg');
+  color: white;
+}
+
+.dash-jumbo h1{
+  text-shadow: 2px 2px black;
+}
 
 .playbook-panel {
   width: 30%;
@@ -122,4 +130,25 @@ p, a {
 
 .jumbotron {
   background-color: white;
+}
+
+.dash-btn {
+  margin: 5px;
+  background-color: white;
+  color: #337ab7;
+}
+
+.dash-cont-left {
+  float: left
+}
+
+.dash-cont-right {
+  float: right
+}
+
+.dash-cont-right strong{
+  padding: 80px 60px 10px 10px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }

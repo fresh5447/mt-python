@@ -28,7 +28,6 @@ class UserPostContainer extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    const published = this.state.publish == null ? false : true;
     const data = {
       firstName: this.state.firstName,
       lastName: this.state.lastName,

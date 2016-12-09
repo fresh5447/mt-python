@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import NavLink from '../Components/NavLink';
 import { Jumbotron, Button, Grid, Row, Col, Tabs, Tab, Panel } from 'react-bootstrap';
 
 class GuestDashboardView extends Component {
@@ -7,24 +8,33 @@ class GuestDashboardView extends Component {
       <Grid>
         <Row>
           <Col xs={12}>
-            <Jumbotron>
-              <h1>Code Range Platform Portal</h1>
-              <p>Learn more about gainging access to these platforms.</p>
-              <p><Button bsStyle="primary">Learn more</Button>  <Button bsStyle="primary">Login</Button></p>
+            <Jumbotron className="dash-jumbo">
+              <h1>Code Range</h1>
+              <p><NavLink to="/signin"><Button bsStyle="primary dash-btn">Register</Button></NavLink><NavLink to="/signin"><Button bsStyle="primary dash-btn">Login</Button></NavLink></p>
             </Jumbotron>
             <Jumbotron>
               <Tabs defaultActiveKey={1} id="uncontrolled-tab-example">
                 <Tab eventKey={1} title="Big Sky Code Academy">
                   <div>
-                    <Panel header="Big Sky Code Academy: Learning Platform" footer="learn more | create free acount">
-                      Anyone can sign up for the free tier which include an introduciton to web developement module, as well as countless project pased turorials and learning resources.
+                    <Panel header="Learning Platform">
+                      <div className="dash-cont-left">
+                        <img src="/BSCA_Logo.png" role="presentation"/>
+                      </div>
+                      <div className="dash-cont-right">
+                        <p><strong>Courses and Resources for Big Sky Code Academy Students</strong></p>
+                      </div>
                     </Panel>
                   </div>
                 </Tab>
                 <Tab eventKey={2} title="Montana Code Girls">
                   <div>
-                    <Panel header="Montana Code Girls: Volunteer Playbook" footer="learn more | request access">
-                      MTCG is a state wide after school program to teach girls how to code.
+                    <Panel header="Volunteer Playbook">
+                      <div className="dash-cont-left">
+                        <img src="/mt-code-girls.png" role="presentation"/>
+                      </div>
+                      <div className="dash-cont-right">
+                        <p><strong>Resources for Montana Code Girl volunteers and staff.</strong></p>
+                      </div>
                     </Panel>
                   </div>
                 </Tab>

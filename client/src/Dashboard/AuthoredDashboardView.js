@@ -8,23 +8,28 @@ class AuthoredDashboardView extends Component {
       <Grid>
         <Row>
           <Col xs={12}>
-            <Jumbotron>
+            <Jumbotron className="dash-jumbo">
               <h1>Code Range Platform Portal</h1>
-              <p>Welcome {this.props.user.userName}</p>
+              <p>Welceome {this.props.user.local.email}</p>
             </Jumbotron>
             <Jumbotron>
               <h3>Your Portals</h3>
               <Tabs defaultActiveKey={1} id="uncontrolled-tab-example">
                 <Tab eventKey={1} title="Big Sky Code Academy">
                   <div>
-                    <Panel header="Big Sky Code Academy: Learning Platform" footer={<NavLink to="/big-sky-code-academy">GO</NavLink>}>
-                      Anyone can sign up for the free tier which include an introduciton to web developement module, as well as countless project pased turorials and learning resources.
-                    </Panel>
+                    <Panel header="Learning Platform" footer={<NavLink to="/big-sky-code-academy">GO</NavLink>}>
+                      <div className="dash-cont-left">
+                        <img src="/BSCA_Logo.png" role="presentation"/>
+                      </div>
+                      <div className="dash-cont-right">
+                        <p><strong>Courses and Resources for Big Sky Code Academy Students</strong></p>
+                      </div>
+                  </Panel>
                   </div>
                 </Tab>
                 <Tab eventKey={2} title="Montana Code Girls">
                   <div>
-                    <Panel header="Montana Code Girls: Volunteer Playbook" footer={<NavLink to="/montana-code-girls">GO</NavLink>}>
+                    <Panel header="Volunteer Playbook">
                       MTCG is a state wide after school program to teach girls how to code.
                     </Panel>
                   </div>
