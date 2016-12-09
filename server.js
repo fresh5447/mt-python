@@ -61,6 +61,10 @@ app.use('/api/v2/checkpoints', CheckpointsRouter);
 app.use('/api/v2/resources', ResourcesRouter);
 
 
+app.get('*', function (req, res) {
+  res.sendFile(path.join(__dirname, 'client/public', 'index.html'))
+});
+
 app.listen(app.get('port'), () => {
   console.log(`🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥 at: http://localhost:${app.get('port')}/`); // eslint-disable-line no-console
 });
