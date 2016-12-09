@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route } from 'react-router';
+import { Route, IndexRoute } from 'react-router';
 
 
 import BSCAMainContainer from '../../BSCA/MainContainer';
@@ -18,6 +18,7 @@ var routes = (
     <Route path="course/:course_id/module/:module_id" component={ActiveModuleContainer}>
       <Route path="checkpoint/:checkpoint_id" component={ActiveCheckpointContainer}/>
     </Route>
+    <IndexRoute path="home" component={HomeContainer}/>
   </Route>
 );
 

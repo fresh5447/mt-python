@@ -14,7 +14,7 @@ class MainContainer extends Component {
         <Row>
           <Col xs={12}>
             <Tabs defaultActiveKey={"home"} onSelect={this.handleSelect} id="uncontrolled-tab-example">
-              <Tab eventKey={"home"} title="Home">{this.props.children ? this.props.children : <Home />}</Tab>
+              <Tab eventKey={"home"} title="Home">{ this.props.children }</Tab>
               <Tab eventKey={"resources"} title="Resources">{this.props.children}</Tab>
             </Tabs>
           </Col>

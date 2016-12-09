@@ -68,10 +68,10 @@ var routes = (
       </Route>
     </Route>
 
-        <Route path="users" component={UsersContainer}>
-            <Route path="view/:user_id" component={ViewUserContainer}/>
-            <Route path="post" component={PostUserContainer}/>
-        </Route>
+    <Route path="users" component={UsersContainer}>
+        <Route path="view/:user_id" component={ViewUserContainer}/>
+        <Route path="post" component={PostUserContainer}/>
+    </Route>
 
 
 
