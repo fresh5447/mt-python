@@ -5,12 +5,9 @@ import { Navbar, Nav, NavDropdown, NavItem, MenuItem, Button } from 'react-boots
 class RootNavbar extends Component {
   constructor(props, context){
     super(props, context);
-    this.state = {
-      user: null
-    }
   }
   getNav() {
-    if(this.state.user && this.state.user.local && this.state.user.role === "student"){
+    if(this.props.user && this.props.user.local && this.props.user.role === "student"){
       return (
         <Nav pullRight>
            {/* <NavDropdown  title="Quick Links" id="basic-nav-dropdown">
@@ -23,7 +20,7 @@ class RootNavbar extends Component {
              <NavItem><Button><NavLink to="/big-sky-code-academy">Code Range</NavLink></Button></NavItem>
            </Nav>
       )
-    } else if(this.state.user && this.state.user.local && this.state.user.role === "admin"){
+    } else if(this.props.user && this.props.user.local && this.props.user.role === "admin"){
     return (
       <Nav pullRight>
            <NavItem><Button><NavLink to="/admin-console">Adminland</NavLink></Button></NavItem>
@@ -57,8 +54,6 @@ class RootNavbar extends Component {
     );
   }
 }
-RootNavbar.contextTypes = {
-  getUser: React.PropTypes.func.isRequired
-};
+
 
 export default RootNavbar;
