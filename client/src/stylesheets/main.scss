@@ -1,4 +1,5 @@
 @import './navbar.scss';
+@import './box-shadow.scss';
 
 body {
   margin: 0;
@@ -103,7 +104,7 @@ p, a {
 .playbook-flexbox {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-around;
 }
 
 @media (max-width: 728px ) {
@@ -112,6 +113,14 @@ p, a {
   }
 }
 
+.nav-tabs {
+  border-bottom: 1px dashed #ddd;
+  margin-bottom: 3%;
+}
+
+.nav-pills {
+  margin-bottom: 3%;
+}
 
 
 .main-nav {
@@ -151,4 +160,12 @@ p, a {
   display: block;
   margin-left: auto;
   margin-right: auto;
+}
+
+.panel {
+  box-shadow: $primary-shadow;
+}
+
+.btn-group-vertical {
+  box-shadow: $primary-shadow;
 }

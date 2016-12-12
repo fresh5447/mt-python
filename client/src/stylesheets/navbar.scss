@@ -1,3 +1,6 @@
+@import './box-shadow.scss';
+
 .customNav {
   background-color: white;
+  box-shadow: $primary-shadow;
 }
