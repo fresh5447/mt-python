@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
+import { Jumbotron } from 'react-bootstrap';
 
 const PostCourseForm = (props) =>
   <div className="">
@@ -52,8 +53,36 @@ const PostCourseForm = (props) =>
           type="checkbox" className="form-control pull-left" id="publish-course" placeholder="..."
           />
         </fieldset>
-        <button type="submit" className="btn btn-primary my-primary-btn">Save</button>
+        <Jumbotron>
+          <div>
+        <ul>
+          <h4>Add Category</h4>
+          { props.allCategories ? props.allCategories.map((item) =>
+            <li onClick={ props.addCategory.bind(this, item ) }>{ item.name }</li>
+          ) : null }
+        </ul>
+        </div>
+        <div>
+        <ul>
+          <h4>Remove Category</h4>
+          { props.categories ? props.categories.map((item) =>
+            <li onClick={ props.removeCategory.bind(this, item ) }>{ item.name }</li>
+          ) : null }
+        </ul>
+      </div>
+        </Jumbotron>
+        <button type="submit" className="btn btn-primary my-primary-btn">Submit</button>
       </form>
+      <div>
+        <h3>Need to create a new category?</h3>
+        <form onSubmit={props.submitCategory}>
+          <label>Cagtegory Name</label>
+          <input onChange={ (event) => props.onFieldChange('createCategory', event.target.value)}
+          type="text" className="form-control pull-left" placeholder="..."
+          />
+          <button type="submit" className="btn btn-primary my-primary-btn">Submit</button>
+        </form>
+      </div>
     </div>
   </div>;
 

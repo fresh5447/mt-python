@@ -9,6 +9,7 @@ const path           = require('path'),
   uriUtil             = require('mongodb-uri'),
   CourseRouter        = require('./routes/courses'),
   ModuleRouter        = require('./routes/modules'),
+  CatRouter           = require('./routes/categories'),
   CheckpointsRouter   = require('./routes/checkpoints'),
   ResourcesRouter     = require('./routes/resources'),
 
@@ -58,6 +59,7 @@ app.get('/home', function(req, res) {
 app.use('/api/v2/courses', CourseRouter);
 app.use('/api/v2/modules', ModuleRouter);
 app.use('/api/v2/checkpoints', CheckpointsRouter);
+app.use('/api/v2/categories', CatRouter);
 app.use('/api/v2/resources', ResourcesRouter);
 
 

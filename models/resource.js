@@ -8,6 +8,7 @@ const ResourceSchema = new Schema({
   link: String,
   publish: Boolean,
   desc: String,
+  categories: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Category' }],
   fav: Boolean,
   internal: Boolean
 });

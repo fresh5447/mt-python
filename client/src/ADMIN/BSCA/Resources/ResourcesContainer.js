@@ -8,17 +8,20 @@ class BSCAContainer extends Component {
     super(props, context);
 
     this.state = {
-      resources: null
+      resources: null,
+      categories: null
     };
     this.loadResources = this.loadResources.bind(this);
   }
 
   componentWillMount() {
     this.loadResources();
+    this.loadCategories();
   }
 
   componentWillReceiveProps() {
     this.loadResources();
+    this.loadCategories();
   }
 
   loadResources() {
@@ -27,6 +30,14 @@ class BSCAContainer extends Component {
       method: 'GET',
     }).done((data) => {
       this.setState({ resources: data });
+    });
+  }
+  loadCategories() {
+    $.ajax({
+      url: '/api/v2/categories',
+      method: 'GET',
+    }).done((data) => {
+      this.setState({ categories: data });
     });
   }
   render() {

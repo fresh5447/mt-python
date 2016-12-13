@@ -169,3 +169,14 @@ p, a {
 .btn-group-vertical {
   box-shadow: $primary-shadow;
 }
+
+.resources-main-filter {
+  color: white;
+  background-color: #337ab7;
+  border-radius: 4px;
+      padding: 10px 15px;
+  &:active {
+    color: #337ab7;
+    background-color: white;
+  }
+}

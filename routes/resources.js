@@ -36,6 +36,7 @@ if (!Array.prototype.includes) {
 Router.route('/student')
   .get((req, res) => {
     Resource.find()
+    .populate('categories')
     .exec((err, resources) => {
       if (err) {
         res.json({ message: 'there was an error finding all resources' });
@@ -109,6 +110,7 @@ Router.route('/student/favorite/:id/:action')
 Router.route('/')
   .get((req, res) => {
     Resource.find()
+    .populate('categories')
     .exec((err, resources) => {
       if (err) {
         res.json({ message: 'there was an error finding all resources' });
@@ -124,6 +126,7 @@ Router.route('/')
       link: req.body.link,
       publish: req.body.publish,
       desc: req.body.desc,
+      categories: req.body.categories,
       internal: req.body.internal,
     });
     resource.save((err, source) => {
@@ -169,6 +172,7 @@ Router.route('/')
 Router.route('/id/:id')
     .get((req, res) => {
       Resource.findById(req.params.id)
+      .populate('categories')
       .exec((err, resources) => {
         if (err) {
           res.json({ message: 'there was an error finding all resources' });
@@ -188,6 +192,7 @@ Router.route('/id/:id')
           resource.desc       = req.body.desc ? req.body.desc : resource.desc;
           resource.link       = req.body.link ? req.body.link : resource.link;
           resource.content    = req.body.content ? req.body.content : resource.content;
+          resource.categories    = req.body.categories ? req.body.categories : resource.categories;
           resource.publish    = req.body.publish ? req.body.publish : resource.publish;
           resource.internal   = req.body.internal ? req.body.internal : resource.internal;
 
