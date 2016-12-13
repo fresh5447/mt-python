@@ -78,8 +78,7 @@ class BSCAPostContainer extends Component {
       data
     }).done((d) => {
       this.context.sendNotification("Category Created");
-      const path = `/admin-console/bsca`
-      browserHistory.push(path);
+      this.loadCategories();
     });
   }
 
