@@ -51,6 +51,10 @@ class BSCAPostContainer extends Component {
   render() {
     return <PostCheckpointForm
     onFieldChange={(...args) => this.onFieldChange(...args)}
+    title={this.state.title}
+    desc={this.state.desc}
+    content={this.state.content}
+    assignment={this.state.assignment}
     handleSubmit={this.handleSubmit}
     />;
   }

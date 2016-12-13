@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
-import { Grid, Row, Col } from 'react-bootstrap';
+import CheckpointView from './CheckpointView';
+
 
 
 class ActiveCheckpointContainer extends Component {
@@ -33,23 +34,7 @@ class ActiveCheckpointContainer extends Component {
     });
   }
   render() {
-    return (
-      <Grid>
-        <Row>
-          <Col xs={12}>
-            <h3>{ this.state.checkpoint ? this.state.checkpoint.title : null }</h3>
-          </Col>
-        </Row>
-        <Row>
-          <Col xs={12}>
-            <p>{ this.state.checkpoint ? this.state.checkpoint.desc : null }</p>
-            <p>{ this.state.checkpoint ? this.state.checkpoint.content : null }</p>
-            <p>{ this.state.checkpoint ? this.state.checkpoint.assignment : null }</p>
-          </Col>
-        </Row>
-      </Grid>
-
-    )
+    return this.state.checkpoint ? <CheckpointView checkpoint={this.state.checkpoint}/> : null;
   }
 }
 
