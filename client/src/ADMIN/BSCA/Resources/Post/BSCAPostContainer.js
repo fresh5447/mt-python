@@ -52,6 +52,8 @@ class BSCAPostContainer extends Component {
   render() {
     return <PostResourceForm
     onFieldChange={(...args) => this.onFieldChange(...args)}
+    internal={this.state.internal}
+    content={this.state.content}
     handleSubmit={this.handleSubmit}
     />;
   }
