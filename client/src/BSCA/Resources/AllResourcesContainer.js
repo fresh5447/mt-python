@@ -51,13 +51,15 @@ class AllResourcesContainer extends Component {
       const favBtn = (
         <button onClick={ item.fav ? this.toggleFav.bind(this, item._id, 'remove') :
         this.toggleFav.bind(this, item._id, 'post') }>{item.fav.toString()}</button>
-
       )
+      var cats = item.categories.map(c => <li>{c.name} </li>)
       const stuff = (
         <ul>
           <li>{foot}</li>
           <li>{favBtn}</li>
+          { cats }
         </ul>
+
       )
       return (
         <Panel className="" header={item.title} footer={stuff}>
