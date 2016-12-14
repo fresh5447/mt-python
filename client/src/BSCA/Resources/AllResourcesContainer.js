@@ -43,7 +43,9 @@ class AllResourcesContainer extends Component {
     return this.setState({ tabKey: selectedKey })
   }
   render() {
-    const resourcePanels = this.state.resources ? this.state.resources.map((item) => {
+    const resourcePanels = this.state.resources ? this.state.resources.filter((it) => {
+      return it.publish
+    }).map((item) => {
       const foot = item.internal ? "Internal" : "External";
       // const fav = item.fav ? "FAV" : "Not Fav";
       const favBtn = (
@@ -59,7 +61,7 @@ class AllResourcesContainer extends Component {
       )
       return (
         <Panel className="" header={item.title} footer={stuff}>
-          {item.content}
+          {item.desc}
         </Panel>
       )
     }) : null

@@ -8,7 +8,8 @@ class ResourcesContainer extends Component {
     super(props);
     this.state = {
       tabKey: 1,
-      resources: null
+      resources: null,
+      categories: null,
     };
 
     this.handleSelect = this.handleSelect.bind(this);
@@ -25,8 +26,20 @@ class ResourcesContainer extends Component {
       })
   }
 
+  loadCategories(){
+    console.log("LOADING RES CONTAINER")
+    $.ajax({
+      url: '/api/v2/categories',
+      methode: 'GET'
+    }).done((data) => {
+        this.setState({ categories: data })
+        window.r = data;
+      })
+  }
+
   componentWillMount(){
     this.loadResources();
+    this.loadCategories();
   }
 
   toggleFav = (id, action) => {
@@ -48,13 +61,19 @@ class ResourcesContainer extends Component {
       <Grid>
           <Col xs={2}>
             <p><strong>categories</strong></p>
-            <ButtonGroup vertical>
-              <Button>JavaScript</Button>
-              <Button>CSS</Button>
-              <Button>HTML</Button>
-              <Button>Node</Button>
-              <Button>React</Button>
-            </ButtonGroup>
+
+              {
+                this.state.categories ? (
+                  <ButtonGroup vertical>
+                    {
+                    this.state.categories.map((item) => {
+                      return <Button><NavLink to={"/big-sky-code-academy/resources/categories/" + item.name }>{ item.name }</NavLink></Button>
+                    })
+                    }
+                  </ButtonGroup>
+                ) :<ButtonGroup vertical> <Button>Loading...</Button> </ButtonGroup>
+              }
+
           </Col>
           <Col xs={10}>
             <Nav bsStyle="pills" activeKey={this.state.tabKey} onSelect={this.handleSelect}>

@@ -43,9 +43,16 @@ class CategoriesResourcesContainer extends Component {
     return this.setState({ tabKey: selectedKey })
   }
   render() {
-    const resourcePanels = this.state.resources ? this.state.resources.filter((item) => {
-      return item.categories.includes(this.props.params.category);
-    }).map((item) => {
+    const resourcePanels = this.state.resources ? this.state.resources.filter((i) => {
+      return i.publish
+    }).filter((obj) => {
+        for (var i = 0, length = obj.categories.length; i < length; i++) {
+          if (obj.categories[i].name === this.props.params.category) {
+            return true;
+          }
+        }
+        return false;
+      }).map((item) => {
       const foot = item.internal ? "Internal" : "External";
       // const fav = item.fav ? "FAV" : "Not Fav";
       const favBtn = (
@@ -61,7 +68,7 @@ class CategoriesResourcesContainer extends Component {
       )
       return (
         <Panel className="" header={item.title} footer={stuff}>
-          {item.content}
+          {item.desc}
         </Panel>
       )
     }) : null
