@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var User = require('../models/user');
+var Org = require('../models/org');
 var crypto = require('crypto');
 var async = require('async');
 var nodemailer = require('nodemailer');
@@ -60,6 +61,8 @@ module.exports = function(app, passport) {
           user.local.githubHandle = req.body.githubHandle ? req.body.githubHandle : user.local.githubHandle;
           user.local.skype = req.body.skype ? req.body.skype : user.local.skype;
           user.local.bio = req.body.bio ? req.body.bio : user.local.bio;
+
+          user.orgs =
 
           user.save(function(err){
             if(err){
@@ -132,6 +135,32 @@ module.exports = function(app, passport) {
         }
       })
   })
+
+// org 5851c2d69d62a639c6fd9547
+// user 583f70e9ac0a37d56fa69287
+  app.put('/editUser/orgs/:org_id/:user_id', (req, res) => {
+    User.findById(req.params.user_id, (err, user) => {
+      if(err){
+        console.log(err)
+      } else {
+        user.orgs.push(req.params.org_id);
+        user.save((err, u) => {
+          if(err){
+            console.log(err)
+          } else {
+            Org.findById(req.params.org_id, (err, org) => {
+              if(err){
+                console.log(err)
+              } else {
+                org.members.push(u._id);
+                org.save();
+              }
+            })
+          }
+        })
+      }
+    })
+  });
 
 
 

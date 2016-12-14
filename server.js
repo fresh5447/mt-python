@@ -12,6 +12,7 @@ const path           = require('path'),
   CatRouter           = require('./routes/categories'),
   CheckpointsRouter   = require('./routes/checkpoints'),
   ResourcesRouter     = require('./routes/resources'),
+  OrgsRouter     = require('./routes/orgs'),
 
  mongoose             = require('mongoose');
 
@@ -61,6 +62,7 @@ app.use('/api/v2/modules', ModuleRouter);
 app.use('/api/v2/checkpoints', CheckpointsRouter);
 app.use('/api/v2/categories', CatRouter);
 app.use('/api/v2/resources', ResourcesRouter);
+app.use('/api/v2/orgs', OrgsRouter);
 
 
 app.get('*', function (req, res) {
