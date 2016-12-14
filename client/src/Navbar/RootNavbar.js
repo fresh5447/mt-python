@@ -17,7 +17,7 @@ class RootNavbar extends Component {
              <MenuItem>Register Student</MenuItem>
              <MenuItem>Register Volunteer</MenuItem>
            </NavDropdown> */}
-             <NavItem><Button><NavLink to="/big-sky-code-academy">Code Range</NavLink></Button></NavItem>
+             <NavItem><NavLink to="/big-sky-code-academy">Code Range</NavLink></NavItem>
            </Nav>
       )
     } else if(this.props.user && this.props.user.local && this.props.user.role === "admin"){
@@ -31,8 +31,8 @@ class RootNavbar extends Component {
   } else {
     return (
       <Nav pullRight>
-           <NavItem><Button><NavLink to="/register">Register</NavLink></Button></NavItem>
-           <NavItem><Button><NavLink to="/signin">Signin</NavLink></Button></NavItem>
+           <NavItem><NavLink to="/register">Register</NavLink></NavItem>
+           <NavItem><NavLink to="/signin">Signin</NavLink></NavItem>
       </Nav>
     )
   }

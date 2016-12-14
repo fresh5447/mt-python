@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router';
 import $ from 'jquery';
 import NavLink from '../../Components/NavLink';
 import { Button, Grid, Col, ButtonGroup, Nav, NavItem } from 'react-bootstrap';
@@ -60,19 +61,16 @@ class ResourcesContainer extends Component {
     return (
       <Grid>
           <Col xs={2}>
-            <p><strong>categories</strong></p>
-
+            <ButtonGroup vertical>
+              <p className="btn btn-default"><strong>categories</strong></p>
               {
                 this.state.categories ? (
-                  <ButtonGroup vertical>
-                    {
-                    this.state.categories.map((item) => {
-                      return <Button><NavLink to={"/big-sky-code-academy/resources/categories/" + item.name }>{ item.name }</NavLink></Button>
-                    })
-                    }
-                  </ButtonGroup>
-                ) :<ButtonGroup vertical> <Button>Loading...</Button> </ButtonGroup>
+                  this.state.categories.map((item) => {
+                    return <Link activeClassName="active-category" className={"btn btn-default"} to={"/big-sky-code-academy/resources/categories/" + item.name }>{ item.name }</Link>
+                  })
+                ) : <Button>Loading...</Button>
               }
+              </ButtonGroup>
 
           </Col>
           <Col xs={10}>

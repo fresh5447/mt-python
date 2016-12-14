@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
 import NavLink from '../../Components/NavLink';
+import { Link } from 'react-router';
 import { Jumbotron, Button, Grid, Col, Row, ButtonGroup } from 'react-bootstrap';
 
 class ActiveModuleContainer extends Component {
@@ -47,10 +48,10 @@ class ActiveModuleContainer extends Component {
         <Row className="show-grid">
           <Col xs={2} md={2}>
             <ButtonGroup vertical>
-              <p>Checkpoints</p>
+              <p className="btn btn-default"><strong>checkpoints</strong></p>
               { this.state.module ?
                 this.state.module.checkpoints.map((item)=> {
-                  return <Button><NavLink to={"/big-sky-code-academy/course/" + this.props.params.course_id + "/module/" + this.props.params.module_id + "/checkpoint/" + item._id}>{item.title}</NavLink></Button>
+                  return <Link activeClassName="active-checkpoint" className="btn btn-default" to={"/big-sky-code-academy/course/" + this.props.params.course_id + "/module/" + this.props.params.module_id + "/checkpoint/" + item._id}>{item.title}</Link>
                 })
                 : <Button>Loading...</Button> }
             </ButtonGroup>

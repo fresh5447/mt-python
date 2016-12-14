@@ -37,6 +37,10 @@ p, a {
   font-family: 'Lato', sans-serif;
 }
 
+.vert-nav-btn {
+  color: red;
+}
+
 .dash-jumbo {
   background-image: url('/hero1.jpg');
   color: white;
@@ -192,12 +196,39 @@ p, a {
 }
 
 .resources-main-filter {
+  color: #337ab7;
+  background-color: white;
+  border-radius: 4px;
+  padding: 10px 15px;
+  border: solid 1px #337ab7;
+}
+
+.resources-main-filter-active {
   color: white;
   background-color: #337ab7;
   border-radius: 4px;
-      padding: 10px 15px;
+  padding: 10px 15px;
+  border: solid 1px #337ab7;
+}
+
+.active-checkpoint {
+  color: white;
+  background-color: #337ab7;
+  border: solid 1px #337ab7;
   &:active {
-    color: #337ab7;
-    background-color: white;
+    color: white;
+    background-color: #337ab7;
+    border: solid 1px #337ab7;
+  }
+}
+
+.active-category {
+  color: white;
+  background-color: #337ab7;
+  border: solid 1px #337ab7;
+  &:active {
+    color: white;
+    background-color: #337ab7;
+    border: solid 1px #337ab7;
   }
 }
