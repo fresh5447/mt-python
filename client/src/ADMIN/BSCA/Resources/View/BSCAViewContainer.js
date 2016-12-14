@@ -16,8 +16,12 @@ class BSCAViewContainer extends Component {
     this.loadResource(this.props.params.resource_id);
   }
 
-  componentWillReceiveProps() {
-    this.loadResource(this.props.params.resource_id);
+  componentDidUpdate (prevProps) {
+      let oldId = prevProps.params.resource_id
+      let newId = this.props.params.resource_id
+      if (newId !== oldId){
+        this.loadResource(this.props.params.resource_id)
+      }
   }
 
 

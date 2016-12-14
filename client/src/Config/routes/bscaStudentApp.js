@@ -24,13 +24,13 @@ var routes = (
       <Route path="favorites" component={FavoritesResourcesContainer}/>
       <Route path="categories/:category" component={CategoriesResourcesContainer}/>
       <Route path="show/:resource_id" component={OneResourcesContainer}/>
-      <IndexRoute path="home" component={AllResourcesContainer}/>
+      <IndexRoute component={AllResourcesContainer}/>
     </Route>
     <Route path="course/:course_id" component={ActiveCourseContainer}/>
     <Route path="course/:course_id/module/:module_id" component={ActiveModuleContainer}>
       <Route path="checkpoint/:checkpoint_id" component={ActiveCheckpointContainer}/>
     </Route>
-    <IndexRoute path="home" component={HomeContainer}/>
+    <IndexRoute component={HomeContainer}/>
   </Route>
 );
 

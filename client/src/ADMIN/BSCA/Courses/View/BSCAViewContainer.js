@@ -16,8 +16,16 @@ class BSCAViewContainer extends Component {
     this.loadCourse(this.props.params.course_id);
   }
 
-  componentWillReceiveProps() {
-    this.loadCourse(this.props.params.course_id);
+  // componentWillReceiveProps() {
+  //   this.loadCourse(this.props.params.course_id);
+  // }
+
+  componentDidUpdate (prevProps) {
+      let oldId = prevProps.params.course_id
+      let newId = this.props.params.course_id
+      if (newId !== oldId){
+        this.loadCourse(this.props.params.course_id)
+      }
   }
 
 

@@ -12,6 +12,13 @@ class ViewUser extends Component {
   componentWillMount(){
     this.loadUser()
   }
+  componentDidUpdate (prevProps) {
+      let oldId = prevProps.params.user_id
+      let newId = this.props.params.user_id
+      if (newId !== oldId){
+        this.loadUser(this.props.params.user_id)
+      }
+  }
   loadUser(){
     $.ajax({
       url: '/singleUser/' + this.props.params.user_id,

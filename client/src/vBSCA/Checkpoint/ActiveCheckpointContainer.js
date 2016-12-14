@@ -16,12 +16,12 @@ class ActiveCheckpointContainer extends Component {
     this.loadCheckpoint(this.props.params.checkpoint_id);
   }
 
-  componentDidUpdate (prevProps) {
-      let oldId = prevProps.params.checkpoint_id
-      let newId = this.props.params.checkpoint_id
-      if (newId !== oldId){
-        this.loadCheckpoint(this.props.params.checkpoint_id)
-      }
+  componentWillReceiveProps() {
+    this.loadCheckpoint(this.props.params.checkpoint_id);
+  }
+
+  componentWillUnmount() {
+    this.loadCheckpoint(this.props.params.checkpoint_id);
   }
 
 
