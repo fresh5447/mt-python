@@ -1,6 +1,16 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
+import NavLink from '../../Components/NavLink';
+import FullHeart from 'react-icons/lib/fa/heart';
+import EmptyHeart from 'react-icons/lib/fa/heart-o';
+import ExternalLink from 'react-icons/lib/fa/external-link';
+import InternalLink from 'react-icons/lib/fa/arrow-right';
 import { Panel } from 'react-bootstrap';
+
+const heart = {
+  color: 'red'
+}
+
 
 class AllResourcesContainer extends Component {
   constructor(props){
@@ -46,19 +56,26 @@ class AllResourcesContainer extends Component {
     const resourcePanels = this.state.resources ? this.state.resources.filter((it) => {
       return it.publish
     }).map((item) => {
-      const foot = item.internal ? "Internal" : "External";
+      const foot = item.internal ? <NavLink><InternalLink/></NavLink> : <a href={item.link} target="_"><ExternalLink/></a>;
+
       // const fav = item.fav ? "FAV" : "Not Fav";
       const favBtn = (
-        <button onClick={ item.fav ? this.toggleFav.bind(this, item._id, 'remove') :
-        this.toggleFav.bind(this, item._id, 'post') }>{item.fav.toString()}</button>
+        <button className="fav-btn" onClick={ item.fav ? this.toggleFav.bind(this, item._id, 'remove') :
+        this.toggleFav.bind(this, item._id, 'post') }>
+          {item.fav ? <FullHeart style={heart} /> : <EmptyHeart style={heart} /> }
+        </button>
       )
       var cats = item.categories.map(c => <li>{c.name} </li>)
       const stuff = (
-        <ul>
-          <li>{foot}</li>
-          <li>{favBtn}</li>
-          { cats }
-        </ul>
+        <div>
+          <ul className="res-footer">
+            <li>{foot}</li>
+            <li>{favBtn}</li>
+          </ul>
+          <ul>
+            { cats }
+          </ul>
+        </div>
 
       )
       return (

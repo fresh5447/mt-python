@@ -1,7 +1,8 @@
 import React from 'react';
 import { render } from 'react-dom';
 import App from './App';
-import { Router, Route, browserHistory, IndexRoute } from 'react-router';
+import { Router, Route, browserHistory } from 'react-router';
+// import * as FontAwesome from 'react-icons/fa';
 import 'bootstrap/dist/css/bootstrap.css';
 require('./stylesheets/main.scss');
 
