@@ -5,7 +5,6 @@ const Router = new express.Router();
 
 Router.route('/')
   .get((req, res) => {
-    console.log("Trying to get cats")
     Category.find((err, cat) => {
       if(err){
         console.log(err)

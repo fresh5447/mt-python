@@ -5,7 +5,7 @@ import FullHeart from 'react-icons/lib/fa/heart';
 import EmptyHeart from 'react-icons/lib/fa/heart-o';
 import ExternalLink from 'react-icons/lib/fa/external-link';
 import InternalLink from 'react-icons/lib/fa/arrow-right';
-import { Panel } from 'react-bootstrap';
+import { Panel, Label } from 'react-bootstrap';
 
 const heart = {
   color: 'red'
@@ -56,7 +56,7 @@ class AllResourcesContainer extends Component {
     const resourcePanels = this.state.resources ? this.state.resources.filter((it) => {
       return it.publish
     }).map((item) => {
-      const foot = item.internal ? <NavLink><InternalLink/></NavLink> : <a href={item.link} target="_"><ExternalLink/></a>;
+      const foot = item.internal ? <NavLink to={"/big-sky-code-academy/resources/show/" + item._id}><InternalLink/></NavLink> : <a href={item.link} target="_"><ExternalLink/></a>;
 
       // const fav = item.fav ? "FAV" : "Not Fav";
       const favBtn = (
@@ -65,15 +65,15 @@ class AllResourcesContainer extends Component {
           {item.fav ? <FullHeart style={heart} /> : <EmptyHeart style={heart} /> }
         </button>
       )
-      var cats = item.categories.map(c => <li>{c.name} </li>)
+      var cats = item.categories.map(c => <li><Label bsStyle="primary">{c.name}</Label></li>)
       const stuff = (
         <div>
-          <ul className="res-footer">
-            <li>{foot}</li>
-            <li>{favBtn}</li>
-          </ul>
-          <ul>
+          <ul className="res-footer res-cats">
             { cats }
+          </ul>
+          <ul className="res-footer res-links">
+            <li>{favBtn}</li>
+            <li>{foot}</li>
           </ul>
         </div>
 

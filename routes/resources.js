@@ -64,6 +64,39 @@ Router.route('/student')
     });
   });
 
+
+  Router.route('/student/byid/:id')
+    .get((req, res) => {
+      console.log("TRYING TO GET STUDENT FAV RESOURCES")
+      Resource.findById(req.params.id)
+      .populate('categories')
+      .exec((err, resources) => {
+        if (err) {
+          res.json({ message: 'there was an error finding all resources' });
+        } else {
+          User.findById(req.user._id)
+          .populate('favorites')
+          .exec((er, user) => {
+            if (er) {
+              res.json(er);
+            } else {
+              for (var i = 0; i < resources.length; i++) {
+                const mappedFavs = user.favorites.map((item) => {
+                  return item._id.toString();
+                });
+                if (mappedFavs.includes(resources[i]._id.toString())) {
+                  resources[i].fav = true;
+                } else {
+                  resources[i].fav = false;
+                }
+              }
+              res.json(resources);
+            }
+          });
+        }
+      });
+    });
+
 Array.prototype.remove = function() {
     var what, a = arguments, L = a.length, ax;
     while (L && this.length) {

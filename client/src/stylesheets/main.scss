@@ -23,6 +23,16 @@ h1, h2, h3, h4, h5, h6 {
   list-style: none;
 }
 
+.res-links li {
+  display: inline;
+  margin: 3px 5px 5px 3px;
+}
+
+.res-cats li {
+  display: inline;
+  margin: 3px 5px 5px 3px;
+}
+
 p, a {
   font-family: 'Lato', sans-serif;
 }
@@ -177,6 +187,8 @@ p, a {
 
 .btn-group-vertical {
   box-shadow: $primary-shadow;
+  max-height: 200px;
+  overflow: scroll;
 }
 
 .resources-main-filter {
