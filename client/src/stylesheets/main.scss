@@ -17,6 +17,19 @@ h1, h2, h3, h4, h5, h6 {
 .fav-btn {
   background-color: transparent;
   border: none;
+  // position: relative !important;
+  // right: 5% !important;
+  float: left;
+  font-size: 23px;
+}
+
+.panel-footer {
+  background-color: white;
+}
+
+.res-link {
+  float: right;
+  font-size: 23px;
 }
 
 .res-footer {
@@ -28,9 +41,11 @@ h1, h2, h3, h4, h5, h6 {
   margin: 3px 5px 5px 3px;
 }
 
-.res-cats li {
-  display: inline;
-  margin: 3px 5px 5px 3px;
+.res-cats {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
 }
 
 p, a {
@@ -128,6 +143,27 @@ p, a {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
+}
+
+.resource-flexbox {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: initial;
+  align-content: flex-start;
+}
+
+
+.resource-panel .panel-heading {
+  font-weight: bold;
+  text-align: center;
+  background-color: white;
+}
+.resource-panel {
+    /* Or whatever */
+  height: 100%; /* Or whatever */
+  max-width: 33%;
+  margin-right: 10%;
 }
 
 @media (max-width: 728px ) {

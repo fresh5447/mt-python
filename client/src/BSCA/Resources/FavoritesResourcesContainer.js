@@ -57,7 +57,7 @@ class FavoriteResourcesContainer extends Component {
     }).filter((item) => {
       return item.fav
     }).map((item) => {
-      const foot = item.internal ? <NavLink to={"/big-sky-code-academy/resources/show/" + item._id}><InternalLink/></NavLink> : <a href={item.link} target="_"><ExternalLink/></a>;
+      const foot = item.internal ? <NavLink className="res-link" to={"/big-sky-code-academy/resources/show/" + item._id}><InternalLink/></NavLink> : <a className="res-link" href={item.link} target="_"><ExternalLink/></a>;
       // const fav = item.fav ? "FAV" : "Not Fav";
       const favBtn = (
         <button className="fav-btn" onClick={ item.fav ? this.toggleFav.bind(this, item._id, 'remove') :
@@ -66,26 +66,24 @@ class FavoriteResourcesContainer extends Component {
         </button>
 
       )
-      var cats = item.categories.map(c => <li><Label bsStyle="primary">{c.name}</Label></li>)
+      var cats = item.categories.map(c =><Label bsStyle="primary">{c.name}</Label>)
       const stuff = (
-        <div>
-          <ul className="res-footer res-cats">
+        <span>
+          <span className="res-footer res-cats flex-cats">
             { cats }
-          </ul>
-          <ul className="res-footer res-links">
-            <li>{favBtn}</li>
-            <li>{foot}</li>
-          </ul>
-        </div>
+          </span>
+            {favBtn}
+            {foot}
+        </span>
       )
       return (
-        <Panel className="" header={item.title} footer={stuff}>
+        <Panel className="resource-panel" header={item.title} footer={stuff}>
           {item.desc}
         </Panel>
       )
     }) : null
     return (
-      <div className="show-grid playbook-flexbox">
+      <div className="resource-flexbox">
             { resourcePanels }
       </div>
     )
