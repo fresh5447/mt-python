@@ -23,7 +23,6 @@ class ResourcesContainer extends Component {
       methode: 'GET'
     }).done((data) => {
         this.setState({ resources: data })
-        window.r = data;
       })
   }
 
