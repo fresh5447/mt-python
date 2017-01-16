@@ -1,8 +1,20 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
+import 'whatwg-fetch';
 import $ from 'jquery';
 import NavLink from '../../Components/NavLink';
 import { Button, Grid, Col, ButtonGroup, Nav, NavItem } from 'react-bootstrap';
+
+function readCookie(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0;i < ca.length;i++) {
+        var c = ca[i];
+        while (c.charAt(0) === ' ') c = c.substring(1,c.length);
+        if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length,c.length);
+    }
+    return null;
+}
 
 class ResourcesContainer extends Component {
   constructor(props){
@@ -16,15 +28,41 @@ class ResourcesContainer extends Component {
     this.handleSelect = this.handleSelect.bind(this);
     this.toggleFav = this.toggleFav.bind(this);
   }
-  loadResources(){
-    console.log("LOADING RES CONTAINER")
-    $.ajax({
-      url: '/api/v2/resources/student',
-      methode: 'GET'
-    }).done((data) => {
-        this.setState({ resources: data })
-      })
+
+  loadResources() {
+    console.log("LOADING RES CONTAINER WITH PROMISE");
+
+    const sessionIdCookie = 'connect.sid';
+    const sessionId = readCookie(sessionIdCookie);
+
+    const fetchInit = {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Cookie': `connect.sid=${sessionId}`
+      },
+    };
+
+    return fetch('/api/v2/resources/student', fetchInit).then(
+      data => {
+        this.setState({ resources: data });
+      },
+      error => {
+        console.log("ERRRORR")
+      },
+    );
   }
+
+  // loadResources(){
+  //   console.log("LOADING RES CONTAINER")
+  //   $.ajax({
+  //     url: '/api/v2/resources/student',
+  //     method: 'GET'
+  //   }).done((data) => {
+  //       this.setState({ resources: data })
+  //     })
+  // }
 
   loadCategories(){
     console.log("LOADING RES CONTAINER")

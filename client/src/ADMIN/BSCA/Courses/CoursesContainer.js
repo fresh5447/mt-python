@@ -8,7 +8,7 @@ class BSCAContainer extends Component {
     super(props, context);
 
     this.state = {
-      courses: null
+      courses: []
     };
     this.loadCourses = this.loadCourses.bind(this);
   }
@@ -20,15 +20,38 @@ class BSCAContainer extends Component {
   componentWillReceiveProps() {
     this.loadCourses();
   }
-
+  //
+  // loadCourses() {
+  //   $.ajax({
+  //     url: '/api/v2/courses',
+  //     method: 'GET',
+  //   }).done((data) => {
+  //     this.setState({ courses: data });
+  //   });
+  // }
   loadCourses() {
-    $.ajax({
-      url: '/api/v2/courses',
+    console.log("LOADING RES COURSES WITH PROMISE");
+
+    const fetchInit = {
       method: 'GET',
-    }).done((data) => {
-      this.setState({ courses: data });
-    });
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+    };
+
+    return fetch('/api/v2/courses', fetchInit).then(
+      data => {
+        console.log(data.body, "DATAAA");
+        this.setState({ courses: data });
+      },
+      error => {
+        console.log("ERRRORR")
+      },
+    );
   }
+
+
   render() {
     const courseItems = this.state.courses ? this.state.courses.map((item) => {
       return (
