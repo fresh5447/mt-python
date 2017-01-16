@@ -26,6 +26,7 @@ class Forgot extends React.Component {
       data: User,
       method: 'POST',
       success: ((data) => {
+        console.log("I AM DATA", data);
         this.setState({ success: true })
         this.context.sendNotification(data.message);
         // browserHistory.push('/');
