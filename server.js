@@ -29,10 +29,13 @@ app.set('port', (process.env.PORT || 3001));
 
 
 
-  // Express only serves static assets in production
-  if (process.env.NODE_ENV === 'production') {
-    app.use(express.static('client/build'));
-  }
+// Express only serves static assets in production
+const isProd = process.env.NODE_ENV === 'production';
+const clientPath = isProd ? 'client/build' : 'client/public';
+
+if (isProd) {
+  app.use(express.static(clientPath));
+}
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -66,7 +69,7 @@ app.use('/api/v2/orgs', OrgsRouter);
 
 
 app.get('*', function (req, res) {
-  res.sendFile(path.join(__dirname, 'client/public', 'index.html'))
+  res.sendFile(path.join(__dirname, clientPath, 'index.html'));
 });
 
 app.listen(app.get('port'), () => {
