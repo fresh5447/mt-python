@@ -29,40 +29,15 @@ class ResourcesContainer extends Component {
     this.toggleFav = this.toggleFav.bind(this);
   }
 
-  loadResources() {
-    console.log("LOADING RES CONTAINER WITH PROMISE");
-
-    const sessionIdCookie = 'connect.sid';
-    const sessionId = readCookie(sessionIdCookie);
-
-    const fetchInit = {
-      method: 'GET',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'Cookie': `connect.sid=${sessionId}`
-      },
-    };
-
-    return fetch('/api/v2/resources/student', fetchInit).then(
-      data => {
-        this.setState({ resources: data });
-      },
-      error => {
-        console.log("ERRRORR")
-      },
-    );
+  loadResources(){
+    console.log("LOADING RES CONTAINER")
+    $.ajax({
+      url: '/api/v2/resources/student',
+      method: 'GET'
+    }).done((data) => {
+        this.setState({ resources: data })
+      })
   }
-
-  // loadResources(){
-  //   console.log("LOADING RES CONTAINER")
-  //   $.ajax({
-  //     url: '/api/v2/resources/student',
-  //     method: 'GET'
-  //   }).done((data) => {
-  //       this.setState({ resources: data })
-  //     })
-  // }
 
   loadCategories(){
     console.log("LOADING RES CONTAINER")
