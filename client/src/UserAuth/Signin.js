@@ -43,7 +43,7 @@ class UserSignin extends React.Component {
       <div className="user-screen-container">
         <div className="container">
           <div className="row">
-            <NavLink className="btn btn-primary  register-btn pull-right" to="/signup">register</NavLink>
+            <NavLink className="btn btn-primary  register-btn pull-right" to="/register">register</NavLink>
           </div>
           <div className="col-xs-6 col-xs-offset-3">
             <h1>login</h1>

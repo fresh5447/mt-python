@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Grid, Row, Col, Tabs, Tab } from 'react-bootstrap';
-import Home from './Home/HomeContainer';
 import { browserHistory } from 'react-router'
 
 

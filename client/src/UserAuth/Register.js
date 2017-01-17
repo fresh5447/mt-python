@@ -1,5 +1,4 @@
 import React from 'react';
-import { browserHistory } from 'react-router';
 import $ from 'jquery';
 import NavLink from '../Components/NavLink';
 
@@ -53,7 +52,7 @@ class Register extends React.Component {
       <div className="user-screen-container">
         <div className="container">
           <div className="row">
-              <NavLink className="btn btn-primary  register-btn pull-right" to="/login">login</NavLink>
+              <NavLink className="btn btn-primary  register-btn pull-right" to="/signin">login</NavLink>
           </div>
           <div className="col-xs-6 col-xs-offset-3">
             <h1>registration</h1>

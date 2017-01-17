@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import NavLink from '../Components/NavLink';
-import { Navbar, Nav, NavDropdown, NavItem, MenuItem, Button } from 'react-bootstrap';
+import { Navbar, Nav, NavItem, Button } from 'react-bootstrap';
 
 class RootNavbar extends Component {
   constructor(props, context){
@@ -10,13 +10,6 @@ class RootNavbar extends Component {
     if(this.props.user && this.props.user.local && this.props.user.role === "student"){
       return (
         <Nav pullRight>
-           {/* <NavDropdown  title="Quick Links" id="basic-nav-dropdown">
-             <MenuItem>Code.org Intro To CS</MenuItem>
-             <MenuItem>Montana Code Girls Website</MenuItem>
-             <MenuItem>Big Sky Code Academy</MenuItem>
-             <MenuItem>Register Student</MenuItem>
-             <MenuItem>Register Volunteer</MenuItem>
-           </NavDropdown> */}
              <NavItem><NavLink to="/big-sky-code-academy">Code Range</NavLink></NavItem>
            </Nav>
       )
