@@ -88,6 +88,7 @@ class CategoriesResourcesContainer extends Component {
     }) : <div><h1>No resources for this category</h1></div>
     return (
       <div className="resource-flexbox">
+        <h1>Cats Res</h1>
             { resourcePanels }
       </div>
     )

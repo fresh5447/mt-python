@@ -15,6 +15,7 @@ class GetUser extends React.Component {
   }
 
   getUser(cb) {
+    console.log("CALLING MMEEEEE")
     $.ajax({
       url: '/getUser',
       method: 'GET'

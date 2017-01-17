@@ -20,35 +20,14 @@ class BSCAContainer extends Component {
   componentWillReceiveProps() {
     this.loadCourses();
   }
-  //
-  // loadCourses() {
-  //   $.ajax({
-  //     url: '/api/v2/courses',
-  //     method: 'GET',
-  //   }).done((data) => {
-  //     this.setState({ courses: data });
-  //   });
-  // }
+
   loadCourses() {
-    console.log("LOADING RES COURSES WITH PROMISE");
-
-    const fetchInit = {
+    $.ajax({
+      url: '/api/v2/courses',
       method: 'GET',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-    };
-
-    return fetch('/api/v2/courses', fetchInit).then(
-      data => {
-        console.log(data.body, "DATAAA");
-        this.setState({ courses: data });
-      },
-      error => {
-        console.log("ERRRORR")
-      },
-    );
+    }).done((data) => {
+      this.setState({ courses: data });
+    });
   }
 
 

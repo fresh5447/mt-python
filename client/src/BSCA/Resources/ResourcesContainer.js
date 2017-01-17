@@ -1,46 +1,19 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router';
-import 'whatwg-fetch';
+import { Link, browserHistory } from 'react-router';
 import $ from 'jquery';
 import NavLink from '../../Components/NavLink';
 import { Button, Grid, Col, ButtonGroup, Nav, NavItem } from 'react-bootstrap';
 
-function readCookie(name) {
-    var nameEQ = name + "=";
-    var ca = document.cookie.split(';');
-    for(var i=0;i < ca.length;i++) {
-        var c = ca[i];
-        while (c.charAt(0) === ' ') c = c.substring(1,c.length);
-        if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length,c.length);
-    }
-    return null;
-}
 
 class ResourcesContainer extends Component {
-  constructor(props){
-    super(props);
+  constructor(props, context){
+    super(props, context);
     this.state = {
-      tabKey: 1,
-      resources: null,
       categories: null,
     };
-
-    this.handleSelect = this.handleSelect.bind(this);
-    this.toggleFav = this.toggleFav.bind(this);
-  }
-
-  loadResources(){
-    console.log("LOADING RES CONTAINER")
-    $.ajax({
-      url: '/api/v2/resources/student',
-      method: 'GET'
-    }).done((data) => {
-        this.setState({ resources: data })
-      })
   }
 
   loadCategories(){
-    console.log("LOADING RES CONTAINER")
     $.ajax({
       url: '/api/v2/categories',
       methode: 'GET'
@@ -51,24 +24,17 @@ class ResourcesContainer extends Component {
   }
 
   componentWillMount(){
-    this.loadResources();
-    this.loadCategories();
+    this.context.getUser((data) => {
+      console.log(data, "USER DATAAAAA")
+      if (data.user === 'no user') {
+        alert('you must be signed in to view this');
+        return browserHistory.push('/login');
+      } else {
+        this.loadCategories();
+      }
+    });
   }
 
-  toggleFav = (id, action) => {
-    console.log("ID ACTION", id,action)
-  $.ajax({
-    url: `/api/v2/resources/student/favorite/${id}/${action}`,
-    method: 'PUT'
-  }).done((d) => {
-    console.log("TRYING", d)
-    this.loadResources()
-  });
-}
-
-  handleSelect(selectedKey) {
-    return this.setState({ tabKey: selectedKey })
-  }
   render() {
     return (
       <Grid>
@@ -86,7 +52,7 @@ class ResourcesContainer extends Component {
 
           </Col>
           <Col xs={10}>
-            <Nav bsStyle="pills" activeKey={this.state.tabKey} onSelect={this.handleSelect}>
+            <Nav bsStyle="pills">
               <NavItem><NavLink to="/big-sky-code-academy/resources/all" className="resources-main-filter">All</NavLink></NavItem>
               <NavItem><NavLink to="/big-sky-code-academy/resources/favorites" className="resources-main-filter">Favorite</NavLink></NavItem>
             </Nav>
@@ -99,5 +65,8 @@ class ResourcesContainer extends Component {
   }
 }
 
+ResourcesContainer.contextTypes = {
+  getUser: React.PropTypes.func.isRequired
+};
 
 export default ResourcesContainer;

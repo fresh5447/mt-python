@@ -1,20 +1,13 @@
 import React, { Component } from 'react';
+import { browserHistory } from 'react-router';
 import $ from 'jquery';
-import NavLink from '../../Components/NavLink';
-import FullHeart from 'react-icons/lib/fa/heart';
-import EmptyHeart from 'react-icons/lib/fa/heart-o';
-import ExternalLink from 'react-icons/lib/fa/external-link';
-import InternalLink from 'react-icons/lib/fa/arrow-right';
+import FavBtn from './FavBtn';
+import FooterLink from './FooterLink';
 import { Panel, Label } from 'react-bootstrap';
 
-const heart = {
-  color: 'red'
-}
-
-
 class AllResourcesContainer extends Component {
-  constructor(props){
-    super(props);
+  constructor(props, context){
+    super(props, context);
     this.state = {
       tabKey: 1,
       resources: null
@@ -35,7 +28,15 @@ class AllResourcesContainer extends Component {
   }
 
   componentWillMount(){
-    this.loadResources();
+    this.context.getUser((data) => {
+      console.log(data, "USER DATAAAAA")
+      if (data.user === 'no user') {
+        alert('you must be signed in to view this');
+        return browserHistory.push('/login');
+      } else {
+        this.loadResources();
+      }
+    });
   }
 
   toggleFav = (id, action) => {
@@ -56,23 +57,20 @@ class AllResourcesContainer extends Component {
     const resourcePanels = this.state.resources ? this.state.resources.filter((it) => {
       return it.publish
     }).map((item) => {
-      const foot = item.internal ? <NavLink className="res-link" to={"/big-sky-code-academy/resources/show/" + item._id}><InternalLink/></NavLink> : <a className="res-link" href={item.link} target="_"><ExternalLink/></a>;
 
-      // const fav = item.fav ? "FAV" : "Not Fav";
-      const favBtn = (
-        <button className="fav-btn" onClick={ item.fav ? this.toggleFav.bind(this, item._id, 'remove') :
-        this.toggleFav.bind(this, item._id, 'post') }>
-          {item.fav ? <FullHeart style={heart} /> : <EmptyHeart style={heart} /> }
-        </button>
-      )
-      var cats = item.categories.map(c =><Label bsStyle="primary">{c.name}</Label>)
+      // const foot = item.internal ? <NavLink className="res-link" to={"/big-sky-code-academy/resources/show/" + item._id}><InternalLink/></NavLink> : <a className="res-link" href={item.link} target="_"><ExternalLink/></a>;
+
+      // const favBtn = <FavBtn fav={item.fav} id={item._id} toggleFav={this.toggleFav}/>;
+
+      var cats = item.categories.map(c => <Label bsStyle="primary">{c.name}</Label>)
+
       const stuff = (
         <span>
           <span className="res-footer res-cats flex-cats">
             { cats }
           </span>
-            {favBtn}
-            {foot}
+          <FavBtn fav={item.fav} id={item._id} toggleFav={this.toggleFav}/>
+          <FooterLink internal={item.internal} id={item._id} link={item.link}/>
         </span>
 
       )
@@ -84,11 +82,14 @@ class AllResourcesContainer extends Component {
     }) : null
     return (
       <div className="resource-flexbox">
+        <h1>All Resources</h1>
             { resourcePanels }
       </div>
     )
   }
 }
 
-
+AllResourcesContainer.contextTypes = {
+  getUser: React.PropTypes.func.isRequired
+};
 export default AllResourcesContainer;
