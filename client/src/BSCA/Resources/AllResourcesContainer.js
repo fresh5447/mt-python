@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import { browserHistory } from 'react-router';
 import $ from 'jquery';
-import FavBtn from './FavBtn';
-import FooterLink from './FooterLink';
-import { Panel, Label } from 'react-bootstrap';
+import ResourceCard from './ResourceCard';
 
 class AllResourcesContainer extends Component {
   constructor(props, context){
@@ -41,49 +39,27 @@ class AllResourcesContainer extends Component {
 
   toggleFav = (id, action) => {
     console.log("ID ACTION", id,action)
-  $.ajax({
-    url: `/api/v2/resources/student/favorite/${id}/${action}`,
-    method: 'PUT'
-  }).done((d) => {
-    console.log("TRYING", d)
-    this.loadResources()
-  });
-}
+    $.ajax({
+      url: `/api/v2/resources/student/favorite/${id}/${action}`,
+      method: 'PUT'
+    }).done((d) => {
+      console.log("TRYING", d)
+      this.loadResources()
+    });
+  }
 
   handleSelect(selectedKey) {
     return this.setState({ tabKey: selectedKey })
   }
   render() {
-    const resourcePanels = this.state.resources ? this.state.resources.filter((it) => {
-      return it.publish
+    const resourcePanels = this.state.resources ? this.state.resources.filter((i) => {
+      return i.publish
     }).map((item) => {
-
-      // const foot = item.internal ? <NavLink className="res-link" to={"/big-sky-code-academy/resources/show/" + item._id}><InternalLink/></NavLink> : <a className="res-link" href={item.link} target="_"><ExternalLink/></a>;
-
-      // const favBtn = <FavBtn fav={item.fav} id={item._id} toggleFav={this.toggleFav}/>;
-
-      var cats = item.categories.map(c => <Label bsStyle="primary">{c.name}</Label>)
-
-      const stuff = (
-        <span>
-          <span className="res-footer res-cats flex-cats">
-            { cats }
-          </span>
-          <FavBtn fav={item.fav} id={item._id} toggleFav={this.toggleFav}/>
-          <FooterLink internal={item.internal} id={item._id} link={item.link}/>
-        </span>
-
-      )
-      return (
-        <Panel className="resource-panel" header={item.title} footer={stuff}>
-          {item.desc}
-        </Panel>
-      )
-    }) : null
+      return <ResourceCard fav={item.fav} id={item._id}  toggleFav={this.toggleFav} internal={item.internal} link={item.link} cats={item.categories} desc={item.desc}/>
+    }) : <div>Loading...</div>
     return (
       <div className="resource-flexbox">
-        <h1>All Resources</h1>
-            { resourcePanels }
+        { resourcePanels }
       </div>
     )
   }
