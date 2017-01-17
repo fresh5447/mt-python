@@ -3,16 +3,20 @@ import { Grid, Row, Col, Tabs, Tab } from 'react-bootstrap';
 import PlaybookContainer from './Playbook/PlaybookContainer';
 import { browserHistory } from 'react-router'
 
-//LOAD USER
-//LOAD COURSES
-// const u = {
-//
-// }
-
-
 class MTCG extends Component {
+  constructor(props, context){
+    super(props, context)
+  }
   handleSelect(key) {
     browserHistory.push('/montana-code-girls/' + key);
+  }
+  componentWillMount(){
+    this.context.getUser((data) => {
+      if (!data.user) {
+        alert('you must be signed in to view this');
+        return browserHistory.push('/signin');
+      }
+    });
   }
   render() {
     return (
@@ -33,4 +37,7 @@ class MTCG extends Component {
   }
 }
 
+MTCG.contextTypes = {
+  getUser: React.PropTypes.func.isRequired
+}
 export default MTCG;

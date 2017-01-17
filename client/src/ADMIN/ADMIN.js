@@ -5,8 +5,19 @@ import { browserHistory } from 'react-router'
 
 
 class ADMIN extends Component {
+  constructor(props, context){
+    super(props, context)
+  }
   handleSelect(key) {
     browserHistory.push('/admin-console/' + key);
+  }
+  componentWillMount(){
+    this.context.getUser((data) => {
+      if (!data.user) {
+        alert('you must be signed in to view this');
+        return browserHistory.push('/signin');
+      }
+    });
   }
   render() {
     return (
@@ -27,4 +38,7 @@ class ADMIN extends Component {
   }
 }
 
+ADMIN.contextTypes = {
+  getUser: React.PropTypes.func.isRequired
+}
 export default ADMIN;

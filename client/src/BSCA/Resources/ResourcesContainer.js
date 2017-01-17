@@ -24,15 +24,7 @@ class ResourcesContainer extends Component {
   }
 
   componentWillMount(){
-    this.context.getUser((data) => {
-      console.log(data, "USER DATAAAAA")
-      if (data.user === 'no user') {
-        alert('you must be signed in to view this');
-        return browserHistory.push('/login');
-      } else {
-        this.loadCategories();
-      }
-    });
+    this.loadCategories();
   }
 
   render() {

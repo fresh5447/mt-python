@@ -15,7 +15,6 @@ class FavoriteResourcesContainer extends Component {
     this.toggleFav = this.toggleFav.bind(this);
   }
   loadResources(){
-    console.log("LOADING RES CONTAINER")
     $.ajax({
       url: '/api/v2/resources/student',
       methode: 'GET'

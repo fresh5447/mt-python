@@ -5,8 +5,19 @@ import { browserHistory } from 'react-router'
 
 
 class MainContainer extends Component {
+  constructor(props, context){
+    super(props, context)
+  }
   handleSelect(key) {
     browserHistory.push('/big-sky-code-academy/' + key);
+  }
+  componentWillMount(){
+    this.context.getUser((data) => {
+      if (!data.user) {
+        alert('you must be signed in to view this');
+        return browserHistory.push('/signin');
+      }
+    });
   }
   render() {
     return (
@@ -25,4 +36,7 @@ class MainContainer extends Component {
   }
 }
 
+MainContainer.contextTypes = {
+  getUser: React.PropTypes.func.isRequired
+}
 export default MainContainer;
