@@ -10,7 +10,7 @@ class GuestDashboardView extends Component {
           <Col xs={12}>
             <Jumbotron className="dash-jumbo">
               <h1>Code Range</h1>
-              <p><NavLink to="/signin"><Button bsStyle="primary">Register</Button></NavLink><NavLink to="/signin"><Button bsStyle="primary dash-btn">Login</Button></NavLink></p>
+              <p><NavLink to="/signin"><Button bsStyle="primary dash-btn">Register</Button></NavLink><NavLink to="/signin"><Button bsStyle="primary dash-btn">Login</Button></NavLink></p>
             </Jumbotron>
             <Jumbotron>
               <Tabs defaultActiveKey={1} id="uncontrolled-tab-example">

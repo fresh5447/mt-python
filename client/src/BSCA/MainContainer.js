@@ -12,7 +12,7 @@ class MainContainer extends Component {
   }
   componentWillMount(){
     this.context.getUser((data) => {
-      if (!data.user) {
+      if (!data.user && !data.local) {
         alert('you must be signed in to view this');
         return browserHistory.push('/signin');
       }
