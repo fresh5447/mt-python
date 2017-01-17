@@ -1,15 +1,6 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
-import NavLink from '../../Components/NavLink';
-import FullHeart from 'react-icons/lib/fa/heart';
-import EmptyHeart from 'react-icons/lib/fa/heart-o';
-import ExternalLink from 'react-icons/lib/fa/external-link';
-import InternalLink from 'react-icons/lib/fa/arrow-right';
-import { Panel, Label } from 'react-bootstrap';
-
-const heart = {
-  color: 'red'
-}
+import ResourceCard from './ResourceCard';
 
 class CategoriesResourcesContainer extends Component {
   constructor(props){
@@ -62,34 +53,13 @@ class CategoriesResourcesContainer extends Component {
         }
         return false;
       }).map((item) => {
-        const foot = item.internal ? <NavLink className="res-link" to={"/big-sky-code-academy/resources/show/" + item._id}><InternalLink/></NavLink> : <a className="res-link" href={item.link} target="_"><ExternalLink/></a>;
-      // const fav = item.fav ? "FAV" : "Not Fav";
-      const favBtn = (
-        <button className="fav-btn" onClick={ item.fav ? this.toggleFav.bind(this, item._id, 'remove') :
-        this.toggleFav.bind(this, item._id, 'post') }>
-          {item.fav ? <FullHeart style={heart} /> : <EmptyHeart style={heart} /> }
-        </button>
-      )
-      var cats = item.categories.map(c =><Label bsStyle="primary">{c.name}</Label>)
-      const stuff = (
-        <span>
-          <span className="res-footer res-cats flex-cats">
-            { cats }
-          </span>
-            {favBtn}
-            {foot}
-        </span>
-      )
-      return (
-        <Panel className="resource-panel" header={item.title} footer={stuff}>
-          {item.desc}
-        </Panel>
-      )
-    }) : <div><h1>No resources for this category</h1></div>
+
+        return <ResourceCard fav={item.fav} id={item._id}  toggleFav={this.toggleFav} internal={item.internal} link={item.link} cats={item.categories} desc={item.desc}/>
+        }) : <div>Loading...</div>
+
     return (
       <div className="resource-flexbox">
-        <h1>Cats Res</h1>
-            { resourcePanels }
+        { resourcePanels }
       </div>
     )
   }
