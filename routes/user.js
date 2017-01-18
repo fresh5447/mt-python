@@ -184,7 +184,7 @@ module.exports = function(app, passport) {
    });
 
    app.post('/reset/:token', function(req, res) {
-     console.log("resetting pwrod token")
+   console.log("resetting pwrod token")
    async.waterfall([
      function(done) {
        User.findOne({ 'local.resetPasswordToken': req.params.token, 'local.resetPasswordExpires': { $gt: Date.now() } }, function(err, user) {
@@ -237,10 +237,11 @@ module.exports = function(app, passport) {
          });
        },
        function(token, done) {
+         console.log(req.body)
          User.findOne({ 'local.email': req.body.email }, function(err, user) {
            if (!user) {
+             //How to handle this error?
              res.json({message: 'No account with that email address exists.'});
-             return res.redirect('/forgot');
            }
 
            user.local.resetPasswordToken = token;
@@ -269,6 +270,7 @@ module.exports = function(app, passport) {
              'If you did not request this, please ignore this email and your password will remain unchanged.\n'
          };
          mailer.sendMail(mailOptions, function(err) {
+           //How to handle this success?
           //  req.flash('info', 'An e-mail has been sent to ' + user.local.email + ' with further instructions.');
            done(err, 'done');
          });

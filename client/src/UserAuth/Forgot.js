@@ -18,22 +18,18 @@ class Forgot extends React.Component {
 
   submitUserToServer(e) {
     e.preventDefault();
-    const User = {
+    const data = {
       email: this.state.email,
     };
     $.ajax({
       url: '/forgot',
-      data: User,
       method: 'POST',
-      success: ((data) => {
-        console.log("I AM DATA", data);
-        this.setState({ success: true })
-        this.context.sendNotification(data.message);
-        // browserHistory.push('/');
-      }),
-      error: ((err) => {
-        this.context.sendNotification("Email not found, request assitance from admin");
-      })
+      data
+    }).done((d) => {
+      //How to handle this error success in conjunction with forgot api route.
+      console.log("I AM DATA", data);
+      this.setState({ success: true })
+      this.context.sendNotification(data.message);
     })
   }
 
