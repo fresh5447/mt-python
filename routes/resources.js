@@ -35,7 +35,6 @@ if (!Array.prototype.includes) {
 
 Router.route('/student')
   .get((req, res) => {
-    console.log(req);
     Resource.find()
     .populate('categories')
     .exec((err, resources) => {

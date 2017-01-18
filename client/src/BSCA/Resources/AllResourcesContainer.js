@@ -8,7 +8,8 @@ class AllResourcesContainer extends Component {
     super(props, context);
     this.state = {
       tabKey: 1,
-      resources: null
+      resources: null,
+      loadingFav: false
     };
 
     this.handleSelect = this.handleSelect.bind(this);
@@ -38,13 +39,13 @@ class AllResourcesContainer extends Component {
   }
 
   toggleFav = (id, action) => {
-    console.log("ID ACTION", id,action)
+    this.setState({ loadingFav: true })
     $.ajax({
       url: `/api/v2/resources/student/favorite/${id}/${action}`,
       method: 'PUT'
     }).done((d) => {
-      console.log("TRYING", d)
       this.loadResources()
+      this.setState({ loadingFav: false })
     });
   }
 
@@ -55,7 +56,7 @@ class AllResourcesContainer extends Component {
     const resourcePanels = this.state.resources ? this.state.resources.filter((i) => {
       return i.publish
     }).map((item) => {
-      return <ResourceCard fav={item.fav} id={item._id}  toggleFav={this.toggleFav} internal={item.internal} link={item.link} cats={item.categories} desc={item.desc}/>
+      return <ResourceCard loadingFav={ this.state.loadingFav } fav={item.fav} id={item._id}  toggleFav={this.toggleFav} internal={item.internal} link={item.link} cats={item.categories} desc={item.desc}/>
     }) : <div>Loading...</div>
     return (
       <div className="resource-flexbox">

@@ -12,7 +12,7 @@ const ResourceCard = (props) => {
       <span className="res-footer res-cats flex-cats">
         { cats }
       </span>
-      <FavBtn fav={props.fav} id={props.id} toggleFav={props.toggleFav}/>
+      <FavBtn  loadingFav={props.loadingFav} fav={props.fav} id={props.id} toggleFav={props.toggleFav}/>
       <FooterLink internal={props.internal} id={props._id} link={props.link}/>
     </span>
   )

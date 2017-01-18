@@ -41,11 +41,6 @@ class HomeContainer extends Component {
           { availableCourses }
         </ul>
       </Jumbotron>
-      <Jumbotron>
-        <h3>User Profile</h3>
-        <p>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-        <p><Button bsStyle="primary">Edit</Button></p>
-      </Jumbotron>
     </div>
     )
   }
