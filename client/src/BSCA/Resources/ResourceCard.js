@@ -13,7 +13,7 @@ const ResourceCard = (props) => {
         { cats }
       </span>
       <FavBtn  loadingFav={props.loadingFav} fav={props.fav} id={props.id} toggleFav={props.toggleFav}/>
-      <FooterLink internal={props.internal} id={props._id} link={props.link}/>
+      <FooterLink internal={props.internal} id={props.id} link={props.link}/>
     </span>
   )
   return (
