@@ -5,12 +5,20 @@ var crypto = require('crypto');
 var async = require('async');
 var nodemailer = require('nodemailer');
 var sgTransport = require('nodemailer-sendgrid-transport');
+
+
 require('dotenv').config();
 // app/routes.js
 module.exports = function(app, passport) {
 
+  app.get('/test', (req, res, next) => {
+    User.findOneAsync({ 'local.email': 'doug@kosmojo.com' }).then(user => {
+      console.log(user);
+    }).catch(err => console.log(err));
+  });
+
   app.post('/signup', function(req, res, next) {
-    passport.authenticate('local-signup', function(err, user, info) {
+    const authenticator = passport.authenticate('local-signup', function(err, user, info) {
       console.log('SIGNUP INFO', info);
       if (err) {
         console.log("ONE ERR: ", err)
@@ -25,7 +33,9 @@ module.exports = function(app, passport) {
         if (err) { return next(err); }
         return res.json({message: "Success! You are all signed up.", user: user});
       });
-    })(req, res, next);
+    });
+
+    authenticator(req, res, next);
   });
 
 
@@ -162,8 +172,6 @@ module.exports = function(app, passport) {
     })
   });
 
-
-
   app.get('/getUsers', function(req, res){
     User.find(function(err, users){
       if(err){
@@ -271,7 +279,7 @@ module.exports = function(app, passport) {
          };
          mailer.sendMail(mailOptions, function(err) {
            //How to handle this success?
-          //  req.flash('info', 'An e-mail has been sent to ' + user.local.email + ' with further instructions.');
+           req.flash('info', 'An e-mail has been sent to ' + user.local.email + ' with further instructions.');
            done(err, 'done');
          });
        }

@@ -1,4 +1,7 @@
-const path           = require('path'),
+const Promise         = require('bluebird');
+  global.Promise      = Promise;
+
+const  path           = require('path'),
   express             = require('express'),
   bodyParser          = require('body-parser'),
   app                 = express(),
@@ -12,9 +15,10 @@ const path           = require('path'),
   CatRouter           = require('./routes/categories'),
   CheckpointsRouter   = require('./routes/checkpoints'),
   ResourcesRouter     = require('./routes/resources'),
-  OrgsRouter     = require('./routes/orgs'),
+  OrgsRouter          = require('./routes/orgs'),
 
- mongoose             = require('mongoose');
+  mongoose            =  Promise.promisifyAll(require('mongoose'));
+
 
  var options = {
 server:  { socketOptions: { keepAlive: 1, connectTimeoutMS: 30000 } },
