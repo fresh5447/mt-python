@@ -13,7 +13,7 @@ var routes = (
     <Route path="/signin" component={Signin} />
     <Route path="/forgot" component={Forgot} />
     <Route path="/signout" component={Logout} />
-    <Route path="/user/reset/:reset_token" component={Reset} />
+    <Route path="/reset/:reset_token" component={Reset} />
   </Route>
 
 );

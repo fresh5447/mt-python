@@ -7,7 +7,6 @@ const nodemailer = require('nodemailer');
 const sgTransport = require('nodemailer-sendgrid-transport');
 require('dotenv').config();
 
-
 const MAILER_OPTIONS = {
   auth: {
       api_key: process.env.SENDGRID_API
@@ -21,9 +20,7 @@ module.exports = function(app, passport) {
 
   app.post('/signup', function(req, res, next) {
     const authenticator = passport.authenticate('local-signup', function(err, user, info) {
-      console.log('SIGNUP INFO', info);
       if (err) {
-        console.log("ONE ERR: ", err)
         res.json(err)
         return next(err);
       }
@@ -36,7 +33,6 @@ module.exports = function(app, passport) {
         return res.json({message: "Success! You are all signed up.", user: user});
       });
     });
-
     authenticator(req, res, next);
   });
 
@@ -184,77 +180,107 @@ module.exports = function(app, passport) {
     })
   });
 
-  app.get('/reset/:token', function(req, res) {
-     User.findOne({ 'local.resetPasswordToken': req.params.token, 'local.resetPasswordExpires': { $gt: Date.now() } }, function(err, user) {
-       if (!user) {
-         return res.json({message: 'Password reset token is invalid or has expired.'});
-       }
-       res.redirect('/reset');
-     });
-   });
-
-   app.post('/reset/:token', function(req, res) {
+  // app.get('/reset/:token', function(req, res) {
+  //    User.findOne({ 'local.resetPasswordToken': req.params.token, 'local.resetPasswordExpires': { $gt: Date.now() } }, function(err, user) {
+  //      if (!user) {
+  //        return res.json({message: 'Password reset token is invalid or has expired.'});
+  //      }
+  //      res.redirect('/reset');
+  //    });
+  //  });
 
 
-   async.waterfall([
-     function(done) {
-       User.findOne({ 'local.resetPasswordToken': req.params.token, 'local.resetPasswordExpires': { $gt: Date.now() } }, function(err, user) {
-         if (!user) {
-           return  res.json({ message: 'Password reset token is invalid or has expired.' });
-         }
+  app.get('/reset/:token', (req, res) => {
+    findUserByToken(req.params.token)
+    .then(() => res.redirect('/reset'))
+  })
 
-         user.local.password = user.generateHash(req.body.password);
-         user.local.resetPasswordToken = undefined;
-         user.local.resetPasswordExpires = undefined;
+  app.post('/reset/:token', (req, res, next) => {
+    let user;
+    findUserByToken(req.params.token)
+      .then( u => {
+        user = u;
+        user.local.password = user.generateHash(req.body.password);
+        user.local.resetPasswordToken = undefined;
+        user.local.resetPasswordExpires = undefined;
+        return user.saveAsync()
+      })
+      .then( () => Promise.fromCallback(cb => req.logIn(user, cb)) )
+      .then( () => sendPasswordConfirmationEmail(user) )
+      .then( res.sendStatus(200) )
+      .catch(next);
+  })
 
-         user.save(function(err) {
-           req.logIn(user, function(err) {
-             done(err, user);
-           });
-         });
-       });
-     },
-     function(user, done) {
-       var options = {
-         auth: {
-             api_key: process.env.SENDGRID_API
-         }
-       }
-       var mailer = nodemailer.createTransport(sgTransport(options));
-       var mailOptions = {
-         to: user.email,
-         from: 'passwordreset@demo.com',
-         subject: 'Your password has been changed',
-         text: 'Hello,\n\n' +
-           'This is a confirmation that the password for your account ' + user.local.email + ' has just been changed.\n'
-       };
-       mailer.sendMail(mailOptions, function(err) {
-         res.json({ message: 'Success! Your password has been changed.' });
-         done(err);
-       });
-     }
-   ], function(err) {
-     console.log('did it fix it?');
-   });
- });
+ //   app.post('/reset/:token', function(req, res) {
+ //   async.waterfall([
+ //     function(done) {
+ //       User.findOne({ 'local.resetPasswordToken': req.params.token, 'local.resetPasswordExpires': { $gt: Date.now() } }, function(err, user) {
+ //         if (!user) {
+ //           return  res.json({ message: 'Password reset token is invalid or has expired.' });
+ //         }
+ //
+ //         user.local.password = user.generateHash(req.body.password);
+ //         user.local.resetPasswordToken = undefined;
+ //         user.local.resetPasswordExpires = undefined;
+ //
+ //         user.save(function(err) {
+ //           req.logIn(user, function(err) {
+ //             done(err, user);
+ //           });
+ //         });
+ //       });
+ //     },
+ //     function(user, done) {
+ //       var options = {
+ //         auth: {
+ //             api_key: process.env.SENDGRID_API
+ //         }
+ //       }
+ //       var mailer = nodemailer.createTransport(sgTransport(options));
+ //       var mailOptions = {
+ //         to: user.email,
+ //         from: 'passwordreset@demo.com',
+ //         subject: 'Your password has been changed',
+ //         text: 'Hello,\n\n' +
+ //           'This is a confirmation that the password for your account ' + user.local.email + ' has just been changed.\n'
+ //       };
+ //       mailer.sendMail(mailOptions, function(err) {
+ //         res.json({ message: 'Success! Your password has been changed.' });
+ //         done(err);
+ //       });
+ //     }
+ //   ], function(err) {
+ //     console.log('did it fix it?');
+ //   });
+ // });
 
 
    app.post('/forgot', function(req, res, next) {
-
      const email = req.body.email;
      let token;
+     const host = process.env.NODE_ENV === 'production' ? 'coderange' : 'localhost:3000';
      generateCryptoBuffer()
        .then(t => {
          token = t;
          return findUserByEmail(email);
        })
        .then(user => savePasswordTokenToUser(user, token))
-       .then(user => sendPasswordResetEmailToUser(user))
-       .catch(err => console.log(err, "ERROR somewhere in the process of sending the email"))
-       .finally(next);
+       .then(user => sendPasswordResetEmailToUser(user, token, host))
+       .then(() => res.sendStatus(200))
+       .catch(next);
    })
-
 };
+
+
+function findUserByToken(token) {
+  return User.findOne({ 'local.resetPasswordToken': token, 'local.resetPasswordExpires': { $gt: Date.now() } })
+    .then(user => {
+      if(!user){
+        throw new Error('Password reset token is invalid or has expired.', err)
+      }
+      return user
+    })
+}
 
 function generateCryptoBuffer() {
   return new Promise((resolve, reject) => {
@@ -283,14 +309,27 @@ function findUserByEmail(email) {
     return user.saveAsync();
   }
 
-  function sendPasswordResetEmailToUser(user) {
+  function sendPasswordConfirmationEmail(user) {
+    const mailOptions = {
+      to: user.local.email,
+      from: 'doug@bigskycodeacademy.org',
+      subject: 'Your password has been changed',
+      text: 'Your password has been reset.'
+    };
+    return sendMailAsync(mailOptions)
+      .then( info => console.log(info, "INFO FROM SEND MAIL ASYNC") )
+  }
+
+  function sendPasswordResetEmailToUser(user, token, host) {
     console.log(user, "USER IN PSWORD SEND EMAIL");
     const mailOptions = {
       to: user.local.email,
       from: 'doug@bigskycodeacademy.org',
       subject: 'Your password has been changed',
-      text: 'Hello,\n\n' +
-        'This is a confirmation that the password for your account ' + user.local.email + ' has just been changed.\n'
+      text: 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
+        'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
+        'http://' + host + '/reset/' + token + '\n\n' +
+        'If you did not request this, please ignore this email and your password will remain unchanged.\n'
     };
     return sendMailAsync(mailOptions)
       .then( info => console.log(info, "INFO FROM SEND MAIL ASYNC") )

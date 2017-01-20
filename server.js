@@ -16,6 +16,7 @@ const  path           = require('path'),
   CheckpointsRouter   = require('./routes/checkpoints'),
   ResourcesRouter     = require('./routes/resources'),
   OrgsRouter          = require('./routes/orgs'),
+  errorHandler        = require('./errorHandler'),
 
   mongoose            =  Promise.promisifyAll(require('mongoose'));
 
@@ -41,9 +42,12 @@ if (isProd) {
   app.use(express.static(clientPath));
 }
 
+app.use(errorHandler);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
+
+
 
 app.use(session({
  secret: 'blahblahblah'
