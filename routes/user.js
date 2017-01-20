@@ -1,21 +1,23 @@
-var mongoose = require('mongoose');
-var User = require('../models/user');
-var Org = require('../models/org');
-var crypto = require('crypto');
-var async = require('async');
-var nodemailer = require('nodemailer');
-var sgTransport = require('nodemailer-sendgrid-transport');
-
-
+const mongoose = require('mongoose');
+const User = require('../models/user');
+const Org = require('../models/org');
+const crypto = require('crypto');
+const async = require('async');
+const nodemailer = require('nodemailer');
+const sgTransport = require('nodemailer-sendgrid-transport');
 require('dotenv').config();
-// app/routes.js
-module.exports = function(app, passport) {
 
-  app.get('/test', (req, res, next) => {
-    User.findOneAsync({ 'local.email': 'doug@kosmojo.com' }).then(user => {
-      console.log(user);
-    }).catch(err => console.log(err));
-  });
+
+const MAILER_OPTIONS = {
+  auth: {
+      api_key: process.env.SENDGRID_API
+  }
+}
+
+const transport = nodemailer.createTransport(sgTransport(MAILER_OPTIONS));
+const sendMailAsync = Promise.promisify(transport.sendMail).bind(transport);
+
+module.exports = function(app, passport) {
 
   app.post('/signup', function(req, res, next) {
     const authenticator = passport.authenticate('local-signup', function(err, user, info) {
@@ -192,7 +194,8 @@ module.exports = function(app, passport) {
    });
 
    app.post('/reset/:token', function(req, res) {
-   console.log("resetting pwrod token")
+
+
    async.waterfall([
      function(done) {
        User.findOne({ 'local.resetPasswordToken': req.params.token, 'local.resetPasswordExpires': { $gt: Date.now() } }, function(err, user) {
@@ -237,57 +240,58 @@ module.exports = function(app, passport) {
 
 
    app.post('/forgot', function(req, res, next) {
-     async.waterfall([
-       function(done) {
-         crypto.randomBytes(20, function(err, buf) {
-           var token = buf.toString('hex');
-           done(err, token);
-         });
-       },
-       function(token, done) {
-         console.log(req.body)
-         User.findOne({ 'local.email': req.body.email }, function(err, user) {
-           if (!user) {
-             //How to handle this error?
-             res.json({message: 'No account with that email address exists.'});
-           }
 
-           user.local.resetPasswordToken = token;
-           user.local.resetPasswordExpires = Date.now() + 3600000; // 1 hour
-
-           user.save(function(err) {
-             done(err, token, user);
-           });
-         });
-       },
-       function(token, user, done) {
-         var options = {
-           auth: {
-             api_key: process.env.SENDGRID_API
-           }
-         }
-         var mailer = nodemailer.createTransport(sgTransport(options));
-
-         var mailOptions = {
-           to: user.local.email,
-           from: 'doug@bigskycodeacademy.org',
-           subject: 'CodeRange Password Reset',
-           text: 'You are receiving this because you (or someone else) have requested the reset of the password for your CodeRange Account.\n\n' +
-             'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
-             'http://' + req.headers.host + '/user/reset/' + token + '\n\n' +
-             'If you did not request this, please ignore this email and your password will remain unchanged.\n'
-         };
-         mailer.sendMail(mailOptions, function(err) {
-           //How to handle this success?
-           req.flash('info', 'An e-mail has been sent to ' + user.local.email + ' with further instructions.');
-           done(err, 'done');
-         });
-       }
-     ], function(err) {
-       if (err) return next(err);
-       res.redirect('/forgot');
-     });
-   });
-
+     const email = req.body.email;
+     let token;
+     generateCryptoBuffer()
+       .then(t => {
+         token = t;
+         return findUserByEmail(email);
+       })
+       .then(user => savePasswordTokenToUser(user, token))
+       .then(user => sendPasswordResetEmailToUser(user))
+       .catch(err => console.log(err, "ERROR somewhere in the process of sending the email"))
+       .finally(next);
+   })
 
 };
+
+function generateCryptoBuffer() {
+  return new Promise((resolve, reject) => {
+    crypto.randomBytes(20, (err, buf) => {
+      if (err) {
+        reject('Error generating crypto bytes', err);
+      }
+      resolve(buf.toString('hex'));
+    });
+  });
+}
+
+function findUserByEmail(email) {
+  return User.findOneAsync({ 'local.email': email })
+    .then(user => {
+      if (!user) {
+        throw new Error(`No account with email '${email}' address exists.`);
+      }
+      return user;
+    })
+  }
+
+  function savePasswordTokenToUser(user, token) {
+    user.local.resetPasswordToken = token;
+    user.local.resetPasswordExpires = Date.now() + 3600000; // 1 hour
+    return user.saveAsync();
+  }
+
+  function sendPasswordResetEmailToUser(user) {
+    console.log(user, "USER IN PSWORD SEND EMAIL");
+    const mailOptions = {
+      to: user.local.email,
+      from: 'doug@bigskycodeacademy.org',
+      subject: 'Your password has been changed',
+      text: 'Hello,\n\n' +
+        'This is a confirmation that the password for your account ' + user.local.email + ' has just been changed.\n'
+    };
+    return sendMailAsync(mailOptions)
+      .then( info => console.log(info, "INFO FROM SEND MAIL ASYNC") )
+  }
