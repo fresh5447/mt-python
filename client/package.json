@@ -70,6 +70,8 @@
     "react-markdown": "^2.4.2",
     "react-router": "^3.0.0",
     "react-tap-event-plugin": "^0.2.2",
+    "request": "^2.79.0",
+    "request-promise": "^4.1.1",
     "whatwg-fetch": "^1.0.0"
   },
   "proxy": "http://localhost:3001/",

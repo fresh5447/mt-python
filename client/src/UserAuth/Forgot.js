@@ -1,4 +1,5 @@
 import React from 'react';
+import rp from 'request-promise';
 import $ from 'jquery';
 
 class Forgot extends React.Component {
@@ -21,19 +22,39 @@ class Forgot extends React.Component {
     const data = {
       email: this.state.email,
     };
-    $.ajax({
-      url: '/forgot',
+    const options = {
       method: 'POST',
-      data
-    }).done((d) => {
-      //How to handle this error success in conjunction with forgot api route.
-      console.log("I AM DATA", data);
-      this.setState({ success: true })
-      this.context.sendNotification(data.message);
-    })
+      uri: 'http://' + window.location.host + '/forgot',
+      json: true,
+      body: data
+    };
+    rp(options)
+      .then( () => {
+        console.log("success in submitting user");
+        this.setState({ success: true })
+        this.context.sendNotification("Email has been sent");
+      })
+      .catch( (err) => {
+        console.log("Error in submitting user", err);
+      })
   }
 
-
+  // submitUserToServer(e) {
+  //   e.preventDefault();
+  //   const data = {
+  //     email: this.state.email,
+  //   };
+  //   $.ajax({
+  //     url: '/forgot',
+  //     method: 'POST',
+  //     data
+  //   }).done((d) => {
+  //     //How to handle this error success in conjunction with forgot api route.
+  //     console.log("I AM DATA", data);
+  //     this.setState({ success: true })
+  //     this.context.sendNotification(data.message);
+  //   })
+  // }
 
   render() {
     return (

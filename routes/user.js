@@ -5,6 +5,7 @@ const crypto = require('crypto');
 const async = require('async');
 const nodemailer = require('nodemailer');
 const sgTransport = require('nodemailer-sendgrid-transport');
+const NotFoundError = require('../errorHandlers/notFoundError')
 require('dotenv').config();
 
 const MAILER_OPTIONS = {
@@ -180,15 +181,6 @@ module.exports = function(app, passport) {
     })
   });
 
-  // app.get('/reset/:token', function(req, res) {
-  //    User.findOne({ 'local.resetPasswordToken': req.params.token, 'local.resetPasswordExpires': { $gt: Date.now() } }, function(err, user) {
-  //      if (!user) {
-  //        return res.json({message: 'Password reset token is invalid or has expired.'});
-  //      }
-  //      res.redirect('/reset');
-  //    });
-  //  });
-
 
   app.get('/reset/:token', (req, res) => {
     findUserByToken(req.params.token)
@@ -207,52 +199,9 @@ module.exports = function(app, passport) {
       })
       .then( () => Promise.fromCallback(cb => req.logIn(user, cb)) )
       .then( () => sendPasswordConfirmationEmail(user) )
-      .then( res.sendStatus(200) )
+      .then( () => res.sendStatus(200) )
       .catch(next);
   })
-
- //   app.post('/reset/:token', function(req, res) {
- //   async.waterfall([
- //     function(done) {
- //       User.findOne({ 'local.resetPasswordToken': req.params.token, 'local.resetPasswordExpires': { $gt: Date.now() } }, function(err, user) {
- //         if (!user) {
- //           return  res.json({ message: 'Password reset token is invalid or has expired.' });
- //         }
- //
- //         user.local.password = user.generateHash(req.body.password);
- //         user.local.resetPasswordToken = undefined;
- //         user.local.resetPasswordExpires = undefined;
- //
- //         user.save(function(err) {
- //           req.logIn(user, function(err) {
- //             done(err, user);
- //           });
- //         });
- //       });
- //     },
- //     function(user, done) {
- //       var options = {
- //         auth: {
- //             api_key: process.env.SENDGRID_API
- //         }
- //       }
- //       var mailer = nodemailer.createTransport(sgTransport(options));
- //       var mailOptions = {
- //         to: user.email,
- //         from: 'passwordreset@demo.com',
- //         subject: 'Your password has been changed',
- //         text: 'Hello,\n\n' +
- //           'This is a confirmation that the password for your account ' + user.local.email + ' has just been changed.\n'
- //       };
- //       mailer.sendMail(mailOptions, function(err) {
- //         res.json({ message: 'Success! Your password has been changed.' });
- //         done(err);
- //       });
- //     }
- //   ], function(err) {
- //     console.log('did it fix it?');
- //   });
- // });
 
 
    app.post('/forgot', function(req, res, next) {
@@ -297,7 +246,7 @@ function findUserByEmail(email) {
   return User.findOneAsync({ 'local.email': email })
     .then(user => {
       if (!user) {
-        throw new Error(`No account with email '${email}' address exists.`);
+        return Promise.reject( new NotFoundError(`No account with email '${email}' address exists.`) );
       }
       return user;
     })
