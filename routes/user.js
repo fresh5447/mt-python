@@ -13,7 +13,7 @@ const MAILER_OPTIONS = {
       api_key: process.env.SENDGRID_API
   }
 }
-
+//sample
 const transport = nodemailer.createTransport(sgTransport(MAILER_OPTIONS));
 const sendMailAsync = Promise.promisify(transport.sendMail).bind(transport);
 
