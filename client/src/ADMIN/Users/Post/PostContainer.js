@@ -32,9 +32,7 @@ class UserPostContainer extends Component {
       firstName: this.state.firstName,
       lastName: this.state.lastName,
       email: this.state.email,
-      role: this.state.role,
-      authOrgs: this.state.authOrgs,
-      authCourses: this.state.authCourses,
+      password: "password"
     };
     $.ajax({
       url: `/signup`,

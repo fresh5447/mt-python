@@ -41,7 +41,7 @@ class UsersContainer extends Component {
     <div>
       <Jumbotron>
         <h3>Users Tab</h3>
-        <NavLink to={"/admin-console/users/post"}>Create User</NavLink>
+        <NavLink to={"/admin-console/users/post"} className="btn btn-primary">New User</NavLink>
         <Table responsive>
           <thead>
             <tr>

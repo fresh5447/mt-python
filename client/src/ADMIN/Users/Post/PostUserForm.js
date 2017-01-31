@@ -25,30 +25,6 @@ const PostUserForm = (props) =>
           type="email" className="form-control" id="" placeholder="email"
           />
         </fieldset>
-        <fieldset className="form-group">
-          <label>role</label>
-          <input required="true" onChange={ (event) => props.onFieldChange('role', event.target.value)}
-          type="text" className="form-control" id="" placeholder="role"
-          />
-        </fieldset>
-        <fieldset className="form-group">
-          <label>Orgs</label>
-          <input required="true" onChange={ (event) => props.onFieldChange('authOrgs', event.target.value)}
-          type="text" className="form-control" id="" placeholder="orgs"
-          />
-        </fieldset>
-        <fieldset className="form-group">
-          <label>courses</label>
-          <input required="true" onChange={ (event) => props.onFieldChange('authCourses', event.target.value)}
-          type="text" className="form-control" id="" placeholder="courses"
-          />
-        </fieldset>
-        <fieldset className="">
-          <label>Send Invitation</label>
-          <input onChange={ (event) => props.onFieldChange('publish', event.target.checked)}
-          type="checkbox" className="form-control pull-left" id="publish-course" placeholder="..."
-          />
-        </fieldset>
         <button type="submit" className="btn btn-primary my-primary-btn">Save</button>
       </form>
     </div>
