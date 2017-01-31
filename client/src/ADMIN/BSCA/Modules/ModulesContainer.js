@@ -56,7 +56,7 @@ class ModulesContainer extends Component {
             { modulesItems }
           </tbody>
         </Table>
-        <NavLink to={"/admin-console/bsca/course/" + this.props.params.course_id + "/modules/post/"}>Create New Module</NavLink>
+        <NavLink className="btn btn-primary" to={"/admin-console/bsca/course/" + this.props.params.course_id + "/modules/post/"}>Create Module</NavLink>
       </Jumbotron>
       { this.props.children }
     </div>

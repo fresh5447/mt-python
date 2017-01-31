@@ -54,9 +54,7 @@ class BSCAContainer extends Component {
           { checkpointItems }
           </tbody>
         </Table>
-        <ul>
-          <li><NavLink to={ "/admin-console/bsca/course/" + this.props.params.course_id + "/module/" + this.props.params.module_id + "/post"}>New Checkpiont</NavLink></li>
-        </ul>
+        <NavLink className="btn btn-primary"  to={ "/admin-console/bsca/course/" + this.props.params.course_id + "/module/" + this.props.params.module_id + "/post"}>Create Checkpiont</NavLink>
       </Jumbotron>
       { this.props.children }
     </div>

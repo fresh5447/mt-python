@@ -38,7 +38,7 @@ class BSCAPostContainer extends Component {
       data
     }).done((d) => {
       this.context.sendNotification("Module Posted");
-      const path = `/admin-console`
+      const path = `/admin-console/bsca/course/${this.props.params.course_id}/modules`
       browserHistory.push(path);
     });
   }

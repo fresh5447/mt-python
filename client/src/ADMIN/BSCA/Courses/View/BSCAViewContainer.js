@@ -40,7 +40,7 @@ class BSCAViewContainer extends Component {
   render() {
     return (
     <div>
-      <Jumbotron>
+      <Jumbotron className="admin-jumbo">
         <h3>{this.state.course ? this.state.course.title : "loading..."}</h3>
         <NavLink to={ "/admin-console/bsca/courses/edit/" + this.props.params.course_id}>Edit Course Info</NavLink>
         <p></p>

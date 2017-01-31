@@ -1,12 +1,9 @@
 import React from 'react';
-import { Panel } from 'react-bootstrap';
+import { Panel, Jumbotron } from 'react-bootstrap';
 import ReactMarkdown from 'react-markdown';
 
 const PostCheckpointForm = (props) =>
-  <div className="">
-    <div className="page-header">
-      <h2>Create Checkpoint</h2>
-    </div>
+  <Jumbotron>
     <div className="">
       <form onSubmit={props.handleSubmit}>
         <fieldset className="form-group">
@@ -52,7 +49,7 @@ const PostCheckpointForm = (props) =>
         }
 
       </Panel>
-    </div>
-  </div>;
+  </div>
+  </Jumbotron>
 
 export default PostCheckpointForm;

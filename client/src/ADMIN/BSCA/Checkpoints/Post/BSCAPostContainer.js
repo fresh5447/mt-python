@@ -42,8 +42,8 @@ class BSCAPostContainer extends Component {
       method: 'POST',
       data
     }).done((d) => {
-      this.context.sendNotification("Posted Checkpoint");
-      const path = `/admin-console`
+      this.context.sendNotification("Checkpoint Created");
+      const path = `/admin-console/bsca/course/${this.props.params.course_id}/module/${this.props.params.module_id}`
       browserHistory.push(path);
     });
   }

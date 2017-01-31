@@ -58,7 +58,7 @@ class BSCAContainer extends Component {
               { courseItems }
             </tbody>
           </Table>
-          <NavLink to="/admin-console/bsca/courses/post/">Create New Course</NavLink>
+          <NavLink to="/admin-console/bsca/courses/post/" className="btn btn-primary">Create Course</NavLink>
       </Jumbotron>
       { this.props.children }
     </div>
