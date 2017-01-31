@@ -71,7 +71,17 @@ module.exports = function(app, passport) {
 
   app.post('/login', function(req, res, next) {
     passport.authenticate('local-login', function(err, user, info) {
-      console.log('login post', info);
+      // issue a remember me cookie if the option was checked
+      if (!req.body.remember_me) {
+        return next();
+      } else {
+        var token = utils.generateToken(64);
+        Token.save(token, { userId: req.user.id }, function(err) {
+          if (err) { return done(err); }
+          res.cookie('remember_me', token, { path: '/', httpOnly: true, maxAge: 604800000 }); // 7 days
+          return next();
+        });
+      }
       if (err) { res.json(info); }
       if (!user) { return res.status(404).json(info.message);}
       req.logIn(user, function(err) {

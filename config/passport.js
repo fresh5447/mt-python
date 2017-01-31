@@ -1,4 +1,5 @@
 var LocalStrategy   = require('passport-local').Strategy;
+var RememberMeStrategy   = require('passport-remember-me').Strategy;
 
 // load up the user model
 var User            = require('../models/user');
@@ -23,6 +24,24 @@ module.exports = function(passport) {
             done(err, user);
         });
     });
+
+    // https://github.com/jaredhanson/passport-remember-me
+    passport.use(new RememberMeStrategy(
+      function(token, done) {
+        Token.consume(token, function (err, user) {
+          if (err) { return done(err); }
+          if (!user) { return done(null, false); }
+          return done(null, user);
+        });
+      },
+      function(user, done) {
+        var token = utils.generateToken(64);
+        Token.save(token, { userId: user.id }, function(err) {
+          if (err) { return done(err); }
+          return done(null, token);
+        });
+      }
+    ));
 
 
     // LOCAL LOGIN =============================================================

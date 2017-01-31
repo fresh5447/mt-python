@@ -49,9 +49,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 
-app.use(session({
- secret: 'blahblahblah'
-})); // session secret
+app.use(session({ secret: 'blahblahblah' })); // session secret
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(session({
@@ -59,6 +57,8 @@ app.use(session({
    maxAge: 60000
  }
 }));
+
+app.use(passport.authenticate('remember-me'));
 
 require('./config/passport')(passport);
 require('./routes/user.js')(app, passport);
