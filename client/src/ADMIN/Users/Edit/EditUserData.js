@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
-import ViewUser from './ViewUser';
+import EditUserForm from './EditUserForm';
 import $ from "jquery";
 
-class UserContainer extends Component {
+class EditUserData extends Component {
   constructor(props, context){
     super(props, context)
     this.state = {
       user: null
     }
-    this.toggleUserCourse = this.toggleUserCourse.bind(this);
   }
   componentWillMount(){
     this.loadUser()
@@ -19,20 +18,6 @@ class UserContainer extends Component {
       if (newId !== oldId){
         this.loadUser(this.props.params.user_id)
       }
-  }
-  toggleUserCourse(user, course, action){
-    console.log(user, course, action)
-    $.ajax({
-      url: '/editSingleUserCourses/' + user + "/" + course + "/" + action,
-      method: 'PUT',
-      success: ((data) => {
-        console.log(data)
-        this.loadUser()
-      }),
-      error: ((err)=> {
-        console.log("ERROR UPDATING USERS COURSES", err)
-      })
-    })
   }
   loadUser(){
     $.ajax({
@@ -47,9 +32,25 @@ class UserContainer extends Component {
       })
     })
   }
+  handleSubmit(e) {
+    e.preventDefault();
+    const data = {
+      email: this.state.email,
+      firstName: this.state.firstName,
+      lastName: this.state.lastName,
+      courses: this.state.courses
+    };
+    $.ajax({
+      url: `/api/v2/courses/${this.props.params.course_id}`,
+      method: 'PUT',
+      data
+    }).done((d) => {
+      this.context.sendNotification("Course Edit Success");
+    });
+  }
   render() {
-    return this.state.user ? <ViewUser toggleUserCourse={this.toggleUserCourse} user={this.state.user} /> : null
+    return this.state.user ? <EditUserForm user={this.state.user} /> : null
   }
 }
 
-export default UserContainer;
+export default EditUserData;

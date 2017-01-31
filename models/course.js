@@ -7,7 +7,8 @@ const CourseSchema = new Schema({
   desc: String,
   publish: Boolean,
   students: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
-  modules: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Module' }]
+  modules: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Module' }],
+  enrolled: Boolean
 });
 
 module.exports = mongoose.model('Course', CourseSchema);

@@ -20,7 +20,6 @@ var userSchema = mongoose.Schema({
 
   role: String,
   orgs: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Org' }],
-  authCourses: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Course' }],
   status: String,
 
   completedCheckpoints: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Checkpoint' }],

@@ -32,8 +32,7 @@ class UsersContainer extends Component {
           <td>{item.local.firstName}</td>
           <td>{item.local.lastName}</td>
           <td>{item.local.email}</td>
-          <td>{item.role ? item.local.role : "no role"}</td>
-          <td>{item.stauts ? item.local.stauts : "no stauts"}</td>
+          <td>{item.role ? item.role : "no role"}</td>
           <td><button><NavLink to={"/admin-console/users/view/" + item._id}>View</NavLink></button></td>
         </tr>
       )

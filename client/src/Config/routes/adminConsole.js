@@ -25,8 +25,9 @@ import BSCAEditResourceContainer from '../../ADMIN/BSCA/Resources/Edit/BSCAEditC
 import BSCAPostResourceContainer from '../../ADMIN/BSCA/Resources/Post/BSCAPostContainer';
 
 import UsersContainer from '../../ADMIN/Users/UsersContainer';
-import ViewUserContainer from '../../ADMIN/Users/View/ViewUser';
+import UserContainer from '../../ADMIN/Users/View/UserContainer';
 import PostUserContainer from '../../ADMIN/Users/Post/PostContainer';
+import EditUserData from '../../ADMIN/Users/Edit/EditUserData';
 
 
 
@@ -69,8 +70,9 @@ var routes = (
     </Route>
 
     <Route path="users" component={UsersContainer}>
-        <Route path="view/:user_id" component={ViewUserContainer}/>
+        <Route path="view/:user_id" component={UserContainer}/>
         <Route path="post" component={PostUserContainer}/>
+        <Route path="edit/:user_id" component={EditUserData}/>
     </Route>
 
 

@@ -1,12 +1,43 @@
 const mongoose = require('mongoose');
 const User = require('../models/user');
 const Org = require('../models/org');
+const Course = require('../models/course');
 const crypto = require('crypto');
 const async = require('async');
 const nodemailer = require('nodemailer');
 const sgTransport = require('nodemailer-sendgrid-transport');
 const NotFoundError = require('../errorHandlers/notFoundError')
 require('dotenv').config();
+
+if (!Array.prototype.includes) {
+  Array.prototype.includes = function(searchElement /*, fromIndex*/ ) {
+    'use strict';
+    var O = Object(this);
+    var len = parseInt(O.length, 10) || 0;
+    if (len === 0) {
+      return false;
+    }
+    var n = parseInt(arguments[1], 10) || 0;
+    var k;
+    if (n >= 0) {
+      k = n;
+    } else {
+      k = len + n;
+      if (k < 0) {k = 0;}
+    }
+    var currentElement;
+    while (k < len) {
+      currentElement = O[k];
+      if (searchElement == currentElement ||
+         (searchElement != searchElement && currentElement !== currentElement)) { // NaN !== NaN
+        return true;
+      }
+      k++;
+    }
+    return false;
+  };
+}
+
 
 const MAILER_OPTIONS = {
   auth: {
@@ -135,15 +166,85 @@ module.exports = function(app, passport) {
       })
   })
 
-  app.get('/singleUser/:student_id', function(req, res){
-      User.findById(req.params.student_id, function(err, user){
-        if(err){
-          console.log(err)
+  // app.get('/singleUser/:student_id', function(req, res){
+  //     User.findById(req.params.student_id, function(err, user){
+  //       if(err){
+  //         console.log(err)
+  //       } else {
+  //         res.json(user)
+  //       }
+  //     })
+  // })
+
+app.get('/singleUser/:student_id',(req, res) => {
+  Course.find()
+  .exec((err, courses) => {
+    if(err){
+      res.json({ message: 'there was an error finding all courses' })
+    } else {
+      User.findById(req.params.student_id)
+      .populate('courses')
+      .exec((er, user) => {
+        if(er){
+          res.json({ message: 'there was an error getting the user' })
         } else {
-          res.json(user)
+          for (var i = 0; i < courses.length; i++) {
+            const mappedUserCourses = user.courses.map((item) => {
+              return item._id.toString();
+            });
+            if (mappedUserCourses.includes(courses[i]._id.toString())) {
+              courses[i].enrolled = true;
+            } else {
+              courses[i].enrolled = false;
+            }
+          }
+          user.courses = courses;
+          res.json(user);
         }
       })
+    }
   })
+});
+
+app.put('/editSingleUserCourses/:user_id/:course_id/:action', (req, res) => {
+  User.findById(req.params.user_id, (err, user) => {
+    if(err) {
+      res.json({ message: "couldnt find user" })
+    } else {
+      if(req.params.action === 'post'){
+        user.courses.push(req.params.course_id);
+        user.save((e, u) => {
+          if(e) {
+            res.json({mesage: "error adding course"})
+          } else {
+            res.json(u);
+          }
+        });
+      } else {
+        user.courses.remove(req.params.course_id);
+        user.save((e, u) => {
+          if(e) {
+            res.json({mesage: "error adding fav"})
+          } else {
+            res.json(u);
+          }
+        });
+      }
+    }
+  })
+})
+
+Array.prototype.remove = function() {
+    var what, a = arguments, L = a.length, ax;
+    while (L && this.length) {
+        what = a[--L];
+        while ((ax = this.indexOf(what)) !== -1) {
+            this.splice(ax, 1);
+        }
+    }
+    return this;
+};
+
 
 // org 5851c2d69d62a639c6fd9547
 // user 583f70e9ac0a37d56fa69287
