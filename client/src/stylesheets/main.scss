@@ -18,6 +18,14 @@ p {
   font-family: 'Varela Round', sans-serif !important;
 }
 
+.live-course {
+  color: dodgerblue;
+}
+
+.draft-course {
+  color: darkorange;
+}
+
 .fav-btn {
   background-color: transparent;
   border: none;
@@ -25,6 +33,11 @@ p {
   // right: 5% !important;
   float: left;
   font-size: 23px;
+}
+
+.admin-jumbo {
+  padding-top: 0;
+  padding-bottom: 0;
 }
 
 .panel-footer {

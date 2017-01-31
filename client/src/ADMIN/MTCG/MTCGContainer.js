@@ -6,8 +6,9 @@ class MTCGContainer extends Component {
   render() {
     return (
     <div>
-      <Jumbotron>
+      <Jumbotron className="admin-jumbo">
         <h3>Montana Code Girls</h3>
+        <p>Page Under Construction</p>
       </Jumbotron>
     </div>
     )

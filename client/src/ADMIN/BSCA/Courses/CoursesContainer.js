@@ -33,9 +33,10 @@ class BSCAContainer extends Component {
 
   render() {
     const courseItems = this.state.courses ? this.state.courses.map((item) => {
+      var published = item.publish ? <span className="live-course"></span> : <span className="draft-course">draft</span>
       return (
         <tr>
-          <td><NavLink to={"/admin-console/bsca/courses/view/" + item._id }> { item.title } </NavLink></td>
+          <td><NavLink to={"/admin-console/bsca/courses/view/" + item._id }> { item.title } {published} </NavLink></td>
           <td><NavLink to={"/admin-console/bsca/courses/edit/" + item._id }> Edit </NavLink></td>
           <td><NavLink to={"/admin-console/bsca/course/" + item._id + "/modules"}> Go </NavLink></td>
         </tr>
@@ -43,7 +44,7 @@ class BSCAContainer extends Component {
     }) : null;
     return (
     <div>
-      <Jumbotron>
+      <Jumbotron className="admin-jumbo">
         <p>Courses</p>
           <Table responsive>
             <thead>

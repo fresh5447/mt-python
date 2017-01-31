@@ -33,15 +33,14 @@ class UsersContainer extends Component {
           <td>{item.local.lastName}</td>
           <td>{item.local.email}</td>
           <td>{item.role ? item.role : "no role"}</td>
-          <td><button><NavLink to={"/admin-console/users/view/" + item._id}>View</NavLink></button></td>
+          <td><NavLink className="btn btn-primary" to={"/admin-console/users/view/" + item._id}>View</NavLink></td>
         </tr>
       )
     }) : null
     return (
     <div>
-      <Jumbotron>
-        <h3>Users Tab</h3>
-        <NavLink to={"/admin-console/users/post"} className="btn btn-primary">New User</NavLink>
+      <Jumbotron className="admin-jumbo">
+        <h3>system users</h3>
         <Table responsive>
           <thead>
             <tr>
@@ -56,6 +55,8 @@ class UsersContainer extends Component {
             { u }
           </tbody>
         </Table>
+        <NavLink to={"/admin-console/users/post"} className="btn btn-primary">New User</NavLink>
+
       </Jumbotron>
       <Jumbotron>
         { this.props.children ? this.props.children : null }

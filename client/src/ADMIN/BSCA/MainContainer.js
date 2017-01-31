@@ -6,7 +6,7 @@ class BSCAMainContainer extends Component {
   render() {
     return (
       <div>
-        <Jumbotron>
+        <Jumbotron className="admin-jumbo">
           <h3>Big Sky Code Academy</h3>
           <NavLink to="/admin-console/bsca/courses">Courses</NavLink>
           <p></p>

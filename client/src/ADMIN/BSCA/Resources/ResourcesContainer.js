@@ -42,16 +42,17 @@ class BSCAContainer extends Component {
   }
   render() {
     const resourceItems = this.state.resources ? this.state.resources.map((item) => {
+      var published = item.publish ? <span className="live-course"></span> : <span className="draft-course">draft</span>
       return (
         <tr>
-          <td><NavLink to={"/admin-console/bsca/resources/view/" + item._id }> { item.title } </NavLink></td>
+          <td><NavLink to={"/admin-console/bsca/resources/view/" + item._id }> { item.title } { published } </NavLink></td>
           <td><NavLink to={"/admin-console/bsca/resources/edit/" + item._id }> Edit </NavLink></td>
         </tr>
       )
     }) : null;
     return (
     <div>
-      <Jumbotron>
+      <Jumbotron className="admin-jumbo">
         <p>Resources</p>
           <Table responsive>
             <thead>
