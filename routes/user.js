@@ -134,6 +134,37 @@ module.exports = function(app, passport) {
     }
   });
 
+
+  app.get('/loadUser',function(req, res){
+    Course.find()
+    .exec((err, courses) => {
+      if(err){
+        res.json({ message: 'there was an error finding all courses' })
+      } else {
+        User.findById(req.user._id)
+        .populate('courses')
+        .exec((er, user) => {
+          if(er){
+            res.json({ message: 'there was an error getting the user' })
+          } else {
+            for (var i = 0; i < courses.length; i++) {
+              const mappedUserCourses = user.courses.map((item) => {
+                return item._id.toString();
+              });
+              if (mappedUserCourses.includes(courses[i]._id.toString())) {
+                courses[i].enrolled = true;
+              } else {
+                courses[i].enrolled = false;
+              }
+            }
+            user.courses = courses;
+            res.json(user);
+          }
+        })
+      }
+    })
+  });
+
   app.get('/editStudent/:student_id', function(req, res){
       User.findById(req.params.student_id)
       .populate('courses')

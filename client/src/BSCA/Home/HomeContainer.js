@@ -10,23 +10,23 @@ class HomeContainer extends Component {
     this.state = {
       courses: null
     };
-    this.loadCourses = this.loadCourses.bind(this);
   }
 
   componentWillMount() {
-    this.loadCourses();
+    this.loadUser();
   }
 
   componentWillReceiveProps() {
-    this.loadCourses();
+    this.loadUser();
   }
 
-  loadCourses() {
+  loadUser(){
     $.ajax({
-      url: '/api/v2/courses',
+      url: '/loadUser',
       method: 'GET',
     }).done((data) => {
-      this.setState({ courses: data });
+      const courses = data.courses.filter(c => c.enrolled);
+      this.setState({ courses: courses });
     });
   }
   render() {
