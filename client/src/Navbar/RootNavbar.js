@@ -20,6 +20,7 @@ class RootNavbar extends Component {
            <NavItem><Button><NavLink to="/admin-console">Adminland</NavLink></Button></NavItem>
            <NavItem><Button><NavLink to="/big-sky-code-academy">BSCA</NavLink></Button></NavItem>
            <NavItem><Button><NavLink to="/montana-code-girls">MTCG</NavLink></Button></NavItem>
+           <a href="/logout">logout</a>
       </Nav>
     )
   } else {
