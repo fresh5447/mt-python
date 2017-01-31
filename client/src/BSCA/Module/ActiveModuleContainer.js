@@ -38,7 +38,7 @@ class ActiveModuleContainer extends Component {
   render() {
     return (
     <div>
-      <Jumbotron>
+      <Jumbotron className="student-jumbo">
         <h3>{this.state.module ? this.state.module.title : null}</h3>
         <p>{this.state.module ? this.state.module.desc : null}</p>
         <NavLink to={"/big-sky-code-academy/course/" + this.props.params.course_id}><Button>Back</Button></NavLink>

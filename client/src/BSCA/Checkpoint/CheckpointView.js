@@ -5,7 +5,7 @@ import { Grid, Row, Col, Panel } from 'react-bootstrap';
 
 
 const CheckpointView = (props) =>
-<Grid>
+<Grid className="">
   <Row>
     <Col xs={10}>
       <Panel header={ props.checkpoint.title }>

@@ -35,7 +35,7 @@ class HomeContainer extends Component {
     }) : null
     return (
     <div>
-      <Jumbotron>
+      <Jumbotron className="student-jumbo">
         <h3>Enrolled Courses</h3>
         <ul>
           { availableCourses }

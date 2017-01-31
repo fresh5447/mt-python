@@ -32,7 +32,7 @@ class ActiveCourseContainer extends Component {
   render() {
     return (
     <div>
-      <Jumbotron>
+      <Jumbotron className="student-jumbo">
         <h3>{this.state.course ? this.state.course.title : "Loading Title"}</h3>
         <p>{this.state.course ? this.state.course.desc : "Loading Desc"}</p>
         <p>0/4 Modules Complete</p>
