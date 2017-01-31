@@ -10,7 +10,8 @@ class RootNavbar extends Component {
     if(this.props.user && this.props.user.local && this.props.user.role === "student"){
       return (
         <Nav pullRight>
-             <NavItem><NavLink to="/big-sky-code-academy">Code Range</NavLink></NavItem>
+             <NavItem><Button><NavLink to="/big-sky-code-academy">BSCA</NavLink></Button></NavItem>
+             <a href="/logout">logout</a>
            </Nav>
       )
     } else if(this.props.user && this.props.user.local && this.props.user.role === "admin"){
