@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import NavLink from '../../Components/NavLink';
 import $ from 'jquery';
 import { Jumbotron, Panel } from 'react-bootstrap';
-import Spinner from 'react-icons/lib/fa/arrow-right';
+import Arrow from 'react-icons/lib/fa/arrow-right';
 
 class HomeContainer extends Component {
   constructor(props, context) {
@@ -34,7 +34,7 @@ class HomeContainer extends Component {
     const availableCourses = this.state.courses ? this.state.courses.map((item) => {
       const footer = (
           <span className="res-footer res-courses flex-cats">
-            <NavLink to={'/big-sky-code-academy/course/' + item._id}> <Spinner className="right-arrow"/> </NavLink>
+            <NavLink to={'/big-sky-code-academy/course/' + item._id}> <Arrow className="right-arrow"/> </NavLink>
           </span>
       )
       return (<Panel header={item.title} footer={footer}>

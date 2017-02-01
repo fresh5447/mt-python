@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
 import NavLink from '../../Components/NavLink';
-// import ModulesList from './ModulesList';
-import { Jumbotron, Button, Panel } from 'react-bootstrap';
+import Arrow from 'react-icons/lib/fa/arrow-right';
+import { Button, Panel } from 'react-bootstrap';
 
 class ActiveCourseContainer extends Component {
   constructor(props, context) {
@@ -32,23 +32,27 @@ class ActiveCourseContainer extends Component {
   render() {
     return (
     <div>
-      <Jumbotron className="student-jumbo">
+      <div className="container student-course-container">
         <h3>{this.state.course ? this.state.course.title : "Loading Title"}</h3>
         <p>{this.state.course ? this.state.course.desc : "Loading Desc"}</p>
-        <p>0/4 Modules Complete</p>
         <NavLink to={"/big-sky-code-academy/home/"}><Button>Back</Button></NavLink>
-      </Jumbotron>
-      <Jumbotron>
+      </div>
+      <div className="container">
         { this.state.course ?
           this.state.course.modules.map((item)=> {
+            const footer = (
+                <span className="res-footer res-courses flex-cats">
+                  <NavLink to={"big-sky-code-academy/course/" + this.props.params.course_id + "/module/" + item._id}> <Arrow className="right-arrow"/> </NavLink>
+                </span>
+            )
             return (
-              <Panel header={item.title} footer={<NavLink to={"big-sky-code-academy/course/" + this.props.params.course_id + "/module/" + item._id}>GO</NavLink>}>
+              <Panel header={item.title} footer={footer}>
                 <p>{item.desc}</p>
               </Panel>
             )
           })
           : null }
-      </Jumbotron>
+      </div>
     </div>
     )
   }
