@@ -10,24 +10,24 @@ class RootNavbar extends Component {
     if(this.props.user && this.props.user.local && this.props.user.role === "student"){
       return (
         <Nav pullRight>
-             <NavItem><Button><NavLink to="/big-sky-code-academy">BSCA</NavLink></Button></NavItem>
-             <a href="/logout">logout</a>
+             <NavItem><NavLink className="btn btn-default" to="/big-sky-code-academy">BSCA</NavLink></NavItem>
+             <NavItem><a className="btn btn-default" href="/logout">logout</a></NavItem>
            </Nav>
       )
     } else if(this.props.user && this.props.user.local && this.props.user.role === "admin"){
     return (
       <Nav pullRight>
-           <NavItem><Button><NavLink to="/admin-console">Adminland</NavLink></Button></NavItem>
-           <NavItem><Button><NavLink to="/big-sky-code-academy">BSCA</NavLink></Button></NavItem>
-           <NavItem><Button><NavLink to="/montana-code-girls">MTCG</NavLink></Button></NavItem>
-           <a href="/logout">logout</a>
+           <NavItem><NavLink className="btn btn-default" to="/admin-console">Adminland</NavLink></NavItem>
+           <NavItem><NavLink className="btn btn-default" to="/big-sky-code-academy">BSCA</NavLink></NavItem>
+           <NavItem><NavLink className="btn btn-default" to="/montana-code-girls">MTCG</NavLink></NavItem>
+           <NavItem><a className="btn btn-default" href="/logout">logout</a></NavItem>
       </Nav>
     )
   } else {
     return (
       <Nav pullRight>
-           <NavItem><NavLink to="/register">Register</NavLink></NavItem>
-           <NavItem><NavLink to="/signin">Signin</NavLink></NavItem>
+           <NavItem><NavLink className="btn btn-default" to="/register">Register</NavLink></NavItem>
+           <NavItem><NavLink className="btn btn-default"to="/signin">Signin</NavLink></NavItem>
       </Nav>
     )
   }
