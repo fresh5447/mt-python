@@ -48,7 +48,7 @@ class FavoriteResourcesContainer extends Component {
     }).filter((item) => {
       return item.fav
     }).map((item) => {
-      return <ResourceCard fav={item.fav} id={item._id}  toggleFav={this.toggleFav} internal={item.internal} link={item.link} cats={item.categories} desc={item.desc}/>
+      return <ResourceCard title={item.title} fav={item.fav} id={item._id}  toggleFav={this.toggleFav} internal={item.internal} link={item.link} cats={item.categories} desc={item.desc}/>
     }) : <div>Loading...</div>
     return (
       <div className="resource-flexbox">

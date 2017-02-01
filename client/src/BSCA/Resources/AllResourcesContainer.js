@@ -56,7 +56,7 @@ class AllResourcesContainer extends Component {
     const resourcePanels = this.state.resources ? this.state.resources.filter((i) => {
       return i.publish
     }).map((item) => {
-      return <ResourceCard loadingFav={ this.state.loadingFav } fav={item.fav} id={item._id}  toggleFav={this.toggleFav} internal={item.internal} link={item.link} cats={item.categories} desc={item.desc}/>
+      return <ResourceCard loadingFav={ this.state.loadingFav } fav={item.fav} id={item._id} title={item.title} toggleFav={this.toggleFav} internal={item.internal} link={item.link} cats={item.categories} desc={item.desc}/>
     }) : <div>Loading...</div>
     return (
       <div className="resource-flexbox">

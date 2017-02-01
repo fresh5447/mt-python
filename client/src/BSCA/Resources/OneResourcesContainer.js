@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
 import { Panel } from 'react-bootstrap';
+import ReactMarkdown from 'react-markdown';
 
 class OneResourcesContainer extends Component {
   constructor(props){
@@ -41,7 +42,9 @@ class OneResourcesContainer extends Component {
     return (
       <div>
         <Panel header={this.state.resource ? this.state.resource.title : "Loading..."}>
-          { this.state.resource ? this.state.resource.content : "Loading..." }
+          { this.state.resource ?
+            <ReactMarkdown source={this.state.resource.content}/>
+            : "Loading..." }
         </Panel>
       </div>
     )
