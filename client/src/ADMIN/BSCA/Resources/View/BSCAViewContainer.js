@@ -37,7 +37,7 @@ class BSCAViewContainer extends Component {
     return (
     <div>
       <Jumbotron>
-        <NavLink to={ "/admin-console/bsca/resources/edit/" + this.props.params.resource_id}>Edit Course Info</NavLink>
+        <NavLink className="btn btn-warning" to={ "/admin-console/bsca/resources/edit/" + this.props.params.resource_id}>Edit</NavLink>
         <h3>{this.state.resource ? this.state.resource.title : "loading..."}</h3>
         <p></p>
         <p></p>

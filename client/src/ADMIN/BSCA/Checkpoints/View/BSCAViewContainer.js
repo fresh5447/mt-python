@@ -38,7 +38,7 @@ class BSCAViewContainer extends Component {
           this.state.checkpoint ? (
             <div>
               <h3> { this.state.checkpoint.title }</h3>
-              <NavLink to={ "/admin-console/bsca/course/" + this.props.params.course_id + "/module/" + this.props.params.module_id + "/edit/" + this.props.params.checkpoint_id}>Edit</NavLink>
+              <NavLink className="btn btn-warning" to={ "/admin-console/bsca/course/" + this.props.params.course_id + "/module/" + this.props.params.module_id + "/edit/" + this.props.params.checkpoint_id}>Edit</NavLink>
               <p></p>
               <p>{ "Desription: " + this.state.checkpoint.desc}</p>
               <p>Content</p>

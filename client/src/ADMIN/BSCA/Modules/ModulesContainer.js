@@ -34,8 +34,8 @@ class ModulesContainer extends Component {
       return (
         <tr>
           <td><NavLink to={"/admin-console/bsca/course/" + this.props.params.course_id + "/modules/view/" + item._id}>{ item.title } </NavLink></td>
-          <td><NavLink to={ "/admin-console/bsca/course/" + this.props.params.course_id + "/modules/edit/" + item._id}>Edit</NavLink></td>
-          <td><NavLink to={ "/admin-console/bsca/course/" + this.props.params.course_id + "/module/" + item._id}>Go</NavLink></td>
+          <td><NavLink className="btn btn-success" to={ "/admin-console/bsca/course/" + this.props.params.course_id + "/module/" + item._id}>Go</NavLink></td>
+          <td><NavLink className="btn btn-warning" to={ "/admin-console/bsca/course/" + this.props.params.course_id + "/modules/edit/" + item._id}>Edit</NavLink></td>
         </tr>
       )
     }) : null;

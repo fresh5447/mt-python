@@ -34,8 +34,8 @@ class BSCAViewContainer extends Component {
     <div>
       <Jumbotron>
         <h3>{this.state.module ? this.state.module.title : "loading..."}</h3>
-        <NavLink to={ "/admin-console/bsca/course/" + this.props.params.course_id + "/modules/edit/" + this.props.params.module_id}>Edit Module Info</NavLink>
-        <NavLink to={ "/admin-console/bsca/course/" + this.props.params.course_id + "/module/" + this.props.params.module_id}>GO THERE BABYYY</NavLink>
+        <NavLink className="btn btn-warning" to={ "/admin-console/bsca/course/" + this.props.params.course_id + "/modules/edit/" + this.props.params.module_id}>Edit</NavLink>
+        <NavLink className="btn btn-success" to={ "/admin-console/bsca/course/" + this.props.params.course_id + "/module/" + this.props.params.module_id}>Go</NavLink>
         <p></p>
         <p>{this.state.module ? "Desription: " + this.state.module.desc : "loading..."}</p>
         <p>{this.state.module ? "Publish: " + this.state.module.publish.toString() : "loading..."}</p>

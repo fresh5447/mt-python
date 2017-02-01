@@ -34,7 +34,7 @@ class BSCAContainer extends Component {
       return (
         <tr>
           <td><NavLink to={ "/admin-console/bsca/course/" + this.props.params.course_id + "/module/" + this.props.params.module_id + "/view/" + item._id}>{item.title}</NavLink></td>
-          <td><NavLink to={ "/admin-console/bsca/course/" + this.props.params.course_id + "/module/" + this.props.params.module_id + "/edit/" + item._id}>Edit</NavLink></td>
+          <td><NavLink className="btn btn-warning" to={ "/admin-console/bsca/course/" + this.props.params.course_id + "/module/" + this.props.params.module_id + "/edit/" + item._id}>Edit</NavLink></td>
         </tr>
       )    }) : null;
     return (
