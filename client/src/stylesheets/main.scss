@@ -17,6 +17,15 @@ h1, h2, h3, h4, h5, h6 {
 p {
   font-family: 'Varela Round', sans-serif !important;
 }
+.right-arrow {
+  color: dodgerblue;
+  font-size: 22px;
+  margin-right: 20px;
+}
+
+.my-courses {
+  color: dodgerblue;
+}
 
 .live-course {
   color: dodgerblue;
@@ -69,6 +78,13 @@ p {
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-around;
+}
+
+.res-courses {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-end;
 }
 
 p, a {
