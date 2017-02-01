@@ -40,11 +40,9 @@ class BSCAViewContainer extends Component {
               <h3> { this.state.checkpoint.title }</h3>
               <NavLink className="btn btn-warning" to={ "/admin-console/bsca/course/" + this.props.params.course_id + "/module/" + this.props.params.module_id + "/edit/" + this.props.params.checkpoint_id}>Edit</NavLink>
               <p></p>
-              <p>{ "Desription: " + this.state.checkpoint.desc}</p>
               <p>Content</p>
               <ReactMarkdown source={this.state.checkpoint.content}/>
               <p></p>
-              <ReactMarkdown source={this.state.checkpoint.assignment}/>
               <p>{ "Publish: " + this.state.checkpoint.publish.toString() }</p>
             </div>
           ) : <p>Loading...</p>

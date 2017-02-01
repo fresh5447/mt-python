@@ -11,10 +11,8 @@ class BSCAEditContainer extends Component {
 
     this.state = {
       title: null,
-      desc: null,
       publish: null,
       content: null,
-      assignment: null
     };
   }
 
@@ -30,8 +28,6 @@ class BSCAEditContainer extends Component {
     e.preventDefault();
     const data = {
       title: this.state.title,
-      desc: this.state.desc,
-      assignment: this.state.assignment,
       content: this.state.content,
       publish: this.state.publish,
     };
@@ -58,19 +54,15 @@ class BSCAEditContainer extends Component {
     }).done((data) => {
       this.setState({
         title: data.title,
-        desc: data.desc,
         publish: data.publish,
-        content: data.content,
-        assignment: data.assignment
+        content: data.content
       });
     });
   }
   render() {
     return (this.state.title ? <EditCheckpointForm
       title={this.state.title}
-      desc={this.state.desc}
       content={this.state.content}
-      assignment={this.state.assignment}
       publish={this.state.publish}
       onFieldChange={this.onFieldChange}
       handleSubmit={this.handleSubmit}

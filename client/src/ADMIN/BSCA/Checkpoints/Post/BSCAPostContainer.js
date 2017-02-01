@@ -11,10 +11,8 @@ class BSCAPostContainer extends Component {
 
     this.state = {
       title: null,
-      desc: null,
       publish: null,
       content: null,
-      assignment: null,
       module: null
     };
 
@@ -31,10 +29,8 @@ class BSCAPostContainer extends Component {
     const published = this.state.publish == null ? false : true;
     const data = {
       title: this.state.title,
-      desc: this.state.desc,
       content: this.state.content,
       publish: published,
-      assignment: this.state.assignment,
       module: this.props.params.module_id
     };
     $.ajax({
@@ -52,9 +48,7 @@ class BSCAPostContainer extends Component {
     return <PostCheckpointForm
     onFieldChange={(...args) => this.onFieldChange(...args)}
     title={this.state.title}
-    desc={this.state.desc}
     content={this.state.content}
-    assignment={this.state.assignment}
     handleSubmit={this.handleSubmit}
     />;
   }

@@ -16,21 +16,9 @@ const EditCheckpointForm = (props) =>
           />
         </fieldset>
         <fieldset className="form-group">
-          <label>description</label>
-          <input required="true" onChange={ (event) => props.onFieldChange('desc', event.target.value)}
-          type="text" className="form-control" id="" placeholder="..." value={props.desc}
-          />
-        </fieldset>
-        <fieldset className="form-group">
           <label>content</label>
           <textarea onChange={ (event) => props.onFieldChange('content', event.target.value)}
             className="form-control" required="true" rows="7" value={props.content}
-          ></textarea>
-        </fieldset>
-        <fieldset className="form-group">
-          <label>assignment</label>
-          <textarea onChange={ (event) => props.onFieldChange('assignment', event.target.value)}
-            className="form-control" required="true" rows="5" value={props.assignment}
           ></textarea>
         </fieldset>
         <fieldset className="">
