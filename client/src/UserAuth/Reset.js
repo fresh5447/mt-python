@@ -1,7 +1,6 @@
 import React from 'react';
 import $ from 'jquery';
 
-
 class Reset extends React.Component {
   constructor(props, context) {
     super(props, context);
@@ -63,8 +62,6 @@ class Reset extends React.Component {
               </div>
             )
           }
-
-
         </div>
       </div>
 

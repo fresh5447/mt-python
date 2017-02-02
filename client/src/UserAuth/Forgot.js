@@ -17,44 +17,44 @@ class Forgot extends React.Component {
 
   handleEmailChange = (e) => this.setState({ email: e.target.value });
 
-  submitUserToServer(e) {
-    e.preventDefault();
-    const data = {
-      email: this.state.email,
-    };
-    const options = {
-      method: 'POST',
-      uri: 'http://' + window.location.host + '/forgot',
-      json: true,
-      body: data
-    };
-    rp(options)
-      .then( () => {
-        console.log("success in submitting user");
-        this.setState({ success: true })
-        this.context.sendNotification("Email has been sent");
-      })
-      .catch( (err) => {
-        console.log("Error in submitting user", err);
-      })
-  }
-
   // submitUserToServer(e) {
   //   e.preventDefault();
   //   const data = {
   //     email: this.state.email,
   //   };
-  //   $.ajax({
-  //     url: '/forgot',
+  //   const options = {
   //     method: 'POST',
-  //     data
-  //   }).done((d) => {
-  //     //How to handle this error success in conjunction with forgot api route.
-  //     console.log("I AM DATA", data);
-  //     this.setState({ success: true })
-  //     this.context.sendNotification(data.message);
-  //   })
+  //     uri: 'http://' + window.location.host + '/forgot',
+  //     json: true,
+  //     body: data
+  //   };
+  //   rp(options)
+  //     .then( () => {
+  //       console.log("success in submitting user");
+  //       this.setState({ success: true })
+  //       this.context.sendNotification("Email has been sent");
+  //     })
+  //     .catch( (err) => {
+  //       console.log("Error in submitting user", err);
+  //     })
   // }
+
+  submitUserToServer(e) {
+    e.preventDefault();
+    const data = {
+      email: this.state.email,
+    };
+    $.ajax({
+      url: '/forgot',
+      method: 'POST',
+      data
+    }).done((d) => {
+      //How to handle this error success in conjunction with forgot api route.
+      console.log("I AM DATA", data);
+      this.setState({ success: true })
+      this.context.sendNotification(data.message);
+    })
+  }
 
   render() {
     return (
