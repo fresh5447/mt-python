@@ -23,9 +23,11 @@ render((
 
       { mtcgRoutes }
 
+      {/* <Route path="*" component={PageNotFound} /> */}
+
       { userAuth }
 
-      <Route path="*" component={PageNotFound} />
+
 
     </Route>
   </Router>
