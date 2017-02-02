@@ -14,10 +14,9 @@ import FavoritesResourcesContainer from '../../BSCA/Resources/FavoritesResources
 import CategoriesResourcesContainer from '../../BSCA/Resources/CategoriesResourcesContainer';
 import OneResourcesContainer from '../../BSCA/Resources/OneResourcesContainer';
 
-
 import ProfileContainer from '../../BSCA/Profile/ProfileContainer';
 import ViewProfileData from '../../BSCA/Profile/ViewProfileData';
-
+import EditProfileData from '../../BSCA/Profile/EditProfileData';
 
 var routes = (
   <Route path="big-sky-code-academy" component={BSCAMainContainer}>
@@ -25,6 +24,7 @@ var routes = (
 
     <Route path="profile" component={ProfileContainer}>
       <Route path="view" component={ViewProfileData}/>
+      <Route path="edit" component={EditProfileData}/>
       <IndexRoute component={ViewProfileData}/>
     </Route>
 

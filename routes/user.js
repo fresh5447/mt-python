@@ -96,13 +96,13 @@ module.exports = function(app, passport) {
           user.local.email = req.body.email ? req.body.email : user.local.email;
           user.local.firstName = req.body.firstName ? req.body.firstName : user.local.firstName;
           user.local.lastName = req.body.lastName ? req.body.lastName : user.local.lastName;
-          user.local.linkedIn = req.body.linkedIn ? req.body.linkedIn : user.local.linkedIn;
-          user.local.twitterHandle = req.body.twitterHandle ? req.body.twitterHandle : user.local.twitterHandle;
-          user.local.githubHandle = req.body.githubHandle ? req.body.githubHandle : user.local.githubHandle;
-          user.local.skype = req.body.skype ? req.body.skype : user.local.skype;
-          user.local.bio = req.body.bio ? req.body.bio : user.local.bio;
+          user.linkedIn = req.body.linkedIn ? req.body.linkedIn : user.linkedIn;
+          user.twitter = req.body.twitter ? req.body.twitter : user.twitter;
+          user.github = req.body.github ? req.body.github : user.github;
+          user.blog = req.body.blog ? req.body.blog : user.blog;
+          user.website = req.body.website ? req.body.website : user.website;
 
-          user.orgs =
+          user.bio = req.body.bio ? req.body.bio : user.bio;
 
           user.save(function(err){
             if(err){

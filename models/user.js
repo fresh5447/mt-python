@@ -18,6 +18,12 @@ var userSchema = mongoose.Schema({
     resetPasswordExpires: Date
   },
 
+  twitter: String,
+  linkedIn: String,
+  github: String,
+  blog: String,
+  website: String,
+
   role: String,
   orgs: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Org' }],
   status: String,
