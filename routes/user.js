@@ -339,7 +339,7 @@ Array.prototype.remove = function() {
    app.post('/forgot', function(req, res, next) {
      const email = req.body.email;
      let token;
-     const host = process.env.NODE_ENV === 'production' ? 'www.coderange.org' : 'localhost:3000';
+     const host = process.env.NODE_ENV === 'production' ? 'coderange.org' : 'localhost:3000';
      generateCryptoBuffer()
        .then(t => {
          token = t;
