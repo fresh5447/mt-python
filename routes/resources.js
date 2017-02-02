@@ -121,6 +121,14 @@ Router.route('/student/favorite/:id/:action')
             if(e) {
               res.json({mesage: "error adding fav"})
             } else {
+              Resource.findById(req.params.id, function(e, r) {
+                if(e){
+                  console.log(e)
+                } else {
+                  r.numFavs = r.numFavs += 1;
+                  r.save();
+                }
+              })
               res.json(u);
             }
           });
@@ -130,6 +138,14 @@ Router.route('/student/favorite/:id/:action')
             if(e) {
               res.json({mesage: "error adding fav"})
             } else {
+              Resource.findById(req.params.id, function(e, r) {
+                if(e){
+                  console.log(e)
+                } else {
+                  r.numFavs = r.numFavs -= 1;
+                  r.save();
+                }
+              })
               res.json(u);
             }
           });

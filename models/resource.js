@@ -10,6 +10,7 @@ const ResourceSchema = new Schema({
   desc: String,
   categories: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Category' }],
   fav: Boolean,
+  numFavs: { type: Number, default: 0 },
   internal: Boolean
 });
 
