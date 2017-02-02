@@ -83,13 +83,23 @@ p {
   background-color: white;
 }
 
+.resource-panel > .panel-heading {
+  color: dodgerblue;
+}
+
+
 .res-link {
   float: right;
   font-size: 23px;
+  color: dodgerblue;
 }
 
 .res-footer {
   list-style: none;
+}
+
+strong {
+  color: dodgerblue;
 }
 
 .res-links li {
