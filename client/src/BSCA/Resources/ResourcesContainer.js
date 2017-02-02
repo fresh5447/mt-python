@@ -29,30 +29,27 @@ class ResourcesContainer extends Component {
 
   render() {
     return (
-      <Grid>
-          <Col xs={2}>
-            <ButtonGroup vertical>
-              <p className="btn btn-default"><strong>categories</strong></p>
-              {
-                this.state.categories ? (
-                  this.state.categories.map((item) => {
-                    return <Link activeClassName="active-category" className={"btn btn-default"} to={"/big-sky-code-academy/resources/categories/" + item.name }>{ item.name }</Link>
-                  })
-                ) : <Button>Loading...</Button>
-              }
-              </ButtonGroup>
-
-          </Col>
-          <Col xs={10}>
-            <Nav bsStyle="pills">
-              <NavItem><NavLink to="/big-sky-code-academy/resources/all" className="resources-main-filter">All</NavLink></NavItem>
-              <NavItem><NavLink to="/big-sky-code-academy/resources/favorites" className="resources-main-filter">Favorite</NavLink></NavItem>
-            </Nav>
-          </Col>
-          <Col xs={10}>
-            { this.props.children }
-          </Col>
-      </Grid>
+      <div className="container">
+        <div className="col-xs-2">
+          <ButtonGroup vertical>
+            <p className="btn btn-default"><strong>categories</strong></p>
+            {
+              this.state.categories ? (
+                this.state.categories.map((item) => {
+                  return <Link activeClassName="active-category" className={"btn btn-default"} to={"/big-sky-code-academy/resources/categories/" + item.name }>{ item.name }</Link>
+                })
+              ) : <Button>Loading...</Button>
+            }
+            </ButtonGroup>
+        </div>
+        <div className="col-xs-10">
+          <Nav bsStyle="pills">
+            <NavItem><NavLink to="/big-sky-code-academy/resources/all" className="resources-main-filter">All</NavLink></NavItem>
+            <NavItem><NavLink to="/big-sky-code-academy/resources/favorites" className="resources-main-filter">Favorite</NavLink></NavItem>
+          </Nav>
+          { this.props.children }
+        </div>
+      </div>
     )
   }
 }

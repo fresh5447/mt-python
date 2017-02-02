@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import $ from 'jquery';
 import NavLink from '../../Components/NavLink';
 import { Link } from 'react-router';
+import LeftArrow from 'react-icons/lib/fa/arrow-left';
+
 import { Jumbotron, Button, Grid, Col, Row, ButtonGroup } from 'react-bootstrap';
 
 class ActiveModuleContainer extends Component {
@@ -37,31 +39,27 @@ class ActiveModuleContainer extends Component {
   }
   render() {
     return (
-    <div>
-      <Jumbotron className="student-jumbo">
-        <h3>{this.state.module ? this.state.module.title : null}</h3>
-        <p>{this.state.module ? this.state.module.desc : null}</p>
-        <NavLink to={"/big-sky-code-academy/course/" + this.props.params.course_id}><Button>Back</Button></NavLink>
-      </Jumbotron>
-
-      <Grid>
-        <Row className="show-grid">
-          <Col xs={2} md={2}>
-            <ButtonGroup vertical>
-              <p className="btn btn-default"><strong>checkpoints</strong></p>
-              { this.state.module ?
-                this.state.module.checkpoints.map((item)=> {
-                  return <Link activeClassName="active-checkpoint" className="btn btn-default" to={"/big-sky-code-academy/course/" + this.props.params.course_id + "/module/" + this.props.params.module_id + "/checkpoint/" + item._id}>{item.title}</Link>
-                })
-                : <Button>Loading...</Button> }
-            </ButtonGroup>
-          </Col>
-          <Col xs={10} md={10}>
-            { this.props.children }
-          </Col>
-        </Row>
-      </Grid>
-    </div>
+      <div className="container">
+        <div className="col-xs-10 col-xs-offset-1">
+          <div className="module-header">
+            <h3 className="my-courses">{this.state.module ? this.state.module.title : null}</h3>
+            <NavLink to={"/big-sky-code-academy/course/" + this.props.params.course_id}><LeftArrow className="left-arrow"/></NavLink>
+          </div>
+        </div>
+        <div className="col-xs-2">
+          <ButtonGroup vertical>
+            <p className="btn btn-default"><strong>checkpoints</strong></p>
+            { this.state.module ?
+              this.state.module.checkpoints.map((item)=> {
+                return <Link activeClassName="active-checkpoint" className="btn btn-default" to={"/big-sky-code-academy/course/" + this.props.params.course_id + "/module/" + this.props.params.module_id + "/checkpoint/" + item._id}>{item.title}</Link>
+              })
+              : <Button>Loading...</Button> }
+          </ButtonGroup>
+        </div>
+        <div className="col-xs-10">
+          { this.props.children }
+        </div>
+      </div>
     )
   }
 }

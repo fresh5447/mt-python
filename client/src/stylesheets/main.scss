@@ -23,12 +23,32 @@ p {
   margin-right: 20px;
 }
 
+.module-header {
+  padding-bottom: 20px;
+}
+
+.left-arrow {
+  color: dodgerblue;
+  font-size: 22px;
+  // margin-right: 20px;
+}
+
+.nav-btn {
+  color: dodgerblue;
+  border-color: dodgerblue;
+}
+
 .student-course-container {
   padding-bottom: 20px;
 }
 
 .my-courses {
   color: dodgerblue;
+  text-align: center;
+}
+
+.center-text {
+  text-align: center;
 }
 
 .live-course {
