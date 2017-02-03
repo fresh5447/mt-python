@@ -22,3 +22,9 @@ In the future we will be adding:
 ----
 ## Bug
 * Reset password: If user enters an email not found, it crashes the system.
+
+----
+## ToDo
+__Server API Documentation__ 
+
+__React Component Hierarchy Documentation__
