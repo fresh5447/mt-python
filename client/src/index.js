@@ -7,10 +7,10 @@ require('./stylesheets/main.scss');
 
 import PageNotFound from './Components/PageNotFound';
 
-import mtcgRoutes from './Config/routes/mtcg';
-import userAuth from './Config/routes/userAuth';
-import adminConsole from './Config/routes/adminConsole';
-import bscaStudentApp from './Config/routes/bscaStudentApp';
+import mtcgRoutes from './Routes/routes/mtcg';
+import userAuth from './Routes/routes/userAuth';
+import adminConsole from './Routes/routes/adminConsole';
+import bscaStudentApp from './Routes/routes/bscaStudentApp';
 
 render((
   <Router history={browserHistory}>
@@ -23,11 +23,9 @@ render((
 
       { mtcgRoutes }
 
-      {/* <Route path="*" component={PageNotFound} /> */}
-
       { userAuth }
 
-
+      <Route path="*" component={PageNotFound} />
 
     </Route>
   </Router>
