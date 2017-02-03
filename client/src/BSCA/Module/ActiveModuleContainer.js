@@ -47,7 +47,7 @@ class ActiveModuleContainer extends Component {
           </div>
         </div>
         <div className="col-xs-2">
-          <ButtonGroup vertical>
+          <ButtonGroup vertical className="checkpoint-vetical-btn">
             <p className="btn btn-default"><strong>checkpoints</strong></p>
             { this.state.module ?
               this.state.module.checkpoints.map((item)=> {

@@ -27,6 +27,7 @@ p {
   padding-bottom: 20px;
 }
 
+
 .left-arrow {
   color: dodgerblue;
   font-size: 22px;
@@ -302,6 +303,11 @@ p, a {
   box-shadow: $primary-shadow;
   max-height: 200px;
   overflow: scroll;
+}
+
+.checkpoint-vetical-btn {
+  position: relative;
+  left: -90px;
 }
 
 .resources-main-filter {
