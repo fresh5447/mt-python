@@ -17,7 +17,7 @@ In the future we will be adding:
 
 * Implement 'Remember Me' Passport.js functionality
   - https://www.npmjs.com/package/passport-remember-me
-
+  - http://stackoverflow.com/questions/15609232/how-to-add-remember-me-to-my-app-with-passport
 
 ----
 ## Bug
