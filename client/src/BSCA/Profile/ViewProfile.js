@@ -8,9 +8,10 @@ import Blog from 'react-icons/lib/fa/bullhorn';
 import Website from 'react-icons/lib/fa/user';
 import Email from 'react-icons/lib/fa/envelope-o'
 
+
 const ViewProfile = (props) =>
 <Jumbotron>
-  <h3>{ props.user.local.firstName + " " + props.user.local.lastName }</h3>
+  <h3 className="my-courses">{ props.user.local.firstName + " " + props.user.local.lastName }</h3>
   <p> <Email /> { props.user.local.email }</p>
   <p> <Tweeter /> { props.user.twitter ? props.user.twitter : "add Twitter"}</p>
   <p> <Linkedin/> { props.user.linkedIn ? props.user.linkedIn : "add LinkedIn"}</p>
