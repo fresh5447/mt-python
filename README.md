@@ -1,15 +1,24 @@
-# Bug
+## Code Range Overview
 
-Proxy Server Fires up on port 3100 even though it is supposed to fire up on 3001.
+The code range currently consists of two core applications.
+ - Big Sky Code Academy: For students of BSCA
+ - Montana Code Girls: App for MTCG volunteers
 
-In this mode, does not give proper server error. Instead simply says can not proxy server.
+In the future we will be adding:
+- Code 4 Philanthropy: connecting students and non-profits
+- Montana Teaching Teachers Tech: Resources for MT3 teachers and trainers.
 
-Admin Course List Container is not un-mounting.
 
-Edit Course - Publish does not pre-populate value.
+----
+### BSCA
 
-Reset password will crash if email is not found.
 
-Reset email uses host in link. This redirects to the server host.
+### Feature Request
 
-Adds extra route when we hit refresh
+* Implement 'Remember Me' Passport.js functionality
+  - https://www.npmjs.com/package/passport-remember-me
+
+
+----
+## Bug
+* Reset password: If user enters an email not found, it crashes the system.
