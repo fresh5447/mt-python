@@ -32,21 +32,24 @@ class HomeContainer extends Component {
   }
   render() {
     const availableCourses = this.state.courses ? this.state.courses.map((item) => {
-      const footer = (
-          <span className="res-footer res-courses flex-cats">
-            <NavLink to={'/big-sky-code-academy/course/' + item._id}> <Arrow className="right-arrow"/> </NavLink>
-          </span>
-      )
-      return (<Panel header={item.title} footer={footer}>
-                {item.desc}
-              </Panel>
+      return (<div className="course-panel panel panel-default">
+                <div className="panel-heading">
+                  <h3 className="panel-title">{item.title}</h3>
+                  <img role="presentation" src={item.imgUrl} className="course-img"/>
+                </div>
+                <div className="panel-body">
+                  {item.desc}
+                  <NavLink to={'/big-sky-code-academy/course/' + item._id}> <Arrow className="right-arrow"/> </NavLink>
+                </div>
+
+              </div>
           )
     }) : null
     return (
     <div>
       <Jumbotron className="student-jumbo">
-        <h3 className="my-courses">My Courses</h3>
-        <div>
+        <h3 className="my-courses">Available Courses</h3>
+        <div className="course-list-flex">
           { availableCourses }
         </div>
 

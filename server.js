@@ -16,9 +16,13 @@ const  path           = require('path'),
   CheckpointsRouter   = require('./routes/checkpoints'),
   ResourcesRouter     = require('./routes/resources'),
   OrgsRouter          = require('./routes/orgs'),
-  errorHandler        = require('./errorHandler'),
-
+  // errorHandler        = require('./errorHandler'),
   mongoose            =  Promise.promisifyAll(require('mongoose'));
+  var  Raven               = require('raven');
+  Raven.config(process.env.SENTRY_DSN).install();
+
+  app.use(Raven.requestHandler());
+
 
 
  var options = {
@@ -42,7 +46,26 @@ if (isProd) {
   app.use(express.static(clientPath));
 }
 
-app.use(errorHandler);
+
+
+// app.use(errorHandler);
+
+app.get('/', function mainHandler(req, res) {
+    throw new Error('Broke!');
+});
+
+
+
+app.use(Raven.errorHandler());
+
+// Optional fallthrough error handler
+app.use(function onError(err, req, res, next) {
+    // The error id is attached to `res.sentry` to be returned
+    // and optionally displayed to the user for support.
+    res.statusCode = 500;
+    res.end(res.sentry + '\n');
+});
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));

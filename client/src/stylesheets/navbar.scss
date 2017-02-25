@@ -4,3 +4,11 @@
   background-color: white;
   box-shadow: $primary-shadow;
 }
+
+@media(max-width: 996px){
+  .customNav {
+    border-bottom: solid 1px #ccc;
+    box-shadow: none;
+  }
+
+}

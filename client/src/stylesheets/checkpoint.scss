@@ -1,0 +1,96 @@
+.cp-flex-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.checkpoints-container {
+  max-width: 23%;
+  height: 100%;
+  border-color: #ccc;
+  box-shadow: rgba(0, 0, 0, 0.156863) 0px 3px 10px, rgba(0, 0, 0, 0.227451) 0px 3px 10px;
+}
+
+.progress {
+  margin: 10px;
+  background-color: rgba(20, 98, 94, 0.61);
+}
+
+.progress-bar {
+  background-color: $bs-green;
+}
+
+.checkpoints-container h4 {
+  text-align: center;
+  color: #fff;
+  background-color: $bs-blue;
+  border-color: $bs-blue;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding: 10px;
+}
+
+@media(max-width: 996px){
+
+  .checkpoints-container {
+    box-shadow: none;
+    border-left: solid 1px #ccc;
+    border-right: solid 1px #ccc;
+    border-bottom: solid 1px #ccc;
+  }
+  .active-checkpoint-container {
+    box-shadow: none !important;
+    border: solid 1px #ccc;
+  }
+
+}
+
+.checkpoints-p {
+  line-height: 200%;
+}
+
+.checkpoints-container ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.checkpoints-container li {
+  padding: 10px;
+  text-align: center;
+  color: #333;
+  background-color: #fff;
+  border-top: solid 1px #ccc;
+}
+
+.active-checkpoint-container {
+  max-width: 70%;
+  padding: 20px 20px;
+  box-shadow: rgba(0, 0, 0, 0.156863) 0px 3px 10px, rgba(0, 0, 0, 0.227451) 0px 3px 10px;
+}
+
+.open > .dropdown-menu {
+  width: 100%;
+  text-align: center;
+}
+
+.dropdown-menu > li > a {
+  color: #fff;
+  background-color: #337ab7;
+  border-color: #2e6da4;
+}
+
+.checkpoint-header {
+  text-align: center;
+}
+
+.cp-nav-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.cp-nav-item {
+  display: flex;
+  height: 10px;
+  align-items: center;
+  padding: 10px;
+}

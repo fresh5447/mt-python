@@ -1,5 +1,8 @@
+@import './colors.scss';
 @import './navbar.scss';
 @import './box-shadow.scss';
+@import './videoPlayer.scss';
+@import './checkpoint.scss';
 
 body {
   margin: 0;
@@ -18,9 +21,10 @@ p {
   font-family: 'Varela Round', sans-serif !important;
 }
 .right-arrow {
-  color: dodgerblue;
+  color: $bs-blue;
   font-size: 22px;
   margin-right: 20px;
+  float: right;
 }
 
 .module-header {
@@ -29,23 +33,31 @@ p {
 
 
 .left-arrow {
-  color: dodgerblue;
+  color: $bs-blue;
   font-size: 22px;
   // margin-right: 20px;
 }
 
+.testing-back-button {
+  background-color: orange;
+  color: white !important;
+  padding: 4px;
+  border-radius: 20%;
+}
+
 .nav-btn {
-  color: dodgerblue;
-  border-color: dodgerblue;
+  color: $bs-blue;
+  border-color: $bs-blue;
 }
 
 .student-course-container {
-  padding-bottom: 20px;
+  padding: 20px;
+  margin-bottom: 5%;
+  box-shadow: $primary-shadow;
 }
 
 .my-courses {
-  color: dodgerblue;
-  text-align: center;
+  color: $bs-blue;
 }
 
 .center-text {
@@ -53,7 +65,7 @@ p {
 }
 
 .live-course {
-  color: dodgerblue;
+  color: $bs-blue;
 }
 
 .draft-course {
@@ -85,14 +97,14 @@ p {
 }
 
 .resource-panel > .panel-heading {
-  color: dodgerblue;
+  color: $bs-blue;
 }
 
 
 .res-link {
   float: right;
   font-size: 23px;
-  color: dodgerblue;
+  color: $bs-blue;
 }
 
 .res-footer {
@@ -100,7 +112,7 @@ p {
 }
 
 strong {
-  color: dodgerblue;
+  color: $bs-blue;
 }
 
 .res-links li {
@@ -346,4 +358,43 @@ p, a {
     background-color: #337ab7;
     border: solid 1px #337ab7;
   }
+}
+
+.course-img {
+  max-width: 100%;
+}
+
+.course-panel {
+  max-width: 45%;
+}
+
+.course-list-flex {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+
+.active-course-list-flex {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: initial;
+  justify-content: space-between;
+}
+
+.course-panel .panel-heading {
+  padding: 20px 0 0 0;
+  background-color: white;
+  color: $bs-blue;
+}
+
+.course-panel .panel-heading h3 {
+  text-align: center;
+  padding: 10px;
+}
+
+.active-course-heading {
+  color: white !important;
+  padding: 40px;
+  background-image: linear-gradient(-187deg, #612193 10%, $bs-blue 100%) !important;
 }

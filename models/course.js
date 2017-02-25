@@ -8,7 +8,8 @@ const CourseSchema = new Schema({
   publish: Boolean,
   students: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
   modules: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Module' }],
-  enrolled: Boolean
+  enrolled: Boolean,
+  imgUrl: String
 });
 
 module.exports = mongoose.model('Course', CourseSchema);

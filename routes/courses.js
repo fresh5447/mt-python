@@ -19,7 +19,8 @@ Router.route('/')
     const course = new Course({
       title: req.body.title,
       desc: req.body.desc,
-      publish: req.body.publish
+      publish: req.body.publish,
+      imgUrl: req.body.imgUrl
     });
     course.save((err, r) => {
       if (err) {
@@ -50,6 +51,7 @@ Router.route('/:id')
         course.title = req.body.title ? req.body.title : course.title;
         course.desc = req.body.desc ? req.body.desc : course.desc;
         course.publish = req.body.publish ? req.body.publish : course.publish;
+        course.imgUrl = req.body.imgUrl ? req.body.imgUrl : course.imgUrl;
 
         course.save((er) => {
           if (er) {

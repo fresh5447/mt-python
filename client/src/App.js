@@ -5,7 +5,6 @@ import Notifier from './Context/Notifier';
 import DashboardContainer from './Dashboard/DashboardContainer';
 import RootNavbar from './Navbar/RootNavbar';
 
-
 class App extends Component {
   constructor(props, context){
     super(props, context);
