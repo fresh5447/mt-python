@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import { Panel } from 'react-bootstrap';
 import ReactMarkdown from 'react-markdown';
 import Popout from 'react-popout';
 
-class HostingComponent extends Component {
+class PopOutWrapper extends Component {
   constructor(props) {
     super(props);
     this.popout = this.popout.bind(this);
@@ -40,9 +39,9 @@ const EditCheckpointForm = (props) =>
   <div className="">
     <div className="">
       <h3> {props.title} <span className="edit-text"> edititng</span> </h3>
-      <HostingComponent>
+      <PopOutWrapper>
         <ReactMarkdown source={props.content}/>
-      </HostingComponent>
+      </PopOutWrapper>
     </div>
     <div className="container cp-form">
       <form onSubmit={props.handleSubmit}>
