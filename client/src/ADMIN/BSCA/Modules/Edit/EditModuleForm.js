@@ -1,9 +1,10 @@
 import React from 'react';
+import NavLink from '../../../../Components/NavLink';
 
 const EditModuleForm = (props) =>
   <div className="container">
     <div className="">
-      <h5>edit module: {props.title}</h5>
+      <h5>{props.title} <span className="edit-text">editing</span></h5>
     </div>
     <div className="">
       <form onSubmit={props.handleSubmit}>
@@ -25,6 +26,7 @@ const EditModuleForm = (props) =>
           />
         </fieldset>
         <button type="submit" className="btn btn-primary my-primary-btn">Save</button>
+        <NavLink to={"admin-console/bsca/courses"}>Cancel</NavLink>
       </form>
     </div>
   </div>;

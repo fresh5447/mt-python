@@ -33,34 +33,30 @@ class BSCAContainer extends Component {
 
   render() {
     const courseItems = this.state.courses ? this.state.courses.map((item) => {
-      var published = item.publish ? <span className="live-course"></span> : <span className="draft-course">draft</span>
+      var published = item.publish ? <span className="live-course">live</span> : <span className="draft-course">draft</span>
       return (
-        <tr>
-          <td><NavLink to={"/admin-console/bsca/courses/view/" + item._id }> { item.title } {published} </NavLink></td>
-          <td><NavLink className="btn btn-success"  to={"/admin-console/bsca/course/" + item._id + "/modules"}> Go </NavLink></td>
-          <td><NavLink className="btn btn-warning" to={"/admin-console/bsca/courses/edit/" + item._id }> Edit </NavLink></td>
-        </tr>
+        <div className="admin-course-panel panel panel-default">
+                  <div className="panel-heading active-course-heading">
+                    <h3 className="panel-title">{item.title} {published}</h3>
+                  </div>
+                  <div className="panel-body">
+                    {item.desc}
+                    {/* <NavLink to={"/admin-console/bsca/courses/view/" + item._id }> { item.title }  </NavLink> */}
+                   </div>
+                   <div className="panel-footer">
+                     <NavLink className="btn btn-success"  to={"/admin-console/bsca/course/" + item._id + "/modules"}> Go </NavLink>
+                     <NavLink className="btn btn-warning" to={"/admin-console/bsca/courses/edit/" + item._id }> Edit </NavLink>
+                   </div>
+                </div>
       )
     }) : null;
     return (
     <div>
-      <Jumbotron className="admin-jumbo">
-        <p>Courses</p>
-          <Table responsive>
-            <thead>
-              <tr>
-                <th></th>
-                <th></th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              { courseItems }
-            </tbody>
-          </Table>
-          <NavLink to="/admin-console/bsca/courses/post/" className="btn btn-primary">Create Course</NavLink>
-      </Jumbotron>
       { this.props.children }
+      <div className="admin-jumbo admin-course-list-flex">
+          { courseItems }
+            <NavLink to="/admin-console/bsca/courses/post/" className="admin-course-panel panel button-panel">Create Course</NavLink>
+      </div>
     </div>
     )
   }

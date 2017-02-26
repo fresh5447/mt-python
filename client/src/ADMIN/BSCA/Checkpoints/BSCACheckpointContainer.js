@@ -31,33 +31,28 @@ class BSCAContainer extends Component {
   }
   render() {
     const checkpointItems = this.state.module ? this.state.module.checkpoints.map((item) => {
+      var published = item.publish ? <span className="live-course">live</span> : <span className="draft-course">draft</span>
       return (
-        <tr>
-          <td><NavLink to={ "/admin-console/bsca/course/" + this.props.params.course_id + "/module/" + this.props.params.module_id + "/view/" + item._id}>{item.title}</NavLink></td>
-          <td><NavLink className="btn btn-warning" to={ "/admin-console/bsca/course/" + this.props.params.course_id + "/module/" + this.props.params.module_id + "/edit/" + item._id}>Edit</NavLink></td>
-        </tr>
+        <div className="admin-course-panel panel panel-default">
+                  <div className="panel-heading active-course-heading">
+                    <h3 className="panel-title">{item.title} { published }</h3>
+                  </div>
+                   <div className="panel-footer">
+                     <NavLink className="btn btn-success" to={ "/admin-console/bsca/course/" + this.props.params.course_id + "/module/" + this.props.params.module_id + "/view/" + item._id}>View</NavLink>
+                     <NavLink className="btn btn-warning" to={ "/admin-console/bsca/course/" + this.props.params.course_id + "/module/" + this.props.params.module_id + "/edit/" + item._id}>Edit</NavLink>
+                   </div>
+                </div>
       )    }) : null;
     return (
     <div>
-      <Jumbotron>
-        <h3>{ this.state.module ? this.state.module.title : null }</h3>
-        <p>Checkpoints</p>
-        <Table responsive>
-          <thead>
-            <tr>
-              <th></th>
-              <th></th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-          { checkpointItems }
-          </tbody>
-        </Table>
-        <NavLink className="btn btn-primary"  to={ "/admin-console/bsca/course/" + this.props.params.course_id + "/module/" + this.props.params.module_id + "/post"}>Create Checkpiont</NavLink>
-      </Jumbotron>
       { this.props.children }
+      <h3>{ this.state.module ? this.state.module.title : null }</h3>
+      <div className="admin-jumbo admin-course-list-flex">
+          { checkpointItems }
+          <NavLink className="admin-course-panel panel button-panel"  to={ "/admin-console/bsca/course/" + this.props.params.course_id + "/module/" + this.props.params.module_id + "/post"}>Create Checkpiont</NavLink>
+      </div>
     </div>
+
     )
   }
 }

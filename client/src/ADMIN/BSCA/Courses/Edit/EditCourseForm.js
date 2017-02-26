@@ -1,4 +1,6 @@
 import React from 'react';
+import NavLink from '../../../../Components/NavLink';
+
 
 const EditCourseForm = (props) =>
   <div className="">
@@ -25,6 +27,7 @@ const EditCourseForm = (props) =>
           />
         </fieldset>
         <button type="submit" className="btn btn-primary my-primary-btn">Save</button>
+        <NavLink to={"admin-console/bsca/courses"}>Cancel</NavLink>
       </form>
     </div>
   </div>;

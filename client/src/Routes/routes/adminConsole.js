@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route } from 'react-router';
+import { Route, IndexRoute } from 'react-router';
 
 import ADMIN from '../../ADMIN/ADMIN';
 import BSCAAdminContainer from '../../ADMIN/BSCA/MainContainer';

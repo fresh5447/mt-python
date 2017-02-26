@@ -1,11 +1,48 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Panel } from 'react-bootstrap';
 import ReactMarkdown from 'react-markdown';
+import Popout from 'react-popout';
+
+class HostingComponent extends Component {
+  constructor(props) {
+    super(props);
+    this.popout = this.popout.bind(this);
+    this.popoutClosed = this.popoutClosed.bind(this);
+    this.state = { isPoppedOut: false };
+  }
+
+  popout() {
+    this.setState({isPoppedOut: true});
+  }
+
+  popoutClosed() {
+    this.setState({isPoppedOut: false});
+  }
+
+  render() {
+    if (this.state.isPoppedOut) {
+      return (
+        <Popout url='popout.html' title='Window title' onClosing={this.popoutClosed}>
+          <div className="container">
+            { this.props.children }
+          </div>
+        </Popout>
+      );
+    } else {
+      return <button onClick={this.popout} className="btn btn-markdown buttonGlyphicon glyphicon"> Markdown Previewer</button>
+    }
+  }
+}
+
+
 
 const EditCheckpointForm = (props) =>
   <div className="">
     <div className="">
-      <h5>edit checkpoint: {props.title}</h5>
+      <h3> {props.title} <span className="edit-text"> edititng</span> </h3>
+      <HostingComponent>
+        <ReactMarkdown source={props.content}/>
+      </HostingComponent>
     </div>
     <div className="container cp-form">
       <form onSubmit={props.handleSubmit}>
@@ -18,7 +55,7 @@ const EditCheckpointForm = (props) =>
         <fieldset className="form-group">
           <label>content</label>
           <textarea onChange={ (event) => props.onFieldChange('content', event.target.value)}
-            className="form-control" required="true" rows="7" value={props.content}
+            className="form-control" required="true" rows="25" value={props.content}
           ></textarea>
         </fieldset>
         <fieldset className="">
@@ -29,19 +66,6 @@ const EditCheckpointForm = (props) =>
         </fieldset>
         <button type="submit" className="btn btn-primary my-primary-btn">Save</button>
       </form>
-    </div>
-    <div>
-      <div>
-        <h2>Preview</h2>
-        <Panel header={ props.title ? props.title : "none"}>
-          <ReactMarkdown source={props.desc ? props.desc : "none"}/>
-          <ReactMarkdown source={props.content ? props.content : "none"}/>
-          {
-            props.assignment ? <ReactMarkdown source={props.assignment}/> : null
-          }
-
-        </Panel>
-      </div>
     </div>
   </div>;
 

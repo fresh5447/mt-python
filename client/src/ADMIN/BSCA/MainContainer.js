@@ -5,13 +5,14 @@ import { Jumbotron } from 'react-bootstrap';
 class BSCAMainContainer extends Component {
   render() {
     return (
-      <div>
-        <Jumbotron className="admin-jumbo">
+      <div className="student-course-container">
+
           <h3>Big Sky Code Academy</h3>
-          <NavLink to="/admin-console/bsca/courses">Courses</NavLink>
-          <p></p>
-          <NavLink to="/admin-console/bsca/resources">Resources</NavLink>
-        </Jumbotron>
+          <ul>
+            <li className="btn"><NavLink to="/admin-console/bsca/courses">Courses</NavLink></li>
+            <li className="btn"><NavLink to="/admin-console/bsca/resources">Resources</NavLink></li>
+          </ul>
+
         { this.props.children }
       </div>
     )
