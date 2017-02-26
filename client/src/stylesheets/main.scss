@@ -339,14 +339,7 @@ p, a {
 }
 
 .active-checkpoint {
-  color: white;
-  background-color: #337ab7;
-  border: solid 1px #337ab7;
-  &:active {
-    color: white;
-    background-color: #337ab7;
-    border: solid 1px #337ab7;
-  }
+  font-size: 150%;
 }
 
 .active-category {

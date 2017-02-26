@@ -73,19 +73,12 @@ var CM = React.createClass({
 
 
 
-
-
-
-
-
-
-
 const Movie = () =>
-<Video controls poster="BSCA_Logo.png" onCanPlayThrough={() => {
-            console.log("pretty neat!")
-        }}>
-  <source src="testing.webm" />
-</Video>
+	<Video controls poster="BSCA_Logo.png" onCanPlayThrough={() => {
+	            console.log("pretty neat!")
+	        }}>
+	  <source src="testing.webm" />
+	</Video>
 
 var cb = {
   float: "left",
