@@ -255,8 +255,10 @@ p, a {
 .resource-panel .panel-heading {
   font-weight: bold;
   text-align: center;
-  background-color: white;
+  background-image: linear-gradient(-187deg, #612193 10%, #407093 100%);
+  color: white;
 }
+
 .resource-panel {
     /* Or whatever */
   height: 100%; /* Or whatever */

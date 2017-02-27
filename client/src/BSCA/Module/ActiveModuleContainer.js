@@ -21,7 +21,8 @@ class ActiveModuleContainer extends Component {
       module: null,
       current: null,
       next: null,
-      previous: null
+      previous: null,
+      courses: null
     };
   }
 
@@ -40,6 +41,15 @@ class ActiveModuleContainer extends Component {
     console.log("COMP WILL UNMOUNT");
     this.loadModule(this.props.params.module_id);
   }
+  loadUsersCourses(){
+    $.ajax({
+      url: '/loadUser',
+      method: 'GET',
+    }).done((data) => {
+      const courses = data.courses.filter(c => c.enrolled);
+      this.setState({ courses: courses });
+    });
+  }
 
   getModuleMapLinks(){
     const constAllLinks = this.state.module.checkpoints.map((item, index, arr) => {
@@ -52,6 +62,14 @@ class ActiveModuleContainer extends Component {
     }
   }
 
+  renderCourseLinks(){
+    if(this.state.courses){
+      return this.state.courses.map((item) => {
+        return <li><NavLink to={"/big-sky-code-academy/course/" + item._id}> { item.title } </NavLink></li>
+      })
+    }
+  }
+
   loadModule(id) {
     $.ajax({
       url: '/api/v2/modules/' + id,
@@ -59,6 +77,7 @@ class ActiveModuleContainer extends Component {
     }).done((data) => {
       this.setState({ module: data });
       this.getModuleMapLinks();
+      this.loadUsersCourses();
     });
   }
   CheckpointList() {
@@ -71,6 +90,8 @@ class ActiveModuleContainer extends Component {
             <span>66% Complete</span>
           </div>
         </div>
+        <div>
+        </div>
         <ul>
           { this.state.module ?
             this.state.module.checkpoints.map((item)=> {
@@ -80,9 +101,7 @@ class ActiveModuleContainer extends Component {
           <li className="dropdown">
             <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">change course<span className="caret"></span></a>
             <ul className="dropdown-menu">
-              <li><a href="#">Intro To Web Dev</a></li>
-              <li><a href="#">Backend Development</a></li>
-              <li><a href="#">Frontend Developement</a></li>
+              { this.renderCourseLinks() }
             </ul>
           </li>
         </ul>

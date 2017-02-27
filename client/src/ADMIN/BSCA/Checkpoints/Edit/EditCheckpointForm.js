@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import NavLink from '../../../../Components/NavLink';
 import ReactMarkdown from 'react-markdown';
 import Popout from 'react-popout';
 
@@ -64,6 +65,8 @@ const EditCheckpointForm = (props) =>
           />
         </fieldset>
         <button type="submit" className="btn btn-primary my-primary-btn">Save</button>
+        <NavLink to={"admin-console/bsca/courses"}>Cancel</NavLink>
+
       </form>
     </div>
   </div>;

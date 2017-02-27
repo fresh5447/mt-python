@@ -6,13 +6,10 @@ class BSCAMainContainer extends Component {
   render() {
     return (
       <div className="student-course-container">
-
-          <h3>Big Sky Code Academy</h3>
-          <ul>
-            <li className="btn"><NavLink to="/admin-console/bsca/courses">Courses</NavLink></li>
-            <li className="btn"><NavLink to="/admin-console/bsca/resources">Resources</NavLink></li>
-          </ul>
-
+        <ul>
+          <li className="btn"><NavLink to="/admin-console/bsca/courses">Courses</NavLink></li>
+          <li className="btn"><NavLink to="/admin-console/bsca/resources">Resources</NavLink></li>
+        </ul>
         { this.props.children }
       </div>
     )

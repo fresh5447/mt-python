@@ -42,33 +42,27 @@ class BSCAContainer extends Component {
   }
   render() {
     const resourceItems = this.state.resources ? this.state.resources.map((item) => {
-      var published = item.publish ? <span className="live-course"></span> : <span className="draft-course">draft</span>
+      var published = item.publish ? <span className="live-course">live</span> : <span className="draft-course">draft</span>
       return (
-        <tr>
-          <td><NavLink to={"/admin-console/bsca/resources/view/" + item._id }> { item.title } { published } </NavLink></td>
-          <td><NavLink className="btn btn-warning" to={"/admin-console/bsca/resources/edit/" + item._id }> Edit </NavLink></td>
-        </tr>
+        <div className="admin-course-panel panel panel-default">
+                  <div className="panel-heading active-course-heading">
+                    <h3 className="panel-title">{item.title} { published }</h3>
+                  </div>
+                   <div className="panel-footer">
+                     <NavLink className="btn btn-success"  to={"/admin-console/bsca/resources/view/" + item._id }> { item.title } </NavLink>
+                     <NavLink className="btn btn-warning" to={"/admin-console/bsca/resources/edit/" + item._id }> Edit </NavLink>
+                   </div>
+                </div>
       )
     }) : null;
     return (
     <div>
-      <Jumbotron className="admin-jumbo">
-        <p>Resources</p>
-          <Table responsive>
-            <thead>
-              <tr>
-                <th></th>
-                <th></th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              { resourceItems }
-            </tbody>
-          </Table>
-          <NavLink to="/admin-console/bsca/resources/post/">Create New Resource</NavLink>
-      </Jumbotron>
       { this.props.children }
+      <div className="admin-jumbo admin-course-list-flex">
+          { resourceItems }
+          <NavLink className="admin-course-panel panel button-panel" to="/admin-console/bsca/resources/post/">Create New Resource</NavLink>
+      </div>
+
     </div>
     )
   }

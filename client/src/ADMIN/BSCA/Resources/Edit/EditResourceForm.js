@@ -1,10 +1,50 @@
-import React from 'react';
+import React, { Component } from 'react';
 import ReactMarkdown from 'react-markdown';
+import Popout from 'react-popout';
+import NavLink from '../../../../Components/NavLink';
 
-const EditCourseForm = (props) =>
+class PopOutWrapper extends Component {
+  constructor(props) {
+    super(props);
+    this.popout = this.popout.bind(this);
+    this.popoutClosed = this.popoutClosed.bind(this);
+    this.state = { isPoppedOut: false };
+  }
+
+  popout() {
+    this.setState({isPoppedOut: true});
+  }
+
+  popoutClosed() {
+    this.setState({isPoppedOut: false});
+  }
+
+  render() {
+    if (this.state.isPoppedOut) {
+      return (
+        <Popout url='popout.html' title='Window title' onClosing={this.popoutClosed}>
+          <div className="container">
+            { this.props.children }
+          </div>
+        </Popout>
+      );
+    } else {
+      return <button onClick={this.popout} className="btn btn-markdown buttonGlyphicon glyphicon"> Markdown Previewer</button>
+    }
+  }
+}
+
+const EditResourceForm = (props) =>
 <div className="">
   <div className="page-header">
-    <h2>Edit Resource</h2>
+    <h3> {props.title} <span className="edit-text"> edititng</span> </h3>
+    {
+      props.internal ? (
+        <PopOutWrapper>
+          <ReactMarkdown source={props.content}/>
+        </PopOutWrapper>
+      ) : null
+    }
   </div>
   <div className="">
     <form onSubmit={props.handleSubmit}>
@@ -32,10 +72,9 @@ const EditCourseForm = (props) =>
             <fieldset className="form-group">
               <label>content</label>
               <textarea onChange={ (event) => props.onFieldChange('content', event.target.value)}
-              type="text" className="form-control" id="" placeholder="..." rows="7" value={props.content}
+              type="text" className="form-control" id="" placeholder="..." rows="20" value={props.content}
               ></textarea>
             </fieldset>
-            <ReactMarkdown source={props.content} />
           </div>
         ) : (
           <fieldset className="form-group">
@@ -53,9 +92,10 @@ const EditCourseForm = (props) =>
         />
       </fieldset>
       <button type="submit" className="btn btn-primary my-primary-btn">Save</button>
+      <NavLink to={"admin-console/bsca/resources"}>Cancel</NavLink>
     </form>
   </div>
 </div>;
 
 
-export default EditCourseForm;
+export default EditResourceForm;
